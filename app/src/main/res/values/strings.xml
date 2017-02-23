@@ -1,0 +1,322 @@
+<resources>
+    <string name="app_name">OK!GO</string>
+    <string name="menu_item_settings_title">Settings</string>
+
+    <!-- PersonalActivity strings -->
+    <string name= "classes">Classes</string>
+    <string name="upcoming_classes">Upcoming classes</string>
+    <string name="to_be_confirmed_classes">Not confirmed</string>
+    <string name="my_clients">My Clients</string>
+    <string name="to_be_confirmed_classes_fragment_tag" translatable="false">to_be_confirmed_classes_fragment_tag</string>
+    <string name="upcoming_classes_fragment_tag" translatable="false">upcoming_classes_fragment_tag</string>
+    <string name="classes_tag" translatable="false">classes_tag</string>
+    <string name="show_unconfirmed_menu_title">Show unconfirmed</string>
+    <string name="show_upcoming_menu_title">Show confirmed</string>
+
+
+    <string-array name="personal_drawer_list">
+        <item>Make your schedule</item>
+        <item>Set professional profile</item>
+        <item>My reviews</item>
+        <item>How to get great reviews</item>
+        <item>Payment info</item>
+        <item>Help and feedback</item>
+        <item>Log out</item>
+    </string-array>
+
+    <string-array name="personal_drawer_icons_list">
+        <item>ic_calendar_dark_24dp</item>
+        <item>ic_person_24dp</item>
+        <item>ic_reviews_24dp</item>
+        <item>ic_full_star_dark_24dp</item>
+        <item>ic_credit_card_24dp</item>
+        <item>ic_help_24dp</item>
+        <item>ic_log_out_24dp</item>
+    </string-array>
+
+    <!-- Personal WeekScheduleResumeFragment strings-->
+    <string-array name="personal_week_days_names">
+        <item>MO</item>
+        <item>TU</item>
+        <item>WE</item>
+        <item>TH</item>
+        <item>FR</item>
+        <item>SA</item>
+        <item>SU</item>
+    </string-array>
+
+    <!--Personal UpcomingClasses strings-->
+    <string name="confirmed">CONFIRMED</string>
+    <string name="not_confirmed">NOT CONFIRMED</string>
+    <string name="hold_to_confirm">HOLD TO CONFIRM</string>
+    <string name="no_classes_scheduled">You have no classes scheduled.</string>
+    <string name="no_pending_classes">You have no classes waiting confirmation</string>
+    <string name="penalty_warning_title">Warning! You are about to cancel a class!</string>
+    <string name="penalty_warning_message">You will suffer reputation penalty! Hold for %1$d seconds to confirm cancellation</string>
+    <string name="class_deletion_confirmation">Class deleted. Reputation penalty applied.</string>
+    <string name="confirmation_title">You are bout to confirm this class!</string>
+    <string name="confirmation_message">Congratulations on your new class! Hold for %1$d seconds to tell the client you are gonna show up</string>
+    <string name="class_confirmation_confirmation">This class was confirmed!</string>
+    <string name="no_class_confirmed_message">No class confirmed yet</string>
+    <string name="no_class_scheduled_message">No one scheduled a class with you yet</string>
+
+    <!--Personal ProfessionalProfile activity strings -->
+    <string name="professional_profile_toolbar_title">Configure public profile</string>
+
+
+    <!--Personal Schedule strings-->
+    <string name="confirm_changes_menu_button_title">Confirm</string>
+    <string name="calendar_menu_week_view_title">Week View</string>
+    <string name="calendar_menu_day_view_title">Day View</string>
+    <string name="configure_class">Configure class</string>
+    <string name="fix_time_conflicts">Time conflicts detected on %1$s</string>
+    <string name="agenda_saved">Your agenda was saved!</string>
+    <string name="configure_class_duration">Choose your class duration</string>
+    <string name="starts_at">Starts at %1$s</string>
+    <string name="ends_at">Ends at %1$s</string>
+    <string name="schedule_arrangement_toolbar_title">Working Hours</string>
+    <string name="class_duration">%1$s - %2$s</string>
+
+    <string name="duration_45">45 minutes</string>
+    <string name="duration_60">1 hour</string>
+    <string name="duration_75">1 hour and 15 minutes</string>
+    <string name="duration_90">1 hour and 30 minutes</string>
+    <string name="duration_105">1 hour and 45 minutes</string>
+    <string name="duration_120">2 hours</string>
+
+    <string name="interval_0">None</string>
+    <string name="interval_15">15 minutes</string>
+    <string name="interval_30">30 minutes</string>
+    <string name="interval_45">45 minutes</string>
+    <string name="interval_60">1 hour</string>
+
+    <string-array name="week_days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <!--Personal MapActivity strings-->
+    <string name="places_saved">Places saved</string>
+
+    <!--Personal SpecialtiesFragment strings-->
+    <string name="choose_specialties_instructions">Have you learned a new specialty? Good! Let your clients know!</string>
+    <string name="specialties_saved">Specialties saved</string>
+
+    <!--PersonalBasicPresentationFragment strings-->
+    <string name="picture_selection_dialog_title">GET IMAGE FROM</string>
+    <string name="grade">Grade</string>
+    <string name="clients">Reviews</string>
+
+    <!--PersonalReviewsActivity-->
+    <string name="your_reviews">Your Reviews</string>
+    <string name="no_reviews_yet">You have no reviews yet</string>
+
+    <!--ClientActivity strings -->
+    <string name="class_history">Class History</string>
+    <string name="find_personal">Find personal</string>
+    <string name="review_personal">Review personal</string>
+    <string name="logged_out">Logged out</string>
+
+    <string-array name="client_drawer_list">
+        <item>Set profile</item>
+        <item>My personals</item>
+        <item>Payment info</item>
+        <item>Help and feedback</item>
+        <item>Log out</item>
+    </string-array>
+
+    <string-array name="client_drawer_icons_list">
+        <item>ic_person_24dp</item>
+        <item>ic_specialties_24dp</item>
+        <item>ic_credit_card_24dp</item>
+        <item>ic_help_24dp</item>
+        <item>ic_log_out_24dp</item>
+    </string-array>
+
+    <!--Registration strings-->
+    <string name="display_name">Display name</string>
+    <string name="birthday">Birthday - DD/MM/YYYY</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="federation_state">State</string>
+    <string name="cref_number">CREF number</string>
+    <string name="cref_name">Name as in CREF register</string>
+    <string name="which_state_cref_from">Which state is your CREF from?</string>
+    <string name="question_has_studio">Do you have a private studio?</string>
+    <string name="question_gym_access">What gyms do you have access to?</string>
+    <string name="choose_specialties">Choose your objectives</string>
+
+    <string name="validating_cref">Validating your CREF</string>
+    <string name="loading">Should take up to 10 seconds</string>
+
+    <string-array name="specialty_types">
+        <item>Weight lifting</item>
+        <item>Cardio</item>
+        <item>Fat loss</item>
+        <item>Fat gain</item>
+        <item>Senior health</item>
+        <item>Massage</item>
+        <item>Martial arts</item>
+        <item>Muscle gain</item>
+        <item>Post Rehabilitative Training</item>
+    </string-array>
+
+    <string name="name_cref_match">Name and CREF are valid!</string>
+    <string name="name_cref_not_match">Name and CREF do not match</string>
+
+    <string name="invalid_name">Invalid name!</string>
+    <string name="invalid_birthday">Invalid birthday!</string>
+    <string name="invalid_age">You are not 18 years old!</string>
+    <string name="invalid_email">Invalid email!</string>
+    <string name="invalid_phone_number">Invalid phone number!</string>
+    <string name="invalid_cref">Name and CREF number don\'t match</string>
+    <string name="cref_is_wrong">CREF is wrong</string>
+    <string name="specialties_blank">Choose at least one specialty</string>
+    <string name="objective_blank">Choose one main objective</string>
+
+    <string-array name="states_array">
+        <item>Acre</item>
+        <item>Alagoas</item>
+        <item>Amazonas</item>
+        <item>Amapá</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Distrito Federal</item>
+        <item>Espiríto Santo</item>
+        <item>Goiás</item>
+        <item>Maranhão</item>
+        <item>Mato Grosso</item>
+        <item>Mato Grosso do Sul</item>
+        <item>Minas Gerais</item>
+        <item>Pará</item>
+        <item>Paraíba</item>
+        <item>Paraná</item>
+        <item>Pernambuco</item>
+        <item>Piauí</item>
+        <item>Rio de Janeiro</item>
+        <item>Rio Grande do Norte</item>
+        <item>Rio Grande do Sul</item>
+        <item>Roraima</item>
+        <item>Rondônia</item>
+        <item>Santa Catarina</item>
+        <item>São Paulo</item>
+        <item>Sergipe</item>
+        <item>Tocantins</item>
+    </string-array>
+
+    <string name="next">Next</string>
+
+    <!-- Client or personal strings -->
+    <string name="i_am_client">I am looking for a personal trainer</string>
+    <string name="i_am_personal">I am a personal trainer</string>
+    <string name="title_activity_register_client">RegisterClientActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Client GeneralPersonalSearchFragment strings -->
+    <string name="choose_date">Select class date</string>
+    <string name="choose_start_time">Start time</string>
+    <string name="choose_duration">Duration time</string>
+    <string name="class_start_time">Starts at %1$s</string>
+    <string name="class_duration_is">%1$s</string>
+    <string name="click_choose_gym">Click to add a gym</string>
+    <string name="searching_for_personal">Searching for your personal</string>
+    <string name="upsy_doopsi" translatable="false">Upsi Dopsy</string>
+    <string name="no_personal_found_at_date">We could not find anyone free for that date. Try again.</string>
+    <string name="reinforce_choose_working_out_place">Please, choose your working out place</string>
+    <string name="reinforce_choose_objective">Please, choose an objective</string>
+    <string name="reinforce_choose_date">Please, choose a date</string>
+    <string name="reinforce_choose_start_time">Please, choose class start time</string>
+    <string name="reinforce_choose_duration">Please, choose class duration</string>
+    <string name="general_personal_search_fragment_tag" translatable ="false">general_personal_search</string>
+
+
+    <!-- Client PersonalBooth strings -->
+    <string name="schedule">SCHEDULE</string>
+    <string name="details">DETAILS</string>
+    <string name="class_number">%1$s classes</string>
+    <string name="cref_number_title">CREF</string>
+    <string name="personal_booth_toolbar_title">Choose your personal</string>
+
+    <!-- Client PersonalSearchActivity -->
+    <string name="search_personal">Search Personal</string>
+    <string name="smart_search">Smart search</string>
+    <string name="specific_search">Specific search</string>
+
+    <!-- Client ReviewPersonalActivity strings -->
+    <string name="review_past_personals">Review Personals</string>
+
+    <!-- Client SpecificPersonalSearchFragment -->
+    <string name="specific_personal_toolbar_title">Search for a specific personal</string>
+    <string name="date_unavailable">Date unavailable</string>
+    <string name="correct_date_instruction">You can\'t choose today nor a date in the past</string>
+    <string name="no_personal_found">No match found. Know that you can search by email, name or CREF number</string>
+    <string name="search">Search</string>
+    <string name="location_warning">Attention! Make sure you select a location you have access to</string>
+    <string name="review_class_title">Review and schedule</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="search_hint">Personal email or CREF</string>
+    <string name="specific_personal_search_fragment_tag" translatable="false">specific_personal_search</string>
+
+    <!--Client ExpandableClassesAdapter strings-->
+    <string name="review_submitted">Review submitted</string>
+    <string name="review_too_long">Review is too long</string>
+
+    <!-- Client ClassesFragment strings -->
+    <string name="upcoming">Upcoming</string>
+    <string name="to_be_confirmed">Not confirmed</string>
+    <string name="history">History</string>
+
+    <!-- ClientUpcomingClasses strings-->
+    <string name="cancellation_warning_message">Are you sure you want to cancel? Hold for %1$d seconds to confirm cancellation</string>
+    <string name="class_cancellation_confirmation">Class canceled. Personal notified.</string>
+    <string name="client_no_class_confirmed_message">The personal has not confirmed your class yet. They were instructed to do so asap. Don\'t worry</string>
+    <string name="client_no_class_scheduled_message">Unconfirmed classes you schedule will appear here</string>
+
+    <!-- DayAgendaFragment strings-->
+    <string name="no_class_available">No classes available at this date</string>
+
+    <!-- NewClassDialog strings -->
+    <string name="new_class">You have a new class!</string>
+    <string name="class_location">Location: %1$s</string>
+    <string name="class_date">%1$s</string>
+    <string name="class_start_end">%1$s - %2$s</string>
+    <string name="review_confirm">Review and Confirm</string>
+    <string name="confirm">Confirm</string>
+    <string name="decline_class">Decline</string>
+
+    <!-- ClientDatabase strings -->
+    <string name="class_scheduled">Class Scheduled</string>
+    <string name="class_not_scheduled">Class could not be scheduled</string>
+
+    <!-- ReviewPersonalActivity strings -->
+    <string name="submit">Submit</string>
+    <string name="loading_past_classes">Loading past classes</string>
+    <string name="tell_what_you_think">What are your thoughts about this personal?</string>
+
+    <!-- ClientProfileActivity strings -->
+    <string name="taken_by_attribution">By %1$s </string>
+    <string name="client_profile_toolbar_title">Configure public profile</string>
+    <string name="no_map_app_detected">No map app detected. We suggest GoogleMaps or Waze</string>
+
+    <!-- PlacePicker hints -->
+    <string name="choose_your_gym_hint">Choose your gym</string>
+    <string name="try_new_working_out_place_hint">Try a new place</string>
+
+    <!--SignInActivity strings -->
+    <string name="login_canceled">Login Canceled</string>
+    <string name="no_connection">No Connection</string>
+
+    <!--Facebook App id -->
+    <string name="facebook_application_id" translatable="false">1816837725229072</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb1816837725229072</string>
+
+
+</resources>

@@ -1,0 +1,17 @@
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp"
+    tools:context="com.andrehaueisen.fitx.personal.drawer.WorkPlacesFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/work_places_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

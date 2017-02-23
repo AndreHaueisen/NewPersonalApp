@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "126072972840",
+    "firebase_url": "https://personalapp-ad97d.firebaseio.com",
+    "project_id": "personalapp-ad97d",
+    "storage_bucket": "personalapp-ad97d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126072972840:android:39f62812e827985c",
+        "android_client_info": {
+          "package_name": "com.andrehaueisen.fitx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126072972840-n0di25h4gh02sk15up60k6m1rlkoebbg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.andrehaueisen.fitx",
+            "certificate_hash": "B8504565D0918950AF82DAA1519FB83AE8ACA361"
+          }
+        },
+        {
+          "client_id": "126072972840-nqo6k8d9o77i78pqrqct79mojab7hiq5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnkKF2Tn0hshjGueNVbFXAQCMHaLxR0Sg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126072972840-nqo6k8d9o77i78pqrqct79mojab7hiq5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

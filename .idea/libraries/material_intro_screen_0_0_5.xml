@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="material-intro-screen-0.0.5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/31b7c2638001d0cdd78d85d5bbe21a10a26f2d0a/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/31b7c2638001d0cdd78d85d5bbe21a10a26f2d0a/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/agency.tango.android/material-intro-screen/0.0.5/5815bbacbf893016ee199891bfc7b847adc6fbdf/material-intro-screen-0.0.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
