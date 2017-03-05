@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.pojo.AttributedPhoto;
-import com.andrehaueisen.fitx.pojo.Gym;
+import com.andrehaueisen.fitx.models.AttributedPhoto;
+import com.andrehaueisen.fitx.models.Gym;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

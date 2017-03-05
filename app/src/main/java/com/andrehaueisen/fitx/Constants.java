@@ -12,7 +12,7 @@ public class Constants {
     public static final String FIREBASE_STORAGE_ROOT_URL = "gs://personalapp-ad97d.appspot.com";
     public static final String FIREBASE_DATABASE_ROOT_URL = "https://personalapp-ad97d.firebaseio.com/";
 
-    public static final String FIREBASE_LOCATION_PERSONAL_TRAINER = "personalTrainer_";
+    public static final String FIREBASE_LOCATION_PERSONAL_TRAINER = "personalTrainer";
     public static final String FIREBASE_LOCATION_CLIENT = "client";
     public static final String FIREBASE_LOCATION_AGENDA = "personal_week_agenda_codes";
     public static final String FIREBASE_LOCATION_GYMS = "gyms";

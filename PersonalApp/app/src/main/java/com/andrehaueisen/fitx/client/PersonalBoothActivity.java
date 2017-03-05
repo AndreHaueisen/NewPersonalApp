@@ -12,10 +12,10 @@ import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.adapters.ExpandableBoothAdapter;
-import com.andrehaueisen.fitx.pojo.PersonalDetailed;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
-import com.andrehaueisen.fitx.pojo.PersonalResume;
-import com.andrehaueisen.fitx.pojo.PersonalTrainer;
+import com.andrehaueisen.fitx.models.PersonalDetailed;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalResume;
+import com.andrehaueisen.fitx.models.PersonalTrainer;
 
 import java.util.ArrayList;
 import java.util.List;

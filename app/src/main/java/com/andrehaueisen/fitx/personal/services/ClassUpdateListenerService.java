@@ -23,7 +23,7 @@ import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.personal.PersonalActivity;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +41,6 @@ public class ClassUpdateListenerService extends Service {
     private final String TAG = ClassUpdateListenerService.class.getSimpleName();
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
 
     ChildEventListener mChildEventListener = new ChildEventListener() {
         @Override

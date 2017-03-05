@@ -20,8 +20,8 @@ import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
-import com.andrehaueisen.fitx.pojo.ClassReceipt;
-import com.andrehaueisen.fitx.pojo.ClientFitClass;
+import com.andrehaueisen.fitx.models.ClassReceipt;
+import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -101,9 +101,6 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
         return view;
     }
-
-
-
 
     @Override
     public void onStart() {

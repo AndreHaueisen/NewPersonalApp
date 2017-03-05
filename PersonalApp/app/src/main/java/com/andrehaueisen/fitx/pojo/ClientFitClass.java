@@ -1,4 +1,4 @@
-package com.andrehaueisen.fitx.pojo;
+package com.andrehaueisen.fitx.models;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;
@@ -205,15 +205,15 @@ public class ClientFitClass implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<com.andrehaueisen.fitx.pojo.PersonalFitClass> CREATOR = new Parcelable.Creator<com.andrehaueisen.fitx.pojo.PersonalFitClass>() {
+    public static final Parcelable.Creator<com.andrehaueisen.fitx.models.PersonalFitClass> CREATOR = new Parcelable.Creator<com.andrehaueisen.fitx.models.PersonalFitClass>() {
         @Override
-        public com.andrehaueisen.fitx.pojo.PersonalFitClass createFromParcel(Parcel in) {
-            return new com.andrehaueisen.fitx.pojo.PersonalFitClass(in);
+        public com.andrehaueisen.fitx.models.PersonalFitClass createFromParcel(Parcel in) {
+            return new com.andrehaueisen.fitx.models.PersonalFitClass(in);
         }
 
         @Override
-        public com.andrehaueisen.fitx.pojo.PersonalFitClass[] newArray(int size) {
-            return new com.andrehaueisen.fitx.pojo.PersonalFitClass[size];
+        public com.andrehaueisen.fitx.models.PersonalFitClass[] newArray(int size) {
+            return new com.andrehaueisen.fitx.models.PersonalFitClass[size];
         }
     };
 

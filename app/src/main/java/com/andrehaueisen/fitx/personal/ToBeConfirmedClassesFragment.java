@@ -17,7 +17,7 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -70,15 +70,18 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new SlideInRightAnimator());
 
-        if(savedInstanceState != null){
-            mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));
-            mWaitingConfirmationPersonalFitClasses = savedInstanceState.getParcelableArrayList(Constants.NOT_CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY);
-        }
-
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_scheduled_message));
 
         mImageCatcher = new FirebaseImageCatcher(this);
+
+        if(savedInstanceState != null){
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));
+            mWaitingConfirmationPersonalFitClasses = savedInstanceState.getParcelableArrayList(Constants.NOT_CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY);
+            if(mWaitingConfirmationPersonalFitClasses!= null && !mWaitingConfirmationPersonalFitClasses.isEmpty()){
+                mNoClassesPlaceHolder.setVisibility(View.GONE);
+            }
+        }
 
         changeStatus();
         return view;
@@ -170,8 +173,8 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(Constants.NOT_CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY, mWaitingConfirmationPersonalFitClasses);
         outState.putParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY, mRecyclerView.getLayoutManager().onSaveInstanceState());
+        outState.putParcelableArrayList(Constants.NOT_CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY, mWaitingConfirmationPersonalFitClasses);
         super.onSaveInstanceState(outState);
     }
 

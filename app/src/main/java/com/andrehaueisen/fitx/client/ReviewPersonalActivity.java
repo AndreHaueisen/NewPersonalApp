@@ -15,9 +15,9 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.adapters.ExpandableClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
-import com.andrehaueisen.fitx.pojo.ClassDetailed;
-import com.andrehaueisen.fitx.pojo.ClassReceipt;
-import com.andrehaueisen.fitx.pojo.ClassResume;
+import com.andrehaueisen.fitx.models.ClassDetailed;
+import com.andrehaueisen.fitx.models.ClassReceipt;
+import com.andrehaueisen.fitx.models.ClassResume;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

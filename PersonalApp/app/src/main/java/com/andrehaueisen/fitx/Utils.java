@@ -20,8 +20,8 @@ import android.widget.Toast;
 
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
-import com.andrehaueisen.fitx.pojo.ClientFitClass;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.ClientFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.CharMatcher;

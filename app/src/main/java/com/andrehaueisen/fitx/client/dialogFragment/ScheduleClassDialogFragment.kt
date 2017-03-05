@@ -9,9 +9,9 @@ import android.widget.ImageView
 import android.widget.Spinner
 import com.andrehaueisen.fitx.*
 import com.andrehaueisen.fitx.client.ScheduleConfirmation
-import com.andrehaueisen.fitx.pojo.Gym
-import com.andrehaueisen.fitx.pojo.PersonalFitClass
-import com.andrehaueisen.fitx.pojo.PersonalTrainer
+import com.andrehaueisen.fitx.models.Gym
+import com.andrehaueisen.fitx.models.PersonalFitClass
+import com.andrehaueisen.fitx.models.PersonalTrainer
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import org.joda.time.LocalDate

@@ -10,7 +10,7 @@ import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.personal.adapters.ReviewAdapter;
-import com.andrehaueisen.fitx.pojo.Review;
+import com.andrehaueisen.fitx.models.Review;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

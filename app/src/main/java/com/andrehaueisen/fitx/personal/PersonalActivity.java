@@ -60,15 +60,19 @@ public class PersonalActivity extends AppCompatActivity {
         mDrawerRecyclerView.setHasFixedSize(true);
         mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mClassFilterImageView = (ImageView) findViewById(R.id.class_filter_image_view);
-        mClassFilterImageView.setOnClickListener(classFilterClickListener);
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
 
         if(toBeConfirmedClassesFragment == null) {
             toBeConfirmedClassesFragment = ToBeConfirmedClassesFragment.newInstance();
             fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commit();
+        }
+
+        if(Utils.getSmallestScreenWidth(this) < 600) {
+            mClassFilterImageView = (ImageView) findViewById(R.id.class_filter_image_view);
+            mClassFilterImageView.setOnClickListener(classFilterClickListener);
+        } else {
+            setupClassesFragmentOnTablet();
         }
 
         setAdapter();
@@ -128,11 +132,32 @@ public class PersonalActivity extends AppCompatActivity {
                 transaction.hide(upcomingClassesFragment);
                 transaction.show(toBeConfirmedClassesFragment);
                 transaction.commit();
-
             }
 
         }
     };
+
+    private void setupClassesFragmentOnTablet(){
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
+        Fragment upcomingClassesFragment = fragmentManager.findFragmentByTag(getString(upcoming_classes_fragment_tag));
+
+        if(toBeConfirmedClassesFragment == null){
+            toBeConfirmedClassesFragment = ToBeConfirmedClassesFragment.newInstance();
+            fragmentTransaction.add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag));
+        }
+
+        if(upcomingClassesFragment == null){
+            upcomingClassesFragment = UpcomingClassesFragment.newInstance();
+            fragmentTransaction.add(R.id.classes_fragment_container_2, upcomingClassesFragment, getString(upcoming_classes_fragment_tag));
+        }
+
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.commit();
+    }
 
     private void setAdapter(){
 
@@ -177,6 +202,7 @@ public class PersonalActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     private void setDrawer(){

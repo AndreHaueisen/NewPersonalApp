@@ -10,8 +10,8 @@ import android.widget.TextView
 import com.andrehaueisen.fitx.R
 import com.andrehaueisen.fitx.Utils
 import com.andrehaueisen.fitx.client.dialogFragment.ScheduleClassDialogFragment
-import com.andrehaueisen.fitx.pojo.Gym
-import com.andrehaueisen.fitx.pojo.PersonalTrainer
+import com.andrehaueisen.fitx.models.Gym
+import com.andrehaueisen.fitx.models.PersonalTrainer
 import org.joda.time.LocalDate
 import java.util.*
 

@@ -17,7 +17,7 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -72,16 +72,19 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new SlideInRightAnimator());
 
-        if(savedInstanceState != null){
-            Parcelable recyclerState = savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY);
-            mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerState);
-            mConfirmedPersonalFitClasses = savedInstanceState.getParcelableArrayList(Constants.CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY);
-        }
-
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_confirmed_message));
 
         mImageCatcher = new FirebaseImageCatcher(this);
+
+        if(savedInstanceState != null){
+            Parcelable recyclerState = savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY);
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerState);
+            mConfirmedPersonalFitClasses = savedInstanceState.getParcelableArrayList(Constants.CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY);
+            if(mConfirmedPersonalFitClasses != null && !mConfirmedPersonalFitClasses.isEmpty()){
+                mNoClassesPlaceHolder.setVisibility(View.GONE);
+            }
+        }
 
         changeStatus();
 

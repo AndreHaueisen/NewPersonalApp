@@ -1,4 +1,4 @@
-package com.andrehaueisen.fitx.pojo;
+package com.andrehaueisen.fitx.models;
 
 import android.location.Location;
 import android.os.Parcel;

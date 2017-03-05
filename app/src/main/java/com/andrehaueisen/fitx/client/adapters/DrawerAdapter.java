@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.pojo.Client;
+import com.andrehaueisen.fitx.models.Client;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

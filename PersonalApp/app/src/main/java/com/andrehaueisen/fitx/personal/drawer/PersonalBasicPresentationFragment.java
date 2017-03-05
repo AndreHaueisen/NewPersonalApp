@@ -23,7 +23,7 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.personal.drawer.dialogFragment.PictureSelectionMethodDialogFragment;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
-import com.andrehaueisen.fitx.pojo.PersonalTrainer;
+import com.andrehaueisen.fitx.models.PersonalTrainer;
 import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawable;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

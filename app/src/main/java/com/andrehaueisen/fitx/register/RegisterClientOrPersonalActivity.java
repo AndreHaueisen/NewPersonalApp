@@ -25,10 +25,10 @@ import com.andrehaueisen.fitx.client.ClientActivity;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.personal.PersonalActivity;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
-import com.andrehaueisen.fitx.pojo.Client;
-import com.andrehaueisen.fitx.pojo.PersonalTrainer;
-import com.andrehaueisen.fitx.pojo.UndefinedUser;
-import com.andrehaueisen.fitx.pojo.UserMappings;
+import com.andrehaueisen.fitx.models.Client;
+import com.andrehaueisen.fitx.models.PersonalTrainer;
+import com.andrehaueisen.fitx.models.UndefinedUser;
+import com.andrehaueisen.fitx.models.UserMappings;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,6 +57,8 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
     private String mPhotoPath;
     private String mBirthday;
     private String mPhoneNumber;
+    private String mCref;
+    private String mCrefState;
 
     private int mSelectedState = -1;
 
@@ -261,6 +263,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
             if (!personalCrefName.isEmpty() && mSelectedState != -1 && !cref.isEmpty()) {
                 mCREFTextField.setErrorEnabled(false);
+                mCref = cref;
             } else {
                 mCREFTextField.setError(getString(R.string.cref_is_wrong));
             }
@@ -311,6 +314,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         mPersonalTrainer.setPhoneNumber(mPhoneNumber);
         mPersonalTrainer.setBirthday(mBirthday);
         mPersonalTrainer.setCrefState(getResources().getStringArray(R.array.states_array)[mSelectedState]);
+        mPersonalTrainer.setCref(mCref);
 
         if (mPersonalTrainer.getName() == null || mNameTextField.isErrorEnabled()
                 || mNameTextField.getEditText().getText().toString().equals("")) {

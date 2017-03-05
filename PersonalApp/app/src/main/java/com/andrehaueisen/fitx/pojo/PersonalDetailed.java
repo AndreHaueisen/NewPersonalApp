@@ -1,4 +1,4 @@
-package com.andrehaueisen.fitx.pojo;
+package com.andrehaueisen.fitx.models;
 
 /**
  * Created by andre on 12/8/2016.

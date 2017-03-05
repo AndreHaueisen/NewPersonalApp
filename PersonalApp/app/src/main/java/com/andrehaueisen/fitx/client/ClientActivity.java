@@ -28,7 +28,7 @@ import com.andrehaueisen.fitx.client.adapters.DrawerAdapter;
 import com.andrehaueisen.fitx.client.adapters.SectionPagerAdapterClient;
 import com.andrehaueisen.fitx.client.drawer.ClientProfileActivity;
 import com.andrehaueisen.fitx.client.services.ClassUpdateListenerService;
-import com.andrehaueisen.fitx.pojo.ClassReceipt;
+import com.andrehaueisen.fitx.models.ClassReceipt;
 import com.andrehaueisen.fitx.register.SignInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;

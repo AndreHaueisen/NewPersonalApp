@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.pojo.Gym;
+import com.andrehaueisen.fitx.models.Gym;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;

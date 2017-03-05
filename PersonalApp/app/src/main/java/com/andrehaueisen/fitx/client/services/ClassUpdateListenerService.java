@@ -24,7 +24,7 @@ import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.ClientActivity;
-import com.andrehaueisen.fitx.pojo.ClientFitClass;
+import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

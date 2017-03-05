@@ -21,7 +21,7 @@ import com.andrehaueisen.fitx.CustomButton;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 

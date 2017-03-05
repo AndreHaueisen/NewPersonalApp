@@ -10,6 +10,8 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -21,8 +23,8 @@ import android.widget.Toast;
 
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
-import com.andrehaueisen.fitx.pojo.ClientFitClass;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
+import com.andrehaueisen.fitx.models.ClientFitClass;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.CharMatcher;
@@ -469,6 +471,13 @@ public class Utils {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(normalizedPersonalName).replaceAll("").toUpperCase();
 
+    }
+
+    public static boolean isDeviceConnected(Context context){
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return !(networkInfo == null || (networkInfo.getState() != NetworkInfo.State.CONNECTED));
     }
 
     public static String formatCrefNumber(String crefNumber){

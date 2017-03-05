@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.pojo.Review;
+import com.andrehaueisen.fitx.models.Review;
 
 import java.util.ArrayList;
 

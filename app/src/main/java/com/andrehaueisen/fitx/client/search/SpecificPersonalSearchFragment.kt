@@ -17,8 +17,8 @@ import com.andrehaueisen.fitx.*
 import com.andrehaueisen.fitx.R
 import com.andrehaueisen.fitx.client.DayAgendaFragment
 import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher
-import com.andrehaueisen.fitx.pojo.Gym
-import com.andrehaueisen.fitx.pojo.PersonalTrainer
+import com.andrehaueisen.fitx.models.Gym
+import com.andrehaueisen.fitx.models.PersonalTrainer
 import com.andrehaueisen.fitx.shared.dialogFragments.ClassDurationDialogFragment
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*

@@ -1,4 +1,4 @@
-package com.andrehaueisen.fitx.pojo;
+package com.andrehaueisen.fitx.models;
 
 import com.bignerdranch.expandablerecyclerview.model.Parent;
 

@@ -111,6 +111,10 @@
     <string name="picture_selection_dialog_title">GET IMAGE FROM</string>
     <string name="grade">Grade</string>
     <string name="clients">Reviews</string>
+    <string name="price_charged_hint">Set 15 minute charge</string>
+    <string name="no_price_set">Set price</string>
+    <string name="currency_symbol">$</string>
+    <string name="dot_zero_zero">.00</string>
 
     <!--PersonalReviewsActivity-->
     <string name="your_reviews">Your Reviews</string>

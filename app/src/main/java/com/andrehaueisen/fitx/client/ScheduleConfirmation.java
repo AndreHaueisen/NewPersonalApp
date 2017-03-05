@@ -4,8 +4,8 @@ import android.app.Activity;
 
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.firebase.AppointmentMaker;
-import com.andrehaueisen.fitx.pojo.PersonalFitClass;
-import com.andrehaueisen.fitx.pojo.PersonalTrainer;
+import com.andrehaueisen.fitx.models.PersonalFitClass;
+import com.andrehaueisen.fitx.models.PersonalTrainer;
 
 /**
  * Created by andre on 10/13/2016.
