@@ -16,7 +16,7 @@ import android.widget.TextView
 import com.andrehaueisen.fitx.*
 import com.andrehaueisen.fitx.R
 import com.andrehaueisen.fitx.client.DayAgendaFragment
-import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher
+import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher
 import com.andrehaueisen.fitx.models.Gym
 import com.andrehaueisen.fitx.models.PersonalTrainer
 import com.andrehaueisen.fitx.shared.dialogFragments.ClassDurationDialogFragment
@@ -33,7 +33,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class SpecificPersonalSearchFragment : Fragment(), FirebaseImageCatcher.FirebaseCallback, ClassDurationDialogFragment.DurationCallBack {
+class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseProfileCallback, ClassDurationDialogFragment.DurationCallBack {
 
     private val mDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val mStartTimesHashMap = HashMap<String, ArrayList<Int>>()
@@ -86,15 +86,15 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseImageCatcher.Firebase
         mClassDurationButton = view?.findViewById(R.id.class_duration_button) as (CustomButton)
         configureClassDurationButton()
 
-        val monthNameTextView = view?.findViewById(R.id.month_name_text_view) as CustomTextView
-        val calendarView = view?.findViewById(R.id.personal_calendar_view) as (LightCalendarView)
+        val monthNameTextView = view.findViewById(R.id.month_name_text_view) as CustomTextView
+        val calendarView = view.findViewById(R.id.personal_calendar_view) as (LightCalendarView)
         configureCalendar(calendarView, monthNameTextView)
 
         return view
     }
 
     fun configureClassDurationButton(){
-        mClassDurationButton?.setOnClickListener { view ->
+        mClassDurationButton?.setOnClickListener {
             val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
             val fragment = activity.supportFragmentManager.findFragmentByTag("dialog")
 
@@ -210,11 +210,10 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseImageCatcher.Firebase
 
         val searchView = view.findViewById(R.id.personal_search_view) as SearchView
 
-        //searchView.isSubmitButtonEnabled = true
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
+                searchView.onActionViewCollapsed()
                 if (query != null && query.isNotBlank()) {
 
                     mDatabaseReference.child(Constants.FIREBASE_LOCATION_PERSONAL_TRAINER).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -410,7 +409,7 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseImageCatcher.Firebase
 
     private fun configurePersonalView(view: View, personal: PersonalTrainer) {
 
-        val imageCatcher = FirebaseImageCatcher(this)
+        val imageCatcher = FirebaseProfileImageCatcher(this)
         imageCatcher.getPersonalProfilePicture(activity, Utils.encodeEmail(personal.email))
 
         val nameTextView = view.findViewById(R.id.personal_name_text_view) as TextView

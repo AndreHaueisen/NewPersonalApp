@@ -27,6 +27,14 @@ public class AttributedPhoto implements Parcelable {
         this.bitmap = bitmap;
     }
 
+    public void setAttribution(CharSequence attribution) {
+        this.attribution = attribution;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
     public CharSequence getAttribution() {
         return attribution;
     }

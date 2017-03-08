@@ -47,10 +47,11 @@ public class SignInActivity extends AppCompatActivity{
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
-                            .setProviders(Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+                            .setProviders(Arrays.asList(
+                                    new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
-                            .setLogo(R.mipmap.ic_launcher)
+                            .setLogo(R.drawable.ok_go_register_icon)
                             .setTheme(R.style.LogInTheme).build(), REQUEST_CODE);
         }
     }

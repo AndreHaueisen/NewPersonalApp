@@ -152,7 +152,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
         }
 
         private void setProfileImage(){
-            String photoUriPath = Utils.getSharedPreferences(mContext).getString(Constants.SHARED_PREF_PERSONAL_PHOTO_URI_PATH, null);
+            String photoUriPath = Utils.getSharedPreferences(mContext).getString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, null);
 
             if(photoUriPath == null){
                 Glide.with(mContext).load(R.drawable.head_placeholder).into(mHeadPhotoImageView);

@@ -108,7 +108,7 @@ public class Utils {
                     new PhotoTask(photoUrl, true).execute(activity);
                 }else{
                     photoUrl = task.getResult().getDownloadUrl();
-                    Utils.getSharedPreferences(activity).edit().putString(Constants.SHARED_PREF_PERSONAL_PHOTO_URI_PATH, photoUrl.toString()).apply();
+                    Utils.getSharedPreferences(activity).edit().putString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, photoUrl.toString()).apply();
                 }
                 activity.startActivity(intent);
             }
@@ -186,7 +186,7 @@ public class Utils {
             try {
                 Bitmap bitmap = with(activity).load(mPhotoUrl).asBitmap().into(100, 100).get();
                 if(mIsPersonal) {
-                    PersonalDatabase.saveProfilePicsToFirebase(activity, bitmap);
+                    PersonalDatabase.saveProfilePicsToFirebase(activity, bitmap, Constants.PERSONAL_PROFILE_PICTURE_NAME);
                 }else{
                     ClientDatabase.saveProfilePicsToFirebase(activity, bitmap);
                 }

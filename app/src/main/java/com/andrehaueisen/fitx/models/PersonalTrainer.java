@@ -12,9 +12,7 @@ public class PersonalTrainer implements Parcelable {
     private String mName;
     private String mCref;
     private String mCrefState;
-    private String mPhoneNumber;
     private String mEmail;
-    private String mBirthday;
     private String mProfilePicsUri;
     private boolean mHasStudio;
     private float mGrade;
@@ -27,15 +25,13 @@ public class PersonalTrainer implements Parcelable {
         mReviewCounter = 1;
     }
 
-    public PersonalTrainer(String name, String cref, String crefState, String phoneNumber, String email, String birthday, String profilePicsUri,
+    public PersonalTrainer(String name, String cref, String crefState, String email, String profilePicsUri,
                            boolean hasStudio, float grade, int reviewCounter, int a15MinutePrice) {
 
         mName = name;
         mCref = cref;
         mCrefState = crefState;
-        mPhoneNumber = phoneNumber;
         mEmail = email;
-        mBirthday = birthday;
         mProfilePicsUri = profilePicsUri;
         mHasStudio = hasStudio;
         mGrade = grade;
@@ -68,14 +64,6 @@ public class PersonalTrainer implements Parcelable {
         mCrefState = crefState;
     }
 
-    public String getPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        mPhoneNumber = phoneNumber;
-    }
-
     public String getEmail() {
         return mEmail;
     }
@@ -84,15 +72,7 @@ public class PersonalTrainer implements Parcelable {
         mEmail = email;
     }
 
-    public String getBirthday() {
-        return mBirthday;
-    }
-
-    public void setBirthday(String birthday) {
-        mBirthday = birthday;
-    }
-
-    public String getProfilePicsUri() {
+     public String getProfilePicsUri() {
         return mProfilePicsUri;
     }
 
@@ -128,9 +108,7 @@ public class PersonalTrainer implements Parcelable {
         mName = in.readString();
         mCref = in.readString();
         mCrefState = in.readString();
-        mPhoneNumber = in.readString();
         mEmail = in.readString();
-        mBirthday = in.readString();
         mProfilePicsUri = in.readString();
         mHasStudio = in.readByte() != 0x00;
         mGrade = in.readFloat();
@@ -149,9 +127,7 @@ public class PersonalTrainer implements Parcelable {
         dest.writeString(mName);
         dest.writeString(mCref);
         dest.writeString(mCrefState);
-        dest.writeString(mPhoneNumber);
         dest.writeString(mEmail);
-        dest.writeString(mBirthday);
         dest.writeString(mProfilePicsUri);
         dest.writeByte((byte) (mHasStudio ? 0x01 : 0x00));
         dest.writeFloat(mGrade);

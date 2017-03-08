@@ -11,7 +11,7 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.PersonalBoothActivity;
 import com.andrehaueisen.fitx.client.ScheduleConfirmation;
-import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
+import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.PersonalDetailed;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.andrehaueisen.fitx.models.PersonalResume;
@@ -34,7 +34,7 @@ public class ExpandableBoothAdapter extends ExpandableRecyclerAdapter<PersonalRe
 
     private PersonalBoothActivity mActivity;
     private List<PersonalTrainer> mPersonalTrainers;
-    private FirebaseImageCatcher mFirebaseImageCatcher;
+    private FirebaseProfileImageCatcher mFirebaseProfileImageCatcher;
     private PersonalFitClass mPersonalFitClass;
 
     public ExpandableBoothAdapter(@NonNull List<PersonalResume> parentList, List<PersonalTrainer> personalTrainers, PersonalBoothActivity activity, PersonalFitClass personalFitClass) {
@@ -51,7 +51,7 @@ public class ExpandableBoothAdapter extends ExpandableRecyclerAdapter<PersonalRe
 
         View parentView = LayoutInflater.from(mActivity).inflate(R.layout.item_personal_resume_parent, parentViewGroup, false);
         PersonalResumeParentHolder holder = new PersonalResumeParentHolder(parentView);
-        mFirebaseImageCatcher = new FirebaseImageCatcher(holder);
+        mFirebaseProfileImageCatcher = new FirebaseProfileImageCatcher(holder);
 
         return holder;
     }
@@ -75,7 +75,7 @@ public class ExpandableBoothAdapter extends ExpandableRecyclerAdapter<PersonalRe
         childViewHolder.bindInfoToView(child);
     }
 
-    public class PersonalResumeParentHolder extends ParentViewHolder<PersonalResume, PersonalDetailed> implements FirebaseImageCatcher.FirebaseCallback {
+    public class PersonalResumeParentHolder extends ParentViewHolder<PersonalResume, PersonalDetailed> implements FirebaseProfileImageCatcher.FirebaseProfileCallback {
 
         private TextView mNameTextView;
         private TextView mGradeTextView;
@@ -91,7 +91,7 @@ public class ExpandableBoothAdapter extends ExpandableRecyclerAdapter<PersonalRe
         }
 
         private void sendImageCatcherToFirebase(PersonalResume personalResume){
-            mFirebaseImageCatcher.getPersonalProfilePicture(mActivity, personalResume.getPersonalKey());
+            mFirebaseProfileImageCatcher.getPersonalProfilePicture(mActivity, personalResume.getPersonalKey());
         }
 
         private void bindInfoToView(PersonalResume personalResume){

@@ -1,6 +1,5 @@
 package com.andrehaueisen.fitx.models;
 
-import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,9 +11,7 @@ import android.os.Parcelable;
 public class Client implements Parcelable {
 
     private String mName;
-    private String mBirthday;
     private String mEmail;
-    private String mPhoneNumber;
     private String mMainObjective;
     private Gym mClientGym;
 
@@ -25,13 +22,10 @@ public class Client implements Parcelable {
         super();
     }
 
-    public Client(String name, String birthday, String email, String phoneNumber, String mainObjective, Gym clientGym, BodyMeasures bodyMeasures,
-                  Location trainingLocations) {
+    public Client(String name, String email, String mainObjective, Gym clientGym, BodyMeasures bodyMeasures) {
 
         mName = name;
-        mBirthday = birthday;
         mEmail = email;
-        mPhoneNumber = phoneNumber;
         mMainObjective = mainObjective;
         mClientGym = clientGym;
         mBodyMeasures = bodyMeasures;
@@ -45,28 +39,12 @@ public class Client implements Parcelable {
         mName = name;
     }
 
-    public String getBirthday() {
-        return mBirthday;
-    }
-
-    public void setBirthday(String birthday) {
-        mBirthday = birthday;
-    }
-
     public String getEmail() {
         return mEmail;
     }
 
     public void setEmail(String mEmail) {
         this.mEmail = mEmail;
-    }
-
-    public String getPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public void setPhoneNumber(String mPhoneNumber) {
-        this.mPhoneNumber = mPhoneNumber;
     }
 
     public String getMainObjective() {
@@ -96,13 +74,10 @@ public class Client implements Parcelable {
 
     protected Client(Parcel in) {
         mName = in.readString();
-        mBirthday = in.readString();
         mEmail = in.readString();
-        mPhoneNumber = in.readString();
         mMainObjective = in.readString();
         mClientGym = (Gym) in.readValue(Gym.class.getClassLoader());
         mBodyMeasures = (BodyMeasures) in.readValue(BodyMeasures.class.getClassLoader());
-
     }
 
     @Override
@@ -113,9 +88,7 @@ public class Client implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mName);
-        dest.writeString(mBirthday);
         dest.writeString(mEmail);
-        dest.writeString(mPhoneNumber);
         dest.writeString(mMainObjective);
         dest.writeValue(mClientGym);
         dest.writeValue(mBodyMeasures);

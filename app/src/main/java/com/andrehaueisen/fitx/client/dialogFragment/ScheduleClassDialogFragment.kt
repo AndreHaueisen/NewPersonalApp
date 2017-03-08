@@ -52,7 +52,6 @@ class ScheduleClassDialogFragment(personalTrainer: PersonalTrainer, personalProf
         builder.setView(view)
 
         confirmButton.setOnClickListener {
-            view ->
             val dateCode = mDate.toString("MMddyyyy", Locale.US)
             val workingPlaceName = workingPlacesSpinner.selectedItem as String
             val workingPlace = mWorkingPlaces.find { it -> it.name == workingPlaceName }
@@ -72,7 +71,7 @@ class ScheduleClassDialogFragment(personalTrainer: PersonalTrainer, personalProf
 
             dismiss()
         }
-        cancelButton.setOnClickListener { view -> dismiss() }
+        cancelButton.setOnClickListener { dismiss() }
 
         return builder.create()
     }

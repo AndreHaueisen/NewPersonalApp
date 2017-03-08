@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
+import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
@@ -35,7 +35,7 @@ import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
  * Created by andre on 9/8/2016.
  */
 
-public class UpcomingClassesFragment extends Fragment implements ChildEventListener, FirebaseImageCatcher.FirebaseCallback {
+public class UpcomingClassesFragment extends Fragment implements ChildEventListener, FirebaseProfileImageCatcher.FirebaseProfileCallback {
 
     private static final String TAG = UpcomingClassesFragment.class.getSimpleName();
 
@@ -44,7 +44,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
     private DatabaseReference mDatabaseReference;
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mConfirmedPersonalFitClasses;
-    private FirebaseImageCatcher mImageCatcher;
+    private FirebaseProfileImageCatcher mImageCatcher;
 
     public static Fragment newInstance() {
         return new UpcomingClassesFragment();
@@ -75,7 +75,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_confirmed_message));
 
-        mImageCatcher = new FirebaseImageCatcher(this);
+        mImageCatcher = new FirebaseProfileImageCatcher(this);
 
         if(savedInstanceState != null){
             Parcelable recyclerState = savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY);

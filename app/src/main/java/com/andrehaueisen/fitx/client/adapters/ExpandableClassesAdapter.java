@@ -1,5 +1,6 @@
 package com.andrehaueisen.fitx.client.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -91,6 +93,7 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
         }else {
             Glide.with(mContext).load("").placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder)).into(parentViewHolder.mHeadPhotoImageView);
         }
+
         parentViewHolder.mPersonalNameTextView.setText(parent.getPersonalName());
         parentViewHolder.mDateTextView.setText(parent.getClassDate());
         parentViewHolder.mLocationTextView.setText(parent.getClassLocation());
@@ -100,6 +103,7 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
     public void onBindChildViewHolder(@NonNull final ClassDetailChildHolder childViewHolder, final int parentPosition, final int childPosition, @NonNull final ClassDetailed child) {
 
         Bitmap personalProfileImage = mClassReceipts.get(childPosition).getPersonalProfileImage();
+        Bitmap personalBackgroundImage = mClassReceipts.get(parentPosition).getPersonalBackgroundImage();
 
         if(personalProfileImage != null) {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -107,6 +111,14 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
             Glide.with(mContext).load(stream.toByteArray()).asBitmap().placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder)).into(childViewHolder.mHeadPhotoChildImageView);
         }else {
             Glide.with(mContext).load("").placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder)).into(childViewHolder.mHeadPhotoChildImageView);
+        }
+
+        if(personalBackgroundImage != null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            personalBackgroundImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            Glide.with(mContext).load(stream.toByteArray()).asBitmap().placeholder(mContext.getResources().getDrawable(R.drawable.personal_background_placeholder)).into(childViewHolder.mBackgroundImageView);
+        }else{
+            Glide.with(mContext).load("").placeholder(mContext.getResources().getDrawable(R.drawable.personal_background_placeholder)).into(childViewHolder.mBackgroundImageView);
         }
 
         childViewHolder.fetchPersonalGrade(childPosition);
@@ -128,6 +140,10 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
 
                     getParentList().remove(parentPosition);
                     notifyParentRemoved(parentPosition);
+
+                    if(getParentList().isEmpty()){
+                        ((Activity) mContext).finish();
+                    }
 
                     Utils.generateSuccessToast(mContext, mContext.getString(R.string.review_submitted)).show();
                 } else {
@@ -157,7 +173,7 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
 
     public class ClassDetailChildHolder extends ChildViewHolder<ClassDetailed> implements TextWatcher{
 
-        //private ImageView mBackgroundImageView;
+        private ImageView mBackgroundImageView;
         private CircleImageView mHeadPhotoChildImageView;
         private TextView mPersonalNameChildTextView;
         private TextView mDateChildTextView;
@@ -171,7 +187,7 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
         public ClassDetailChildHolder(@NonNull View itemView) {
             super(itemView);
 
-            //mBackgroundImageView = (ImageView) itemView.findViewById(R.id.background_image_view);
+            mBackgroundImageView = (ImageView) itemView.findViewById(R.id.background_image_view);
             mHeadPhotoChildImageView = (CircleImageView) itemView.findViewById(R.id.head_photo_image_view);
             mPersonalNameChildTextView = (TextView) itemView.findViewById(R.id.personal_name_text_view);
             mDateChildTextView = (TextView) itemView.findViewById(R.id.class_date_text_view);
@@ -183,7 +199,6 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
 
             mReviewTextInputLayout.getEditText().addTextChangedListener(this);
             mReview = "";
-
 
         }
 
@@ -199,7 +214,6 @@ public class ExpandableClassesAdapter extends ExpandableRecyclerAdapter<ClassRes
 
                     String grade = Utils.formatGrade(personalTrainer.getGrade());
                     mPersonalGradeChildTextView.setText(grade);
-
                 }
 
                 @Override

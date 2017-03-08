@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
+import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
@@ -34,7 +34,7 @@ import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ToBeConfirmedClassesFragment extends Fragment implements ChildEventListener, FirebaseImageCatcher.FirebaseCallback {
+public class ToBeConfirmedClassesFragment extends Fragment implements ChildEventListener, FirebaseProfileImageCatcher.FirebaseProfileCallback {
 
     private static final String TAG = ToBeConfirmedClassesFragment.class.getSimpleName();
 
@@ -43,7 +43,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
     private DatabaseReference mDatabaseReference;
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mWaitingConfirmationPersonalFitClasses;
-    private FirebaseImageCatcher mImageCatcher;
+    private FirebaseProfileImageCatcher mImageCatcher;
 
     public static ToBeConfirmedClassesFragment newInstance() {
         return new ToBeConfirmedClassesFragment();
@@ -73,7 +73,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_scheduled_message));
 
-        mImageCatcher = new FirebaseImageCatcher(this);
+        mImageCatcher = new FirebaseProfileImageCatcher(this);
 
         if(savedInstanceState != null){
             mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));

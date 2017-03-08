@@ -18,17 +18,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.andrehaueisen.fitx.Constants;
-import com.andrehaueisen.fitx.CustomTextView;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.ClientActivity;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
-import com.andrehaueisen.fitx.personal.PersonalActivity;
-import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.models.Client;
 import com.andrehaueisen.fitx.models.PersonalTrainer;
 import com.andrehaueisen.fitx.models.UndefinedUser;
 import com.andrehaueisen.fitx.models.UserMappings;
+import com.andrehaueisen.fitx.personal.PersonalActivity;
+import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,27 +37,25 @@ import com.wx.wheelview.widget.WheelView;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static java.util.Arrays.asList;
 
 public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterClientOrPersonalActivity.class.getSimpleName();
 
-    private TextInputLayout mNameTextField;
-    private TextInputLayout mBirthdayTextField;
-    private TextInputLayout mPhoneNumberTextField;
-    private TextInputLayout mCREFNameTextField;
-    private TextInputLayout mCREFTextField;
-    private WheelView mStateChooserWheel;
+    @BindView(R.id.name_textInputLayout) TextInputLayout mNameTextField;
+    @BindView(R.id.cref_name_textInputLayout) TextInputLayout mCREFNameTextField;
+    @BindView(R.id.cref_textInputLayout) TextInputLayout mCREFTextField;
+    @BindView(R.id.state_chooser_wheel) WheelView mStateChooserWheel;
 
     private String mDisplayName;
     private String mEmail;
     private String mUid;
     private String mPhotoPath;
-    private String mBirthday;
-    private String mPhoneNumber;
     private String mCref;
-    private String mCrefState;
 
     private int mSelectedState = -1;
 
@@ -73,6 +70,8 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_client_or_personal);
 
+        ButterKnife.bind(this);
+
         UndefinedUser undefinedUser = getIntent().getExtras().getParcelable(Constants.UNDEFINED_USER_EXTRA_KEY);
 
         mDisplayName = undefinedUser.getName();
@@ -80,29 +79,18 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         mUid = undefinedUser.getUid();
         mPhotoPath = undefinedUser.getPhotoPath();
 
-        mNameTextField = (TextInputLayout) findViewById(R.id.name_textInputLayout);
         EditText nameEditText = mNameTextField.getEditText();
         nameEditText.setText(mDisplayName);
         nameEditText.addTextChangedListener(mNameTextWatcher);
 
-        mBirthdayTextField = (TextInputLayout) findViewById(R.id.birthday_textInputLayout);
-        mBirthdayTextField.getEditText().addTextChangedListener(mBirthdayTextWatcher);
-
-        mPhoneNumberTextField = (TextInputLayout) findViewById(R.id.phone_number_textInputLayout);
-        mPhoneNumberTextField.getEditText().addTextChangedListener(mPhoneTextWatcher);
-
-        mCREFNameTextField = (TextInputLayout) findViewById(R.id.cref_name_textInputLayout);
         mCREFNameTextField.getEditText().addTextChangedListener(mCREFNameTextWatcher);
 
-        mCREFTextField = (TextInputLayout) findViewById(R.id.cref_textInputLayout);
         mCREFTextField.getEditText().addTextChangedListener(mCREFTextWatcher);
 
         CheckBox isPersonalCheckBox = (CheckBox) findViewById(R.id.is_personal_check_bok);
 
-        final CustomTextView whereTextFromTextView = (CustomTextView) findViewById(R.id.where_cref_from_text_view);
+        final TextView whereTextFromTextView = (TextView) findViewById(R.id.where_cref_from_text_view);
 
-
-        mStateChooserWheel = (WheelView) findViewById(R.id.state_chooser_wheel);
         configureWheel();
 
         isPersonalCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -115,10 +103,10 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                     whereTextFromTextView.setVisibility(View.VISIBLE);
                     mIsPersonal = true;
                 } else {
-                    mCREFNameTextField.setVisibility(View.INVISIBLE);
-                    mCREFTextField.setVisibility(View.INVISIBLE);
+                    mCREFNameTextField.setVisibility(View.GONE);
+                    mCREFTextField.setVisibility(View.GONE);
                     mStateChooserWheel.setVisibility(View.INVISIBLE);
-                    whereTextFromTextView.setVisibility(View.INVISIBLE);
+                    whereTextFromTextView.setVisibility(View.GONE);
                     mIsPersonal = false;
                 }
             }
@@ -147,6 +135,13 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                 mSelectedState = position;
             }
         });
+
+        WheelView.WheelViewStyle wheelViewStyle = new WheelView.WheelViewStyle();
+        wheelViewStyle.backgroundColor = getResources().getColor(R.color.transparent);
+        wheelViewStyle.textColor = getResources().getColor(R.color.black);
+        wheelViewStyle.holoBorderColor = getResources().getColor(R.color.colorAccent);
+        mStateChooserWheel.setStyle( wheelViewStyle );
+
     }
 
     private TextWatcher mNameTextWatcher = new TextWatcher() {
@@ -167,58 +162,6 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
             } else {
                 mNameTextField.setErrorEnabled(false);
                 mDisplayName = name;
-            }
-        }
-    };
-
-    private TextWatcher mBirthdayTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            String birthday = editable.toString();
-            if(!Utils.isBirthdayValid(birthday)){
-                mBirthdayTextField.setError(getString(R.string.invalid_birthday));
-
-            } else {
-                int year = Integer.parseInt(birthday.substring(birthday.length() - 4, birthday.length()));
-
-                if(Utils.isAgeGraterThan18(year)){
-                    mBirthdayTextField.setError(getString(R.string.invalid_age));
-
-                } else {
-                    mBirthdayTextField.setErrorEnabled(false);
-                    mBirthday = birthday;
-                }
-            }
-        }
-    };
-
-    private TextWatcher mPhoneTextWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            String phone = editable.toString();
-            if(!Utils.isPhoneValid(phone)){
-                mPhoneNumberTextField.setError(getString(R.string.invalid_phone_number));
-            } else {
-                mPhoneNumberTextField.setErrorEnabled(false);
-                mPhoneNumber = phone;
             }
         }
     };
@@ -280,11 +223,12 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
                 if(mPhotoPath != null){
                     new ProfileImageTask().execute();
-                    Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_PERSONAL_PHOTO_URI_PATH, mPhotoPath).commit();
+                    Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, mPhotoPath).commit();
                 }
 
                 Intent intent = new Intent(this, PersonalActivity.class);
                 startActivity(intent);
+                finish();
             }
 
         } else {
@@ -301,6 +245,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, ClientActivity.class);
                 startActivity(intent);
+                finish();
             }
 
         }
@@ -311,26 +256,12 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         boolean isAllDataSet = true;
         mPersonalTrainer.setName(mDisplayName);
         mPersonalTrainer.setEmail(mEmail);
-        mPersonalTrainer.setPhoneNumber(mPhoneNumber);
-        mPersonalTrainer.setBirthday(mBirthday);
         mPersonalTrainer.setCrefState(getResources().getStringArray(R.array.states_array)[mSelectedState]);
         mPersonalTrainer.setCref(mCref);
 
         if (mPersonalTrainer.getName() == null || mNameTextField.isErrorEnabled()
                 || mNameTextField.getEditText().getText().toString().equals("")) {
             Utils.generateInfoToast(this, getString(R.string.invalid_name)).show();
-            isAllDataSet = false;
-        }
-
-        if (mPersonalTrainer.getBirthday() == null || mBirthdayTextField.isErrorEnabled()
-                || mBirthdayTextField.getEditText().getText().toString().equals("")) {
-            Utils.generateInfoToast(this, getString(R.string.invalid_birthday)).show();
-            isAllDataSet = false;
-        }
-
-        if (mPersonalTrainer.getPhoneNumber() == null || mPhoneNumberTextField.isErrorEnabled()
-                || mPhoneNumberTextField.getEditText().getText().toString().equals("")) {
-            Utils.generateInfoToast(this, getString(R.string.invalid_phone_number)).show();
             isAllDataSet = false;
         }
 
@@ -359,24 +290,10 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
         mClient.setName(mDisplayName);
         mClient.setEmail(mEmail);
-        mClient.setPhoneNumber(mPhoneNumber);
-        mClient.setBirthday(mBirthday);
 
         if(mClient.getName() == null || mNameTextField.isErrorEnabled()
                 || mNameTextField.getEditText().getText().toString().equals("")){
             Utils.generateInfoToast(this, getString(R.string.invalid_name)).show();
-            isAllDataSet = false;
-        }
-
-        if(mClient.getBirthday() == null || mBirthdayTextField.isErrorEnabled()
-                || mBirthdayTextField.getEditText().getText().toString().equals("")){
-            Utils.generateInfoToast(this, getString(R.string.invalid_birthday)).show();
-            isAllDataSet = false;
-        }
-
-        if(mClient.getPhoneNumber() == null || mPhoneNumberTextField.isErrorEnabled()
-                || mPhoneNumberTextField.getEditText().getText().toString().equals("")){
-            Utils.generateInfoToast(this, getString(R.string.invalid_phone_number)).show();
             isAllDataSet = false;
         }
 
@@ -392,14 +309,14 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     }
 
-    class ProfileImageTask extends AsyncTask<Void, Void, Void>{
+    private class ProfileImageTask extends AsyncTask<Void, Void, Void>{
         @Override
         protected Void doInBackground(Void... voids) {
             Bitmap profileImage;
             if(mIsPersonal){
                 try {
                     profileImage = Glide.with(RegisterClientOrPersonalActivity.this).load(mPhotoPath).asBitmap().into(100, 100).get();
-                    PersonalDatabase.saveProfilePicsToFirebase(RegisterClientOrPersonalActivity.this, profileImage);
+                    PersonalDatabase.saveProfilePicsToFirebase(RegisterClientOrPersonalActivity.this, profileImage, Constants.PERSONAL_PROFILE_PICTURE_NAME);
 
                 } catch (ExecutionException | InterruptedException e) {
                     Log.e(TAG, e.getMessage());
@@ -421,14 +338,14 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     }
 
-    class ValidateCREF extends AsyncTask<String, Void, Boolean> {
+    private class ValidateCREF extends AsyncTask<String, Void, Boolean> {
 
         private String mPersonalName;
         int mState;
         private String mCref;
         ProgressDialog mProgressDialog;
 
-        public ValidateCREF(String personalName, int state, String cref) {
+        ValidateCREF(String personalName, int state, String cref) {
             mPersonalName = personalName;
             mState = state;
             mCref = cref;
@@ -472,7 +389,6 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                 mCREFTextField.setError(getString(R.string.invalid_cref));
             }
         }
-
 
     }
 

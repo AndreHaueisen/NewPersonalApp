@@ -9,12 +9,12 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.SearchView
-        android:layout_margin="16dp"
         android:id="@+id/personal_search_view"
-        app:defaultQueryHint="@string/search_hint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_rectangle_background"/>
+        android:layout_margin="16dp"
+        android:background="@drawable/shape_rectangle_background"
+        app:defaultQueryHint="@string/search_hint"/>
 
     <com.andrehaueisen.fitx.CustomTextView
         android:id="@+id/no_results_text_view"
@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:textSize="18sp"
         android:text="@string/no_personal_found"
+        android:textSize="18sp"
         android:visibility="gone"/>
 
     <android.support.v4.widget.NestedScrollView
@@ -44,9 +44,9 @@
                 android:id="@+id/class_duration_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/shape_rectangle_outline"
                 android:text="@string/configure_class_duration"/>
@@ -54,8 +54,8 @@
             <com.andrehaueisen.fitx.CustomTextView
                 android:id="@+id/month_name_text_view"
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:textAllCaps="true"
                 android:textSize="20sp"

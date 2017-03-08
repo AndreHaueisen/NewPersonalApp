@@ -43,7 +43,8 @@ public class Constants {
     public static final String SHARED_PREF_CLIENT_NAME = "client_name";
     public static final String SHARED_PREF_PERSONAL_EMAIL_UNIQUE_KEY = "personal_unique_key";
     public static final String SHARED_PREF_PERSONAL_NAME = "personal_name";
-    public static final String SHARED_PREF_PERSONAL_PHOTO_URI_PATH = "personalPhotoUri";
+    public static final String SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH = "personalPhotoUri";
+    public static final String SHARED_PREF_PERSONAL_BACKGROUND_PHOTO_URI_PATH = "personalBackgroundPhotoUri";
     public static final String SHARED_PREF_CLIENT_PHOTO_URI_PATH = "clientPhotoUri";
     public static final String SHARED_PREF_SERVER_TOKEN = "server_token";
 
@@ -56,9 +57,11 @@ public class Constants {
     public static final String IMAGE_CODE_BUNDLE_KEY = "image_code";
     public static final int PERSONAL_PROFILE_PICTURE = 0;
     public static final int CLIENT_PROFILE_PICTURE = 1;
+    public static final int PERSONAL_BACKGROUND_PICTURE = 2;
 
 
     public static final String PERSONAL_PROFILE_PICTURE_NAME ="PersonalProfilePicOkGo.png";
+    public static final String PERSONAL_BACKGROUND_PICTURE_NAME = "PersonalBackgroundPicOkGo";
     public static final String CLIENT_PROFILE_PICTURE_NAME ="ClientProfilePicOkGo.png";
 
     //PlacePicker constants
@@ -75,6 +78,7 @@ public class Constants {
     public static final String PERSONAL_BUNDLE_KEY = "personalBundleKey";
     public static final String PERSONAl_WORKING_LOCATIONS_BUNDLE_KEY = "personal_working_loc_bundle_key";
     public static final String PERSONAL_PROFILE_PIC_BUNDLE_KEY = "personal_prof_pic_bundle_key";
+    public static final String PERSONAL_BACKGROUND_PIC_BUNDLE_KEY = "personal_back_pic_bundle_key";
     public static final String PERSONAL_SPECIALTIES_BUNDLE_KEY = "personal_specialties_bundle_key";
     public static final String PERSONAL_UNIQUE_KEY_BUNDLE_KEY = "personal_unique_key_bundle_key";
     public static final String FIT_CLASS_BUNDLE_KEY = "fitClassBundleKey";
@@ -83,6 +87,8 @@ public class Constants {
     public static final String CLASS_DURATION_BUNDLE_KEY = "class_duration_bundle_key";
     public static final String CLASS_DATE_BUNDLE_KEY = "class_date_bundle_key";
     public static final String CLASS_PERSONAL_BUNDLE_KEY = "personal_bundle_key";
+    public static final String CLIENT_GYM_PICTURE_BUNDLE_KEY = "client_gym_picture_bundle_key";
+    public static final String CLIENT_GYM_PICTURE_ATTRIBUTION_BUNDLE_KEY ="client_gym_picture_attribution";
 
     //Saved State keys
     public static final String CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY = "confirmed_personal_classes_state";

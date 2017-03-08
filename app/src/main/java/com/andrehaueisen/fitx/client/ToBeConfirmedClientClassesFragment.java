@@ -18,7 +18,7 @@ import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
-import com.andrehaueisen.fitx.client.firebase.FirebaseImageCatcher;
+import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.ClassReceipt;
 import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.bumptech.glide.Glide;
@@ -41,7 +41,7 @@ import static com.andrehaueisen.fitx.Utils.getSharedPreferences;
  */
 
 public class ToBeConfirmedClientClassesFragment extends Fragment implements ClientClassesAdapter.ClassCallback, ChildEventListener,
-        FirebaseImageCatcher.FirebaseCallback {
+        FirebaseProfileImageCatcher.FirebaseProfileCallback {
 
     private static final String TAG = ToBeConfirmedClientClassesFragment.class.getSimpleName();
 
@@ -50,7 +50,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
     private ArrayList<ClientFitClass> mWaitingConfirmationClientFitClasses;
     private ClientClassesAdapter mAdapter;
-    private FirebaseImageCatcher mImageCatcher;
+    private FirebaseProfileImageCatcher mImageCatcher;
     private String mPersonalKey;
 
 
@@ -91,7 +91,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.client_no_class_scheduled_message));
-        mImageCatcher = new FirebaseImageCatcher(this);
+        mImageCatcher = new FirebaseProfileImageCatcher(this);
 
         if(savedInstanceState != null){
             mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));

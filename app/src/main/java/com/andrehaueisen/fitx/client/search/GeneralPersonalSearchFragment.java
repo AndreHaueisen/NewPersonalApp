@@ -62,6 +62,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -73,20 +76,20 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
 
     private ProgressDialog mProgressDialog;
 
-    private Button mChooseDayButton;
-    private Button mChooseStartTimeButton;
-    private Button mChooseDurationButton;
-    private FloatingActionButton mSearchButton;
+    @BindView(R.id.choose_date_button) Button mChooseDayButton;
+    @BindView(R.id.choose_class_start_time_button) Button mChooseStartTimeButton;
+    @BindView(R.id.choose_duration_button) Button mChooseDurationButton;
+    @BindView(R.id.activate_search_button) FloatingActionButton mSearchButton;
 
-    private ImageView mPlaceImageView;
-    private TextView mPlaceNameTextView;
-    private TextView mPlaceAddressTextView;
-    private TextView mPhotoAttributionsTextView;
+    @BindView(R.id.client_place_image_view) ImageView mPlaceImageView;
+    @BindView(R.id.client_gym_name) TextView mPlaceNameTextView;
+    @BindView(R.id.client_gym_address) TextView mPlaceAddressTextView;
+    @BindView(R.id.attributions_text_view) TextView mPhotoAttributionsTextView;
+
+    @BindView(R.id.specialties_recycler_view) RecyclerView mSpecialtiesRecyclerView;
+    private MainObjectiveAdapter mObjectiveAdapter;
 
     private Gym mClientGym;
-
-    private RecyclerView mSpecialtiesRecyclerView;
-    private MainObjectiveAdapter mObjectiveAdapter;
 
     private FirebaseFilter mFirebaseFilter;
 
@@ -161,18 +164,8 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_general_personal_search, container, false);
+        ButterKnife.bind(this, view);
 
-        mChooseDayButton = (Button) view.findViewById(R.id.choose_date_button);
-        mChooseStartTimeButton = (Button) view.findViewById(R.id.choose_class_start_time_button);
-        mChooseDurationButton = (Button) view.findViewById(R.id.choose_duration_button);
-        mSearchButton = (FloatingActionButton) view.findViewById(R.id.activate_search_button);
-
-        mPlaceImageView = (ImageView) view.findViewById(R.id.client_place_image_view);
-        mPlaceNameTextView = (TextView) view.findViewById(R.id.client_gym_name);
-        mPlaceAddressTextView = (TextView) view.findViewById(R.id.client_gym_address);
-        mPhotoAttributionsTextView = (TextView) view.findViewById(R.id.attributions_text_view);
-
-        mSpecialtiesRecyclerView = (RecyclerView) view.findViewById(R.id.specialties_recycler_view);
         mSpecialtiesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mSpecialtiesRecyclerView.setHasFixedSize(true);
 

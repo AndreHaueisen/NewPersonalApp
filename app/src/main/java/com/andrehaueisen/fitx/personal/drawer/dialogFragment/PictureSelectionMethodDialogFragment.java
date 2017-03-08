@@ -120,6 +120,11 @@ public class PictureSelectionMethodDialogFragment extends DialogFragment  {
             case Constants.PERSONAL_PROFILE_PICTURE:
                 mImageFile = new File(storageDirectory, Constants.PERSONAL_PROFILE_PICTURE_NAME);
                 break;
+
+            case Constants.PERSONAL_BACKGROUND_PICTURE:
+                mImageFile = new File(storageDirectory, Constants.PERSONAL_BACKGROUND_PICTURE_NAME);
+                break;
+
             case Constants.CLIENT_PROFILE_PICTURE:
                 mImageFile = new File(storageDirectory, Constants.CLIENT_PROFILE_PICTURE_NAME);
                 break;

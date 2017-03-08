@@ -29,29 +29,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
             tools:context="com.andrehaueisen.fitx.personal.drawer.ProfessionalProfileActivity">
 
             <fragment
                 android:id="@+id/personal_basic_presentation_fragment"
                 class="com.andrehaueisen.fitx.personal.drawer.PersonalBasicPresentationFragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"/>
 
             <fragment
                 android:id="@+id/place_autocomplete_fragment"
                 class="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"/>
 
             <fragment
                 android:id="@+id/work_places_fragment"
                 class="com.andrehaueisen.fitx.personal.drawer.WorkPlacesFragment"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"/>
@@ -59,6 +57,8 @@
             <fragment
                 android:id="@+id/specialties_fragment"
                 class="com.andrehaueisen.fitx.personal.drawer.SpecialtiesFragment"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"/>

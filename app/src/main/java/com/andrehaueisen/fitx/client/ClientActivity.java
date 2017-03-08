@@ -46,6 +46,9 @@ import com.matrixxun.starry.badgetextview.MaterialBadgeTextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import static com.andrehaueisen.fitx.R.string.upcoming_classes_fragment_tag;
 
 public class ClientActivity extends AppCompatActivity {
@@ -53,11 +56,12 @@ public class ClientActivity extends AppCompatActivity {
     private final String TAG = ClientActivity.class.getSimpleName();
 
     private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-    private MaterialBadgeTextView mBadgeTextView;
     private ArrayList<ClassReceipt> mClassReceipts = new ArrayList<>();
-    private DrawerLayout mDrawer;
-    private RecyclerView mDrawerRecyclerView;
-    private ImageView mClassFilterImageView;
+
+    @BindView(R.id.badge_text_view) MaterialBadgeTextView mBadgeTextView;
+    @BindView(R.id.client_drawer_layout) DrawerLayout mDrawer;
+    @BindView(R.id.drawer_options_list_vew) RecyclerView mDrawerRecyclerView;
+    @Nullable @BindView(R.id.class_filter_image_view) ImageView mClassFilterImageView;
 
     private ActionBarDrawerToggle mBarDrawerToggle;
     private Intent mServiceIntent;
@@ -67,7 +71,8 @@ public class ClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_client);
 
-        mDrawerRecyclerView = (RecyclerView) findViewById(R.id.drawer_options_list_vew);
+        ButterKnife.bind(this);
+
         mDrawerRecyclerView.setHasFixedSize(true);
         mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -80,14 +85,13 @@ public class ClientActivity extends AppCompatActivity {
         }
 
         if(Utils.getSmallestScreenWidth(this) < 600) {
-            mClassFilterImageView = (ImageView) findViewById(R.id.class_filter_image_view);
             mClassFilterImageView.setOnClickListener(classFilterClickListener);
         } else {
             setupClassesFragmentOnTablet();
         }
 
         String clientKey = Utils.getSharedPreferences(this).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
-        mDatabaseReference.child(Constants.FIREBASE_LOCATION_CLASSES_RECEIPT).child(clientKey).addListenerForSingleValueEvent(mMissingReviewClassesListener);
+        mDatabaseReference.child(Constants.FIREBASE_LOCATION_CLASSES_RECEIPT).child(clientKey).addValueEventListener(mMissingReviewClassesListener);
 
         setAdapter();
         setToolbar();
@@ -202,7 +206,6 @@ public class ClientActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mBadgeTextView = (MaterialBadgeTextView) findViewById(R.id.badge_text_view);
         mBadgeTextView.setBadgeCount(0, false);
         mBadgeTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +216,7 @@ public class ClientActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton searchSpecificButton = (FloatingActionButton) findViewById(R.id.search_personal_fab);
+        FloatingActionButton searchSpecificButton = ButterKnife.findById(this, R.id.search_personal_fab);
         searchSpecificButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,8 +227,6 @@ public class ClientActivity extends AppCompatActivity {
     }
 
     private void setDrawer(){
-
-        mDrawer = (DrawerLayout) findViewById(R.id.client_drawer_layout);
 
         final GestureDetector gestureDetector = new GestureDetector(ClientActivity.this, new GestureDetector.SimpleOnGestureListener() {
 
@@ -259,9 +260,8 @@ public class ClientActivity extends AppCompatActivity {
 
             }
         });
-
-        //TODO review ActionBarDrawerToggle last 2 arguments
-        mBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.cref_number, R.string.birthday);
+        
+        mBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.open_drawer, R.string.close_drawer);
         mDrawer.addDrawerListener(mBarDrawerToggle);
 
     }
@@ -370,5 +370,11 @@ public class ClientActivity extends AppCompatActivity {
 
     private void cleanConfig(){
         Utils.getSharedPreferences(this).edit().clear().apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDatabaseReference.removeEventListener(mMissingReviewClassesListener);
     }
 }

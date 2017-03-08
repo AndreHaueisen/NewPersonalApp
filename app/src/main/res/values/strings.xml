@@ -143,10 +143,8 @@
     </string-array>
 
     <!--Registration strings-->
-    <string name="display_name">Display name</string>
-    <string name="birthday">Birthday - DD/MM/YYYY</string>
+    <string name="display_name">User name</string>
     <string name="email">Email</string>
-    <string name="phone_number">Phone Number</string>
     <string name="federation_state">State</string>
     <string name="cref_number">CREF number</string>
     <string name="cref_name">Name as in CREF register</string>
@@ -304,6 +302,8 @@
     <string name="submit">Submit</string>
     <string name="loading_past_classes">Loading past classes</string>
     <string name="tell_what_you_think">What are your thoughts about this personal?</string>
+    <string name="open_drawer">open_drawer</string>
+    <string name="close_drawer">close_drawer</string>
 
     <!-- ClientProfileActivity strings -->
     <string name="taken_by_attribution">By %1$s </string>

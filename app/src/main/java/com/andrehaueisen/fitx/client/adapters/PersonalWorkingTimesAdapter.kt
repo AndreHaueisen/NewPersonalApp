@@ -62,9 +62,9 @@ class PersonalWorkingTimesAdapter(context: Context, fragmentManager: FragmentMan
 
         init {
             mTimeTextView.setOnClickListener {
-                view -> val dialog = ScheduleClassDialogFragment(mPersonalTrainer, mPersonalProfilePic, mWorkingPlaces, mSpecialties, mDate,
-                    mStartTimes[layoutPosition], mDuration)
-                dialog.show(mFragmentManager, "ScheduleClassDialogFragment")}
+                val dialog = ScheduleClassDialogFragment(mPersonalTrainer, mPersonalProfilePic, mWorkingPlaces, mSpecialties, mDate, mStartTimes[layoutPosition], mDuration)
+                dialog.show(mFragmentManager, "ScheduleClassDialogFragment")
+            }
         }
     }
 

@@ -13,7 +13,6 @@
         android:layout_height="150dp"
         android:minHeight="100dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/amazing_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -116,7 +115,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/tell_what_you_think"
             android:imeOptions="normal"
-            android:inputType="text"/>
+            android:inputType="textCapSentences"/>
 
     </android.support.design.widget.TextInputLayout>
 

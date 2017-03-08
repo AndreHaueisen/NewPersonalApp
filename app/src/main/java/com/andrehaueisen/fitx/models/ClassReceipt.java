@@ -14,6 +14,8 @@ public class ClassReceipt implements Parcelable {
 
     @Exclude
     private Bitmap mPersonalProfileImage;
+    @Exclude
+    private Bitmap mPersonalBackgroundImage;
 
     private String mDateCode;
     private Integer mStartTimeCode;
@@ -46,6 +48,14 @@ public class ClassReceipt implements Parcelable {
         mClientName = clientName;
         mPersonalKey = personalKey;
         mGotReview = false;
+    }
+
+    public Bitmap getPersonalBackgroundImage() {
+        return mPersonalBackgroundImage;
+    }
+
+    public void setPersonalBackgroundImage(Bitmap personalBackgroundImage) {
+        mPersonalBackgroundImage = personalBackgroundImage;
     }
 
     public Bitmap getPersonalProfileImage() {
@@ -153,6 +163,7 @@ public class ClassReceipt implements Parcelable {
     }
 
     protected ClassReceipt(Parcel in) {
+        mPersonalBackgroundImage = (Bitmap) in.readValue(Bitmap.class.getClassLoader());
         mPersonalProfileImage = (Bitmap) in.readValue(Bitmap.class.getClassLoader());
         mDateCode = in.readString();
         mStartTimeCode = in.readByte() == 0x00 ? null : in.readInt();
@@ -176,6 +187,7 @@ public class ClassReceipt implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(mPersonalBackgroundImage);
         dest.writeValue(mPersonalProfileImage);
         dest.writeString(mDateCode);
         if (mStartTimeCode == null) {

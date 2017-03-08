@@ -34,11 +34,11 @@ import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
-import com.andrehaueisen.fitx.personal.drawer.PersonalBasicPresentationFragment;
-import com.andrehaueisen.fitx.personal.drawer.dialogFragment.PictureSelectionMethodDialogFragment;
 import com.andrehaueisen.fitx.models.AttributedPhoto;
 import com.andrehaueisen.fitx.models.Client;
 import com.andrehaueisen.fitx.models.Gym;
+import com.andrehaueisen.fitx.personal.drawer.PersonalBasicPresentationFragment;
+import com.andrehaueisen.fitx.personal.drawer.dialogFragment.PictureSelectionMethodDialogFragment;
 import com.andrehaueisen.fitx.shared.PlacePhoto;
 import com.andrehaueisen.fitx.shared.adapters.MainObjectiveAdapter;
 import com.bumptech.glide.Glide;
@@ -60,6 +60,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.bumptech.glide.Glide.with;
@@ -72,11 +74,12 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
     private String mPhotoUriPath;
     private int mLastClickedImageViewCode;
 
-    private ImageView mPlaceImageView;
-    private TextView mPlaceNameTextView;
-    private TextView mPlaceAddressTextView;
-    private TextView mPhotoAttributionsTextView;
-    private RecyclerView mSpecialtiesRecyclerView;
+    @BindView(R.id.client_place_image_view) ImageView mPlaceImageView;
+    @BindView(R.id.client_gym_name) TextView mPlaceNameTextView;
+    @BindView(R.id.client_gym_address) TextView mPlaceAddressTextView;
+    @BindView(R.id.attributions_text_view) TextView mPhotoAttributionsTextView;
+    @BindView(R.id.specialties_recycler_view) RecyclerView mSpecialtiesRecyclerView;
+
     private MainObjectiveAdapter mObjectiveAdapter;
     private Gym mClientGym;
     private CircleImageView mProfileImage;
@@ -93,6 +96,8 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         setContentView(R.layout.activity_client_profile);
 
+        ButterKnife.bind(this);
+
         //TODO  visit https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder when login is ready.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Places.GEO_DATA_API)
@@ -108,11 +113,6 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-
-        mPlaceImageView = (ImageView) findViewById(R.id.client_place_image_view);
-        mPlaceNameTextView = (TextView) findViewById(R.id.client_gym_name);
-        mPlaceAddressTextView = (TextView) findViewById(R.id.client_gym_address);
-        mPhotoAttributionsTextView = (TextView) findViewById(R.id.attributions_text_view);
 
         mPlaceImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +137,6 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         mPlacePhoto = new PlacePhoto(mGoogleApiClient, this);
 
-        mSpecialtiesRecyclerView = (RecyclerView) findViewById(R.id.specialties_recycler_view);
         mSpecialtiesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         configureProfileImageView();

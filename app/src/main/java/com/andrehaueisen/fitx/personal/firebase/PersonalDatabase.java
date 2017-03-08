@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.R.attr.bitmap;
 import static com.andrehaueisen.fitx.Utils.getSharedPreferences;
 
 
@@ -177,7 +178,7 @@ public class PersonalDatabase {
         }
     }
 
-    public static void saveProfilePicsToFirebase(final Activity activity, Bitmap bitmap){
+    public static void saveProfilePicsToFirebase(final Activity activity, Bitmap bitmap, String fileName){
 
         final String personalUniqueKey = Utils.getSharedPreferences(activity).getString(Constants.SHARED_PREF_PERSONAL_EMAIL_UNIQUE_KEY, null);
 
@@ -185,8 +186,6 @@ public class PersonalDatabase {
         StorageReference storageReference = storage.getReferenceFromUrl(Constants.FIREBASE_STORAGE_ROOT_URL);
 
             try {
-
-                String fileName = Constants.PERSONAL_PROFILE_PICTURE_NAME;
 
                 StorageReference personalProfileReference = storageReference.child("personalTrainer/" + personalUniqueKey + "/" + fileName);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -201,7 +200,7 @@ public class PersonalDatabase {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Utils.getSharedPreferences(activity).edit().putString(Constants.SHARED_PREF_PERSONAL_PHOTO_URI_PATH, downloadUrl.toString()).apply();
+                        Utils.getSharedPreferences(activity).edit().putString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, downloadUrl.toString()).apply();
                         //saveProfilePicsUrl(downloadUrl, personalUniqueKey);
                         Log.i(TAG, downloadUrl.getPath());
                         Utils.generateSuccessToast(activity, "Profile picture " + downloadUrl.getLastPathSegment() + " saved").show();
