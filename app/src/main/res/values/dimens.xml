@@ -3,4 +3,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+
+    <!--widget dimens-->
+    <dimen name="widget_class_default_width">110dp</dimen>
+    <dimen name="widget_class_default_height">40dp</dimen>
+    <dimen name="widget_class_min_resize_width">40dp</dimen>
+    <dimen name="widget_class_min_resize_height">@dimen/widget_class_default_height</dimen>
+    <dimen name="widget_class_large_width">220dp</dimen>
+
+    <dimen name="widget_class_detail_default_width">250dp</dimen>
+    <dimen name="widget_class_detail_default_height">180dp</dimen>
+    <dimen name="widget_class_detail_min_resize_width">220dp</dimen>
+    <dimen name="widget_class_detail_min_resize_height">@dimen/widget_class_detail_default_height</dimen>
+
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

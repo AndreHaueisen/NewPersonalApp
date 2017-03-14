@@ -38,7 +38,6 @@ public class PlacePhoto implements GoogleApiClient.OnConnectionFailedListener, G
     private Context mContext;
     private PlacePhotosCallback mPlacePhotosCallback;
 
-
     public PlacePhoto(GoogleApiClient googleApiClient, Fragment fragment) {
         mContext = fragment.getContext();
         mGoogleApiClient = googleApiClient;
@@ -80,8 +79,8 @@ public class PlacePhoto implements GoogleApiClient.OnConnectionFailedListener, G
         private ArrayList<AttributedPhoto> mAttributedPhotos;
         private int mWidth;
         private int mHeight;
-        private boolean mIsMultipleInsert;
         private int mPosition = -1;
+        private boolean mIsMultipleInsert;
 
         public PlacePhotoTask(boolean isMultipleInsert) {
             mAttributedPhotos = new ArrayList<>();

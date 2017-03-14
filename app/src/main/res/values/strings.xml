@@ -231,11 +231,11 @@
     <string name="searching_for_personal">Searching for your personal</string>
     <string name="upsy_doopsi" translatable="false">Upsi Dopsy</string>
     <string name="no_personal_found_at_date">We could not find anyone free for that date. Try again.</string>
-    <string name="reinforce_choose_working_out_place">Please, choose your working out place</string>
-    <string name="reinforce_choose_objective">Please, choose an objective</string>
-    <string name="reinforce_choose_date">Please, choose a date</string>
-    <string name="reinforce_choose_start_time">Please, choose class start time</string>
-    <string name="reinforce_choose_duration">Please, choose class duration</string>
+    <string name="reinforce_choose_working_out_place">Working out place missing</string>
+    <string name="reinforce_choose_objective">Objective missing</string>
+    <string name="reinforce_choose_date">Date missing</string>
+    <string name="reinforce_choose_start_time">Start time missing</string>
+    <string name="reinforce_choose_duration">Duration missing</string>
     <string name="general_personal_search_fragment_tag" translatable ="false">general_personal_search</string>
 
 
@@ -321,6 +321,18 @@
     <!--Facebook App id -->
     <string name="facebook_application_id" translatable="false">1816837725229072</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb1816837725229072</string>
+
+    <!--Widget strings-->
+    <string name="class_widget_title">OK!GO Classes</string>
+
+    <!--Notification strings-->
+    <string name="new_class_notification_personal">New class! Congratulations!</string>
+    <string name="class_canceled_notification_personal">One of your clients canceled</string>
+    <string name="action_require_on_new_class_personal">Review and confirm the class as soon as possible</string>
+    <string name="new_class_notification_title_client">New class!</string>
+    <string name="class_canceled_notification_title_client">Class canceled</string>
+    <string name="new_class_notification_client">New class in %1$s at %2$s</string>
+    <string name="class_canceled_notification_client">Class at %1$s was canceled</string>
 
 
 </resources>

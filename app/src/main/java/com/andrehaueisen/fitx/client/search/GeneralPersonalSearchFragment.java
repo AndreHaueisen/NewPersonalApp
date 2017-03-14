@@ -142,8 +142,6 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
         }
     }
 
-
-
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);

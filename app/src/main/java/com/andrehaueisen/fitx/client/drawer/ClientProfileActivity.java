@@ -19,7 +19,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,11 +73,18 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
     private String mPhotoUriPath;
     private int mLastClickedImageViewCode;
 
-    @BindView(R.id.client_place_image_view) ImageView mPlaceImageView;
-    @BindView(R.id.client_gym_name) TextView mPlaceNameTextView;
-    @BindView(R.id.client_gym_address) TextView mPlaceAddressTextView;
-    @BindView(R.id.attributions_text_view) TextView mPhotoAttributionsTextView;
-    @BindView(R.id.specialties_recycler_view) RecyclerView mSpecialtiesRecyclerView;
+    @BindView(R.id.client_place_image_view)
+    ImageView mPlaceImageView;
+    @BindView(R.id.client_gym_name)
+    TextView mPlaceNameTextView;
+    @BindView(R.id.client_gym_address)
+    TextView mPlaceAddressTextView;
+    @BindView(R.id.attributions_text_view)
+    TextView mPhotoAttributionsTextView;
+    @BindView(R.id.specialties_recycler_view)
+    RecyclerView mSpecialtiesRecyclerView;
+    @Nullable @BindView(R.id.contrast_view)
+    View mContrastView;
 
     private MainObjectiveAdapter mObjectiveAdapter;
     private Gym mClientGym;
@@ -98,12 +104,15 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         ButterKnife.bind(this);
 
-        //TODO  visit https://developers.google.com/android/reference/com/google/android/gms/common/api/GoogleApiClient.Builder when login is ready.
+        if (savedInstanceState != null && savedInstanceState.getParcelable(Constants.CLIENT_BUNDLE_KEY) != null) {
+            mClient = savedInstanceState.getParcelable(Constants.CLIENT_BUNDLE_KEY);
+        }
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Places.GEO_DATA_API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-               .build();
+                .build();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -118,7 +127,7 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
             @Override
             public void onClick(View view) {
 
-                if(mClientGym != null) {
+                if (mClientGym != null) {
                     //geo:0,0?q=latitude,longitude(label)
                     Uri addressUri = Uri.parse("geo:0,0?q=" + mClientGym.getLatitude() + "," + mClientGym.getLongitude());
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, addressUri);
@@ -176,6 +185,12 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
         });
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(Constants.CLIENT_BUNDLE_KEY, mClient);
+    }
+
     private void setProfileImage() {
         mPhotoUriPath = Utils.getSharedPreferences(this).getString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, null);
 
@@ -190,12 +205,12 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Utils.generateSuccessToast(this, "Google api places services connected!").show();
+        Log.i(TAG, "Google api places services connected!");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Utils.generateErrorToast(this, "Api places services failed!").show();
+        Log.e(TAG, "Api places services failed!");
     }
 
     @Override
@@ -206,21 +221,26 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         String clientKey = Utils.getSharedPreferences(this).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(Constants.FIREBASE_LOCATION_CLIENT).child(clientKey).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    mClient = dataSnapshot.getValue(Client.class);
-                    bindClientData();
+        if (mClient == null) {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+            databaseReference.child(Constants.FIREBASE_LOCATION_CLIENT).child(clientKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        mClient = dataSnapshot.getValue(Client.class);
+                        bindClientData();
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+
+        } else {
+            bindClientData();
+        }
     }
 
     @Override
@@ -238,20 +258,24 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         mClientGym = mClient.getClientGym();
 
-        if (mClientGym != null) {
-            bindPlaceData();
-        }
-
+        bindPlaceData();
     }
 
     private void bindPlaceData() {
 
-        mPlaceNameTextView.setText(mClientGym.getName());
-        mPlaceAddressTextView.setText(mClientGym.getAddress());
+        if (mClientGym != null) {
+            mPlaceNameTextView.setText(mClientGym.getName());
+            mPlaceAddressTextView.setText(mClientGym.getAddress());
 
-        ArrayList<String> placeIds = new ArrayList<>();
-        placeIds.add(mClientGym.getPlaceId());
-        mPlacePhoto.initializeTask(placeIds, false);
+            ArrayList<String> placeIds = new ArrayList<>();
+            placeIds.add(mClientGym.getPlaceId());
+            mPlacePhoto.initializeTask(placeIds, false);
+
+        } else {
+            hideGymViews();
+            hideAttributionViews();
+            Glide.with(this).load(R.drawable.neutral_background).centerCrop().into(mPlaceImageView);
+        }
     }
 
     @Override
@@ -259,28 +283,39 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
 
         if (attributedPhoto != null) {
 
-            if (attributedPhoto.getBitmap() != null) {
-                mPlaceImageView.setImageBitmap(attributedPhoto.getBitmap());
+            mPlaceImageView.setImageBitmap(attributedPhoto.getBitmap());
+            showGymViews();
+            showAttributionViews();
 
-            } else {
-                Glide.with(this).load(R.drawable.neutral_background).centerCrop().into(mPlaceImageView);
-            }
-
-            if (attributedPhoto.getAttribution() != null) {
-                String attribution = Html.fromHtml(attributedPhoto.getAttribution().toString()).toString();
-                mPhotoAttributionsTextView.setVisibility(View.VISIBLE);
-                mPhotoAttributionsTextView.setText(this.getString(R.string.taken_by_attribution, attribution));
-
-            } else {
-                mPhotoAttributionsTextView.setVisibility(View.GONE);
-
-            }
         } else {
             Glide.with(this).load(R.drawable.neutral_background).centerCrop().into(mPlaceImageView);
-            mPhotoAttributionsTextView.setVisibility(View.GONE);
-
+            showGymViews();
+            hideAttributionViews();
         }
+    }
 
+    private void hideGymViews(){
+        mPlaceNameTextView.setVisibility(View.INVISIBLE);
+        mPlaceAddressTextView.setVisibility(View.INVISIBLE);
+    }
+
+    private void hideAttributionViews(){
+        if(mContrastView != null){
+            mContrastView.setVisibility(View.INVISIBLE);
+        }
+        mPhotoAttributionsTextView.setVisibility(View.INVISIBLE);
+    }
+
+    private void showGymViews(){
+        mPlaceNameTextView.setVisibility(View.VISIBLE);
+        mPlaceAddressTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showAttributionViews(){
+        if(mContrastView != null){
+            mContrastView.setVisibility(View.VISIBLE);
+        }
+        mPhotoAttributionsTextView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -343,12 +378,12 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
         autocompleteFragment.setFilter(filter);
         autocompleteFragment.setHint(getString(R.string.choose_your_gym_hint));
 
-        EditText editText = ((EditText)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input));
+        EditText editText = ((EditText) autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input));
         editText.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         editText.setTextSize(16.0f);
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
-        ImageButton imageButton = ((ImageButton)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_button));
+        ImageButton imageButton = ((ImageButton) autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_button));
         imageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_dark_24dp));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -364,6 +399,7 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
                 String longitude = String.valueOf(place.getLatLng().longitude);
 
                 mClientGym = new Gym(placeId, name, address, latitude, longitude);
+                mClient.setClientGym(mClientGym);
                 bindPlaceData();
             }
 

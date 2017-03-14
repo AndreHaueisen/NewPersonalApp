@@ -1,7 +1,6 @@
 package com.andrehaueisen.fitx.client.services;
 
 import android.app.ActivityManager;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -15,10 +14,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
@@ -50,12 +45,9 @@ public class ClassUpdateListenerService extends Service {
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             final Context context = getApplication().getApplicationContext();
-            //final boolean isAppOnForeground = isAppOnForeground(getApplicationContext());
-
             final Bitmap appIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
 
             if (dataSnapshot.exists()) {
-                String classKey = dataSnapshot.getKey();
                 ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
 
                 if (clientFitClass.isConfirmed()) {
@@ -66,14 +58,12 @@ public class ClassUpdateListenerService extends Service {
                     String classStartTime = Utils.getClockFromTimeCode(context, clientFitClass.getStartTimeCode());
                     String classEndTime = Utils.getClockFromTimeCode(context, clientFitClass.getStartTimeCode() + clientFitClass.getDurationCode());
 
-                    String contentText = "New class in " + date + " at " + placeName;
-
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
                             .setLargeIcon(appIcon)
                             .setColor(context.getResources().getColor(R.color.colorPrimaryDark))
                             .setSmallIcon(R.drawable.ic_new_class_24dp)
-                            .setContentTitle("Class confirmed!")
-                            .setContentText(contentText)
+                            .setContentTitle(context.getString(R.string.new_class_notification_title_client))
+                            .setContentText(context.getString(R.string.new_class_notification_client, date, placeName))
                             .setPriority(NotificationCompat.PRIORITY_HIGH);
 
 
@@ -83,6 +73,7 @@ public class ClassUpdateListenerService extends Service {
                     NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     notificationManager.notify(NOTIFICATION_ID, builder.build());
 
+                    updateWidget();
                 }
             }
 
@@ -91,6 +82,38 @@ public class ClassUpdateListenerService extends Service {
         @Override
         public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+            final Context context = getApplication().getApplicationContext();
+            final Bitmap appIcon = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
+
+            if (dataSnapshot.exists()) {
+                ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
+
+                if (clientFitClass.isConfirmed()) {
+
+                    String dateCode = clientFitClass.getDateCode();
+                    String date = Utils.getWrittenDateFromDateCode(context, dateCode);
+                    String placeName = clientFitClass.getPlaceName();
+                    String classStartTime = Utils.getClockFromTimeCode(context, clientFitClass.getStartTimeCode());
+                    String classEndTime = Utils.getClockFromTimeCode(context, clientFitClass.getStartTimeCode() + clientFitClass.getDurationCode());
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+                            .setLargeIcon(appIcon)
+                            .setColor(context.getResources().getColor(R.color.colorPrimaryDark))
+                            .setSmallIcon(R.drawable.ic_class_canceled_24dp)
+                            .setContentTitle(context.getString(R.string.class_canceled_notification_title_client))
+                            .setContentText(context.getString(R.string.class_canceled_notification_client, placeName))
+                            .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+
+                    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, ClientActivity.class), 0);
+                    builder.setContentIntent(pendingIntent);
+
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+                    updateWidget();
+                }
+            }
         }
 
         @Override
@@ -145,14 +168,20 @@ public class ClassUpdateListenerService extends Service {
         return false;
     }
 
+    private void updateWidget() {
+        Context context = getApplicationContext();
+        Intent updateWidgetIntent = new Intent(Constants.ACTION_DATA_UPDATED).setPackage(context.getPackageName());
+        context.sendBroadcast(updateWidgetIntent);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestroy service called!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        Log.i(TAG, "onDestroy service called!!!");
         mDatabase.removeEventListener(mChildEventListener);
     }
 
-    class NotifyNewClassTask extends AsyncTask<Context, Void, Void> {
+    private class NotifyNewClassTask extends AsyncTask<Context, Void, Void> {
 
         @Override
         protected Void doInBackground(Context... params) {
@@ -163,27 +192,6 @@ public class ClassUpdateListenerService extends Service {
 
             return null;
         }
-
-    }
-
-    private void showDialog(Context context, String placeName, String date, String classStartTime, String classEndTime) {
-
-        final Dialog dialog = new Dialog(context, R.style.DialogStyle);
-        dialog.setContentView(R.layout.dialog_new_class);
-        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        TextView locationTextView = (TextView) dialog.findViewById(R.id.location_dialog_text_view);
-        TextView dateTextView = (TextView) dialog.findViewById(R.id.date_time_dialog_text_view);
-        Button reviewClassButton = (Button) dialog.findViewById(R.id.review_confirm_dialog_button);
-
-        locationTextView.setText(getString(R.string.class_location, placeName));
-        dateTextView.setText(getString(R.string.class_date, date));
-        reviewClassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
 
     }
 }

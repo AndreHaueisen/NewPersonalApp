@@ -103,6 +103,14 @@
 
         <activity android:name=".client.search.PersonalSearchActivity">
 
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".client.ClientActivity"/>
@@ -112,28 +120,26 @@
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                   android:theme="@style/Base.Theme.AppCompat"/>
 
-        <!--
-        <service android:name=".personal.services.TokenRefreshListenerService">
+        <receiver
+            android:name=".widget.ClassWidgetProvider"
+            android:enabled="true"
+            android:label="@string/class_widget_title">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED"/>
             </intent-filter>
-        </service>
-        <service android:name=".personal.services.NewClassMessageService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>-->
 
-        <!--
-        <activity android:name=".personal.MockActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_class_detail"/>
+        </receiver>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        -->
+        <service
+            android:name=".widget.ClassWidgetViewsService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
     </application>
 
 </manifest>

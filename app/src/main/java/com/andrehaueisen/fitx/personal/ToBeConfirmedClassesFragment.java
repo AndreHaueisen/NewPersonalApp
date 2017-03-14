@@ -19,6 +19,7 @@ import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -209,7 +210,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
             try {
                 if (image != null && image.length != 0 && mPositionOnArray > -1) {
                     mWaitingConfirmationPersonalFitClasses.get(mPositionOnArray).setClassProfileImage(Glide.with(getContext()).load(image).asBitmap().into
-                            (100, 100).get());
+                            (Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get());
                 }
             } catch (ExecutionException | InterruptedException e) {
                 Log.e(TAG, e.getMessage());

@@ -76,15 +76,16 @@ public class ClientActivity extends AppCompatActivity {
         mDrawerRecyclerView.setHasFixedSize(true);
         mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
-
-        if(toBeConfirmedClassesFragment == null) {
-            toBeConfirmedClassesFragment = ToBeConfirmedClientClassesFragment.newInstance();
-            fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commitNow();
-        }
-
         if(Utils.getSmallestScreenWidth(this) < 600) {
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
+
+            if(toBeConfirmedClassesFragment == null) {
+                toBeConfirmedClassesFragment = ToBeConfirmedClientClassesFragment.newInstance();
+                fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commitNow();
+            }
+
             mClassFilterImageView.setOnClickListener(classFilterClickListener);
         } else {
             setupClassesFragmentOnTablet();

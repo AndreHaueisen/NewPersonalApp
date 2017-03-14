@@ -57,8 +57,9 @@
         android:text="@string/clients"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@+id/textView3"
-        app:layout_constraintRight_toLeftOf="@+id/profile_image_view"
-        app:layout_constraintTop_toBottomOf="@+id/wide_background_image_view"/>
+        app:layout_constraintTop_toBottomOf="@+id/wide_background_image_view"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <com.andrehaueisen.fitx.CustomTextView
         android:id="@+id/review_counter_text_view"
@@ -75,14 +76,15 @@
         android:id="@+id/customTextView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="24dp"
         android:text="@string/price_charged_hint"
         android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/personal_grade_text_view"/>
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/review_counter_text_view"/>
 
     <com.andrehaueisen.fitx.CustomTextView
         android:id="@+id/textView5"
@@ -110,17 +112,28 @@
         app:layout_constraintTop_toTopOf="@+id/price_text_input_layout"
         app:layout_constraintVertical_bias="0.727"/>
 
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/price_text_input_layout"/>
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/price_text_input_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/customTextView4"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/customTextView4"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/customTextView4"
-        app:layout_constraintVertical_bias="0.79">
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/textInputEditText"
@@ -133,18 +146,6 @@
             android:textSize="30sp"/>
 
     </android.support.design.widget.TextInputLayout>
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customTextView4"/>
 
 
 </android.support.constraint.ConstraintLayout>

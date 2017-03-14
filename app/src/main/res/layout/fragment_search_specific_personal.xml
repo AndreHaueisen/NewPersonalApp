@@ -3,18 +3,10 @@
     android:id="@+id/activity_search_specific_personal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <android.support.v7.widget.SearchView
-        android:id="@+id/personal_search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/shape_rectangle_background"
-        app:defaultQueryHint="@string/search_hint"/>
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.andrehaueisen.fitx.CustomTextView
         android:id="@+id/no_results_text_view"
@@ -37,8 +29,58 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <include
-                layout="@layout/item_personal_resume_parent"/>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image_view"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <com.andrehaueisen.fitx.CustomTextView
+                    android:id="@+id/personal_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_image_view"
+                    tools:text="Andre Haueisen"/>
+
+                <com.andrehaueisen.fitx.CustomTextView
+                    android:id="@+id/grade_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintRight_toLeftOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2"
+                    tools:text="4.5"/>
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_full_star_dark_24dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_image_view"
+                    app:layout_constraintRight_toLeftOf="@+id/profile_image_view"
+                    app:layout_constraintTop_toTopOf="@+id/profile_image_view"/>
+
+            </android.support.constraint.ConstraintLayout>
 
             <com.andrehaueisen.fitx.CustomButton
                 android:id="@+id/class_duration_button"

@@ -36,22 +36,24 @@
                 android:id="@+id/client_basic_presentation"
                 layout="@layout/layout_client_basic_presentation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <fragment
                 android:id="@+id/client_place_autocomplete_fragment"
                 class="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="48dp"/>
 
             <include
                 android:id="@+id/default_preferences"
                 layout="@layout/layout_default_preferences"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
+

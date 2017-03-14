@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
-import android.support.v7.widget.SearchView
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -55,8 +54,11 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
 
     companion object {
 
-        fun newInstance(): SpecificPersonalSearchFragment {
-            return SpecificPersonalSearchFragment()
+        fun newInstance(bundle: Bundle): SpecificPersonalSearchFragment {
+            val fragment = SpecificPersonalSearchFragment()
+
+            fragment.arguments = bundle
+            return fragment
         }
     }
 
@@ -80,8 +82,14 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
 
         val view = inflater?.inflate(R.layout.fragment_search_specific_personal, container, false)
 
-        if(view != null)
-            configureSearchView(view)
+        if (!arguments.isEmpty) {
+            val query = arguments.getString(Constants.SEARCH_BUNDLE_KEY)
+
+            if (query != null && view != null) {
+                actOnQuery(query, view)
+            }
+        }
+
 
         mClassDurationButton = view?.findViewById(R.id.class_duration_button) as (CustomButton)
         configureClassDurationButton()
@@ -93,7 +101,7 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
         return view
     }
 
-    fun configureClassDurationButton(){
+    fun configureClassDurationButton() {
         mClassDurationButton?.setOnClickListener {
             val fragmentTransaction = activity.supportFragmentManager.beginTransaction()
             val fragment = activity.supportFragmentManager.findFragmentByTag("dialog")
@@ -109,7 +117,7 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
         }
     }
 
-    fun configureCalendar(calendarView : LightCalendarView, monthNameTextView : CustomTextView){
+    fun configureCalendar(calendarView: LightCalendarView, monthNameTextView: CustomTextView) {
 
         val startDate = LocalDate()
 
@@ -179,23 +187,6 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
 
                 val initialMonthDate = LocalDate(date).dayOfMonth().withMinimumValue()
                 monthNameTextView.text = initialMonthDate.monthOfYear().asText
-
-                /*
-                val initialAccentDate = LocalDate()
-                val days : Int
-
-                val dates : List<Date>
-                if(initialMonthDate.monthOfYear == initialAccentDate.monthOfYear) {
-                    days = Days.daysBetween(initialAccentDate.plusDays(1), initialAccentDate.dayOfMonth().withMaximumValue()).days
-                    dates = days.downTo(0).map { initialAccentDate.withFieldAdded(DurationFieldType.days(), it).toDate() }
-                }else {
-                    days = Days.daysBetween(initialMonthDate, initialMonthDate.dayOfMonth().withMaximumValue()).days
-                    dates = days.downTo(0).map { initialMonthDate.withFieldAdded(DurationFieldType.days(), it).toDate() }
-                }
-
-                val dotAccent = DotAccent(radius = 5f, color = resources.getColor(R.color.colorPrimaryDark))
-                for(validDate in dates) view.setAccents(validDate,  listOf(dotAccent))
-                */
             }
         })
     }
@@ -206,51 +197,38 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
         return selectedDate.isBefore(LocalDate().plusDays(1))
     }
 
-    fun configureSearchView(view: View) {
+    fun actOnQuery(query: String, view: View) {
 
-        val searchView = view.findViewById(R.id.personal_search_view) as SearchView
+        if (query.isNotBlank()) {
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            mDatabaseReference.child(Constants.FIREBASE_LOCATION_PERSONAL_TRAINER).addListenerForSingleValueEvent(object : ValueEventListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.onActionViewCollapsed()
-                if (query != null && query.isNotBlank()) {
+                override fun onDataChange(dataSnapshot: DataSnapshot?) {
 
-                    mDatabaseReference.child(Constants.FIREBASE_LOCATION_PERSONAL_TRAINER).addListenerForSingleValueEvent(object : ValueEventListener {
+                    if (dataSnapshot != null && dataSnapshot.exists()) {
+                        val personal = filterResults(query, dataSnapshot)
+                        val noResultTextView = view.findViewById(R.id.no_results_text_view) as TextView
+                        val personalView = view.findViewById(R.id.personal_view)
 
-                        override fun onDataChange(dataSnapshot: DataSnapshot?) {
+                        if (personal != null) {
+                            getPersonalWorkingLocations(personal)
+                            getPersonalSpecialties(personal)
+                            getPersonalSchedule(personal)
+                            configurePersonalView(view, personal)
+                            mPersonalTrainer = personal
+                            noResultTextView.visibility = View::GONE.get()
+                            personalView.visibility = View::VISIBLE.get()
 
-                            if (dataSnapshot != null && dataSnapshot.exists()) {
-                                val personal = filterResults(query, dataSnapshot)
-                                val noResultTextView = view.findViewById(R.id.no_results_text_view) as TextView
-                                val personalView = view.findViewById(R.id.personal_view)
-
-                                if (personal != null) {
-                                    getPersonalWorkingLocations(personal)
-                                    getPersonalSpecialties(personal)
-                                    getPersonalSchedule(personal)
-                                    configurePersonalView(view, personal)
-                                    mPersonalTrainer = personal
-                                    noResultTextView.visibility = View::GONE.get()
-                                    personalView.visibility = View::VISIBLE.get()
-
-                                } else {
-                                    noResultTextView.visibility = View::VISIBLE.get()
-                                    personalView.visibility = View::GONE.get()
-                                }
-                            }
+                        } else {
+                            noResultTextView.visibility = View::VISIBLE.get()
+                            personalView.visibility = View::GONE.get()
                         }
-
-                        override fun onCancelled(p0: DatabaseError?) {}
-                    })
+                    }
                 }
-                return true
-            }
 
-            override fun onQueryTextChange(newText: String?): Boolean { return true }
-        })
-
-
+                override fun onCancelled(p0: DatabaseError?) {}
+            })
+        }
     }
 
     private fun getPersonalWorkingLocations(personal: PersonalTrainer) {
@@ -401,7 +379,7 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
 
             Patterns.EMAIL_ADDRESS.matcher(query).matches() -> personals.filter { it.email.contains(query) }.forEach { return it }
 
-            else ->  return null//personals.filter { it.name.toUpperCase().contains(query.toUpperCase()) }.forEach { return it }
+            else -> return null//personals.filter { it.name.toUpperCase().contains(query.toUpperCase()) }.forEach { return it }
         }
 
         return null

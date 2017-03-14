@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.RemoteViewsService;
 
 import com.andrehaueisen.fitx.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +43,10 @@ public class FirebaseProfileImageCatcher {
 
     public FirebaseProfileImageCatcher(Activity activity){
         mFirebaseProfileCallback = (FirebaseProfileCallback) activity;
+    }
+
+    public FirebaseProfileImageCatcher(RemoteViewsService remoteViewsService){
+        mFirebaseProfileCallback = (FirebaseProfileCallback) remoteViewsService;
     }
 
     public void getPersonalProfilePicture(String personalKey, final int positionOnArray){

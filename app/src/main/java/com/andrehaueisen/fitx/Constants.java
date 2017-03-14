@@ -71,8 +71,10 @@ public class Constants {
     public static final String PERSONAL_LIST_EXTRA_KEY = "personalsExtraKey";
     public static final String CHOSEN_PERSONAL_KEYS_EXTRA_KEY = "personalKeysExtraKey";
     public static final String FIT_CLASS_EXTRA_KEY = "fitClassExtraKey";
-    public static final String PERSONAL_EXTRA_KEY = "personalExtraKey";
+    public static final String PERSONAL_ENCODED_EMAIL_EXTRA_KEY = "personalExtraKey";
+    public static final String CLIENT_ENCODED_EMAIL_EXTRA_KEY = "clientExtraKey";
     public static final String DRAWER_ITEM_CLICK_POSITION_EXTRA_KEY = "drawerItemPosition";
+    public static final String IS_PERSONAL_EXTRA = "is_personal_extra";
 
     //Bundle Keys
     public static final String PERSONAL_BUNDLE_KEY = "personalBundleKey";
@@ -89,6 +91,8 @@ public class Constants {
     public static final String CLASS_PERSONAL_BUNDLE_KEY = "personal_bundle_key";
     public static final String CLIENT_GYM_PICTURE_BUNDLE_KEY = "client_gym_picture_bundle_key";
     public static final String CLIENT_GYM_PICTURE_ATTRIBUTION_BUNDLE_KEY ="client_gym_picture_attribution";
+    public static final String CLIENT_BUNDLE_KEY = "client_gym_bundle_key";
+    public static final String SEARCH_BUNDLE_KEY = "search_bundle_key";
 
     //Saved State keys
     public static final String CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY = "confirmed_personal_classes_state";
@@ -108,8 +112,8 @@ public class Constants {
     public static final String CONFIRMED_CLIENT_CLASSES_SAVED_STATE_KEY = "confirmed_client_classes_state";
     public static final String NOT_CONFIRMED_CLIENT_CLASSES_SAVED_STATE_KEY = "not_confirmed_client_classes_state";
 
-    //PersonalClassesAdapter constants
-    public static final int LONG_PRESS_TIME = 500; // Time in miliseconds
+    //Action constants
+    public static final String ACTION_DATA_UPDATED = "classes_updated";
 
     //
     public static final String CLASS_RECEIPTS_EXTRA_KEY = "class_receipts_extra_key";

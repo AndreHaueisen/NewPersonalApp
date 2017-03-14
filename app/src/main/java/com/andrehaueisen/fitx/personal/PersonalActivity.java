@@ -60,15 +60,16 @@ public class PersonalActivity extends AppCompatActivity {
         mDrawerRecyclerView.setHasFixedSize(true);
         mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
-
-        if(toBeConfirmedClassesFragment == null) {
-            toBeConfirmedClassesFragment = ToBeConfirmedClassesFragment.newInstance();
-            fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commit();
-        }
-
         if(Utils.getSmallestScreenWidth(this) < 600) {
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment toBeConfirmedClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
+
+            if(toBeConfirmedClassesFragment == null) {
+                toBeConfirmedClassesFragment = ToBeConfirmedClassesFragment.newInstance();
+                fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commit();
+            }
+
             mClassFilterImageView = (ImageView) findViewById(R.id.class_filter_image_view);
             mClassFilterImageView.setOnClickListener(classFilterClickListener);
         } else {
