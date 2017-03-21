@@ -254,7 +254,7 @@
     <!-- Client ReviewPersonalActivity strings -->
     <string name="review_past_personals">Review Personals</string>
 
-    <!-- Client SpecificPersonalSearchFragment -->
+    <!-- Client PersonalSearchFragment -->
     <string name="specific_personal_toolbar_title">Search for a specific personal</string>
     <string name="date_unavailable">Date unavailable</string>
     <string name="correct_date_instruction">You can\'t choose today nor a date in the past</string>

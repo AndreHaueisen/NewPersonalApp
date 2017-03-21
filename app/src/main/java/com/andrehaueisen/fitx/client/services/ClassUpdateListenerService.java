@@ -73,7 +73,7 @@ public class ClassUpdateListenerService extends Service {
                     NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     notificationManager.notify(NOTIFICATION_ID, builder.build());
 
-                    updateWidget();
+                    Utils.updateWidget(getApplicationContext());
                 }
             }
 
@@ -111,7 +111,7 @@ public class ClassUpdateListenerService extends Service {
                     NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     notificationManager.notify(NOTIFICATION_ID, builder.build());
 
-                    updateWidget();
+                    Utils.updateWidget(getApplicationContext());
                 }
             }
         }
@@ -145,6 +145,7 @@ public class ClassUpdateListenerService extends Service {
         if (clientKey != null) {
             mDatabase = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey);
             new ClassUpdateListenerService.NotifyNewClassTask().execute(this);
+            Utils.updateWidget(getApplicationContext());
         }
 
         return START_STICKY;
@@ -168,15 +169,10 @@ public class ClassUpdateListenerService extends Service {
         return false;
     }
 
-    private void updateWidget() {
-        Context context = getApplicationContext();
-        Intent updateWidgetIntent = new Intent(Constants.ACTION_DATA_UPDATED).setPackage(context.getPackageName());
-        context.sendBroadcast(updateWidgetIntent);
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Utils.updateWidget(getApplicationContext());
         Log.i(TAG, "onDestroy service called!!!");
         mDatabase.removeEventListener(mChildEventListener);
     }

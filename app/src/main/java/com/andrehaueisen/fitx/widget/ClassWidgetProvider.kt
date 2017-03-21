@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.support.v4.app.TaskStackBuilder
 import android.widget.RemoteViews
 import com.andrehaueisen.fitx.Constants
 import com.andrehaueisen.fitx.R
@@ -20,31 +21,10 @@ class ClassWidgetProvider : AppWidgetProvider(){
     override fun onUpdate(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?) {
 
         appWidgetIds?.forEach {
-            val views = RemoteViews(context?.packageName, R.layout.widget_main)
 
-            val intent : Intent
-            val remoteAdapterIntent = Intent(context, ClassWidgetViewsService::class.java)
-
-            if(isPersonal(context)) {
-                intent = Intent(context, PersonalActivity::class.java)
-
-                remoteAdapterIntent.putExtra(Constants.IS_PERSONAL_EXTRA, true)
-                remoteAdapterIntent.putExtra(Constants.PERSONAL_ENCODED_EMAIL_EXTRA_KEY, getPersonalUniqueKey(context))
-
-            }else{
-                intent = Intent(context, ClientActivity::class.java)
-
-                remoteAdapterIntent.putExtra(Constants.IS_PERSONAL_EXTRA, false)
-                remoteAdapterIntent.putExtra(Constants.CLIENT_ENCODED_EMAIL_EXTRA_KEY, getClientUniqueKey(context))
-            }
-
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-            views.setOnClickPendingIntent(R.id.widget, pendingIntent)
-
-            views.setRemoteAdapter(R.id.widget_list, remoteAdapterIntent)
-            views.setEmptyView(R.id.widget_list, R.id.widget_empty)
-
+            val views = configureView(context)
             appWidgetManager?.updateAppWidget(it, views)
+
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds)
     }
@@ -52,11 +32,38 @@ class ClassWidgetProvider : AppWidgetProvider(){
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
 
-        if (Constants.ACTION_DATA_UPDATED.equals(intent?.action)) {
+        if (AppWidgetManager.ACTION_APPWIDGET_UPDATE == (intent?.action)) {
             val appWidgetManager = AppWidgetManager.getInstance(context)
             val appWidgetIds = appWidgetManager.getAppWidgetIds (ComponentName(context, javaClass))
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list)
+            appWidgetManager?.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list)
         }
+    }
+
+    private fun configureView(context: Context?) : RemoteViews{
+
+        val views = RemoteViews(context?.packageName, R.layout.widget_main)
+
+        val intent : Intent
+        val remoteAdapterIntent = Intent(context, ClassWidgetViewsService::class.java)
+
+        if(isPersonal(context)) {
+            intent = Intent(context, PersonalActivity::class.java)
+        }else{
+            intent = Intent(context, ClientActivity::class.java)
+        }
+
+        val clickPendingIntentTemplate = TaskStackBuilder.create(context)
+                .addNextIntentWithParentStack(intent)
+                .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, Intent.FLAG_ACTIVITY_CLEAR_TASK)
+
+        views.setOnClickPendingIntent(R.id.widget, pendingIntent)
+        views.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate)
+
+        views.setRemoteAdapter(R.id.widget_list, remoteAdapterIntent)
+        views.setEmptyView(R.id.widget_list, R.id.widget_empty)
+
+        return views
     }
 
     private fun isPersonal(context: Context?) : Boolean{

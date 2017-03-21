@@ -309,6 +309,11 @@ public class ClientActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         mBarDrawerToggle.syncState();
@@ -349,15 +354,16 @@ public class ClientActivity extends AppCompatActivity {
 
             case 5:
 
-                if(mServiceIntent != null) {
-                    stopService(mServiceIntent);
-                }
+
 
                 AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         cleanConfig();
                         Utils.generateInfoToast(ClientActivity.this, getString(R.string.logged_out)).show();
+                        if(mServiceIntent != null) {
+                            stopService(mServiceIntent);
+                        }
                         Intent backToBeginIntent = new Intent(ClientActivity.this, SignInActivity.class);
                         startActivity(backToBeginIntent);
                         finish();

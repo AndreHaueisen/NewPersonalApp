@@ -52,7 +52,8 @@ public class SignInActivity extends AppCompatActivity{
                                     new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),
                                     new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build()))
                             .setLogo(R.drawable.ok_go_register_icon)
-                            .setTheme(R.style.LogInTheme).build(), REQUEST_CODE);
+                            .setTheme(R.style.LogInTheme)
+                            .build(), REQUEST_CODE);
         }
     }
 

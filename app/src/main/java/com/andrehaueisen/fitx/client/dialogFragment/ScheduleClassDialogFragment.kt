@@ -69,7 +69,9 @@ class ScheduleClassDialogFragment(personalTrainer: PersonalTrainer, personalProf
             val scheduleConfirmation = ScheduleConfirmation(activity, mPersonalTrainer, fitClass)
             scheduleConfirmation.makeAppointment()
 
+            activity.finish()
             dismiss()
+
         }
         cancelButton.setOnClickListener { dismiss() }
 

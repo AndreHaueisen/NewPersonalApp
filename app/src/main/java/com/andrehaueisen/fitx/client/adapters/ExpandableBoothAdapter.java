@@ -21,7 +21,6 @@ import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.bignerdranch.expandablerecyclerview.ParentViewHolder;
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -108,26 +107,6 @@ public class ExpandableBoothAdapter extends ExpandableRecyclerAdapter<PersonalRe
             }else {
                 Glide.with(mActivity).load(R.drawable.head_placeholder).into(mProfileCircleImageView);
             }
-        }
-
-        @Override
-        public void onFrontBodyImageReady(byte[] personFrontImage) {
-
-        }
-
-        @Override
-        public void onPersonalPicsReady(String classKey, ArrayList<byte[]> personPhotos) {
-
-        }
-
-        @Override
-        public void onProfileImageReady(byte[] personProfileImage, int positionOnArray) {
-
-        }
-
-        @Override
-        public void onProfileImageReady(byte[] personProfileImage, String personalKey) {
-
         }
     }
 

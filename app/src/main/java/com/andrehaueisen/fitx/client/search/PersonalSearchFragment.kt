@@ -32,7 +32,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseProfileCallback, ClassDurationDialogFragment.DurationCallBack {
+class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseProfileCallback, ClassDurationDialogFragment.DurationCallBack {
 
     private val mDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val mStartTimesHashMap = HashMap<String, ArrayList<Int>>()
@@ -54,8 +54,8 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
 
     companion object {
 
-        fun newInstance(bundle: Bundle): SpecificPersonalSearchFragment {
-            val fragment = SpecificPersonalSearchFragment()
+        fun newInstance(bundle: Bundle): PersonalSearchFragment {
+            val fragment = PersonalSearchFragment()
 
             fragment.arguments = bundle
             return fragment
@@ -298,10 +298,7 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
             override fun onCancelled(p0: DatabaseError?) {
 
             }
-
-
         })
-
     }
 
     private fun getPersonalRestrictions(personalKey: String) {
@@ -423,32 +420,4 @@ class SpecificPersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.F
         }
 
     }
-
-    override fun onFrontBodyImageReady(personFrontImage: ByteArray?) {
-
-    }
-
-    override fun onPersonalPicsReady(classKey: String?, personPhotos: ArrayList<ByteArray>?) {
-
-    }
-
-    override fun onProfileImageReady(personProfileImage: ByteArray?, positionOnArray: Int) {
-
-    }
-
-    override fun onProfileImageReady(personProfileImage: ByteArray?, personalKey: String?) {
-
-    }
-
-    /*
-    Locale locale = Utils.getCurrentLocale(getContext());
-    String dayOfWeek = calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale);
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", locale);
-    mChooseDayButton.setText(simpleDateFormat.format(calendar.getTime()) + " " + dayOfWeek);
-
-    convertDateBeforeSaving(calendar);
-
-    String uniformDateFormat = new SimpleDateFormat("MMddyyyy", Utils.getCurrentLocale(getContext())).format(calendar.getTime());
-    mPersonalFitClass.setDateCode(Integer.parseInt(uniformDateFormat));*/
 }

@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_rectangle_outline"
-    android:layout_margin="4dp"
-    android:padding="4dp"
-    android:orientation="horizontal">
+    android:layout_margin="8dp">
 
-    <TextView
+    <com.andrehaueisen.fitx.CustomTextView
         android:id="@+id/time_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_margin="8dp"
         android:layout_gravity="center"/>
 
 </FrameLayout>

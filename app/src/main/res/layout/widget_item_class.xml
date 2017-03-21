@@ -3,19 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="8dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/person_image_view"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="top|center_horizontal"/>
-
-    <com.andrehaueisen.fitx.CustomTextView
+    <TextView
         android:id="@+id/class_date_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,20 +16,22 @@
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="2"
-        android:textSize="20sp"
-        tools:text="10/04/2017"/>
+        android:text="10/04/2017"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <TextView
         android:id="@+id/class_time_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:gravity="center_horizontal"
-        android:textSize="40sp"
-        tools:text="00:00 - 01:00 "/>
+        android:text="00:00 - 01:00"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <TextView
         android:id="@+id/person_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,10 +39,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:textSize="25sp"
-        tools:text="Andre Haueisen"/>
+        android:text="Andre Haueisen"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <TextView
         android:id="@+id/class_location_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,10 +51,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
-        android:textSize="16sp"
-        tools:text="Primatas Crossfit"/>
+        android:text="Primatas Crossfit"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <TextView
         android:id="@+id/class_location_address_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,18 +65,17 @@
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="2"
-        android:textSize="16sp"
-        tools:text="Av. T-5 Num 640 Setor Bueno"/>
+        android:text="Av. T-5 Num 640 Setor Bueno"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"/>
 
-    <ImageButton
-        android:id="@+id/direction_image_button"
+    <TextView
+        android:id="@+id/is_confirmed_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_get_direction_dark_36dp"/>
+        android:layout_gravity="center"
+        android:padding="12dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"/>
 
 </LinearLayout>

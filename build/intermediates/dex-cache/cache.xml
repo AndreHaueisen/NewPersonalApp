@@ -3,6 +3,15 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\andre\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.1.1\98e484e67f913e934559f7f55f0c94be5593f03c\kotlin-stdlib-1.1.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="98e484e67f913e934559f7f55f0c94be5593f03c">
+        <dex dex="C:\Users\andre\Desktop\OfficialAndroid\PersonalApp\app\build\intermediates\transforms\dex\debug\folders\1000\10\kotlin-stdlib-1.1.1_5b573e63f38a073287f6e5e3e51a1f632355c1f4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\andre\.android\build-cache\a690324f8fa065518fbf9416669047e9ad408048\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -25,7 +34,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6e5c57a0d41ad65c3f90d3e85c27d859cf5756c5">
+        sha1="507c0a532de74ddff0b15a25198c331fe1a7fe12">
         <dex dex="C:\Users\andre\Desktop\OfficialAndroid\PersonalApp\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_6d751543f5187fdeaf4147692855fc23b4148b49\classes.dex" />
     </item>
     <item

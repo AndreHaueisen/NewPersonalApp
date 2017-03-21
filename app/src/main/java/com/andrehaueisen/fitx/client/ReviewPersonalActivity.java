@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
  * Created by andre on 10/23/2016.
  */
 
-public class ReviewPersonalActivity extends AppCompatActivity implements FirebaseProfileImageCatcher.FirebaseProfileCallback, FirebaseBackgroundImageCatcher.FirebaseBackgroundCallback {
+public class ReviewPersonalActivity extends AppCompatActivity implements FirebaseProfileImageCatcher.FirebasePersonalProfileCallback, FirebaseBackgroundImageCatcher.FirebaseBackgroundCallback {
 
     private final String TAG = ReviewPersonalActivity.class.getSimpleName();
 
@@ -208,24 +208,5 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
             super.onPostExecute(position);
             mExpandableClassesAdapter.notifyParentChanged(position);
         }
-    }
-
-    @Override
-    public void onProfileImageReady(byte[] personProfileImage) {
-
-    }
-
-    @Override
-    public void onPersonalPicsReady(String classKey, ArrayList<byte[]> personPhotos) {
-    }
-
-    @Override
-    public void onFrontBodyImageReady(byte[] personFrontImage) {
-
-    }
-
-    @Override
-    public void onProfileImageReady(byte[] personProfileImage, int positionOnArray) {
-
     }
 }

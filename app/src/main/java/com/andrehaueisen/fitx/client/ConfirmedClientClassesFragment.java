@@ -38,7 +38,7 @@ import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConfirmedClientClassesFragment extends Fragment implements ClientClassesAdapter.ClassCallback, ChildEventListener, FirebaseProfileImageCatcher.FirebaseProfileCallback {
+public class ConfirmedClientClassesFragment extends Fragment implements ClientClassesAdapter.ClassCallback, ChildEventListener, FirebaseProfileImageCatcher.FirebaseOnArrayProfileCallback {
 
     private static final String TAG = ConfirmedClientClassesFragment.class.getSimpleName();
 
@@ -281,21 +281,6 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
     }
 
     @Override
-    public void onProfileImageReady(byte[] personProfileImage) {
-
-    }
-
-    @Override
-    public void onFrontBodyImageReady(byte[] personFrontImage) {
-
-    }
-
-    @Override
-    public void onPersonalPicsReady(String classKey, ArrayList<byte[]> personPhotos) {
-
-    }
-
-    @Override
     public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
     }
@@ -305,8 +290,4 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
     }
 
-    @Override
-    public void onProfileImageReady(byte[] personProfileImage, String personalKey) {
-
-    }
 }

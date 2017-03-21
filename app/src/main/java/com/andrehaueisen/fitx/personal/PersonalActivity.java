@@ -263,10 +263,14 @@ public class PersonalActivity extends AppCompatActivity {
 
         if(mBarDrawerToggle.onOptionsItemSelected(item)){
             return true;
-
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     @Override
@@ -311,14 +315,17 @@ public class PersonalActivity extends AppCompatActivity {
 
             case 7:
 
-                if(mServiceIntent != null) {
-                    stopService(mServiceIntent);
-                }
+
                 AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         cleanConfig();
                         Utils.generateInfoToast(PersonalActivity.this, getString(R.string.logged_out)).show();
+
+                        if(mServiceIntent != null) {
+                            stopService(mServiceIntent);
+                        }
+
                         Intent backToBeginIntent = new Intent(PersonalActivity.this, SignInActivity.class);
                         startActivity(backToBeginIntent);
                         finish();

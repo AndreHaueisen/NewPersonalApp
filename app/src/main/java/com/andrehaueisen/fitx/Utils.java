@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,9 +24,10 @@ import android.util.Patterns;
 import android.widget.Toast;
 
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
-import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
+import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
+import com.andrehaueisen.fitx.widget.ClassWidgetProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.base.CharMatcher;
@@ -464,6 +467,19 @@ public class Utils {
 
         return String.format(getCurrentLocale(context), "%02d:%02d", hour, minutes);
     }
+
+    public static void updateWidget(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), ClassWidgetProvider.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        AppWidgetManager widgetManager = AppWidgetManager.getInstance(context);
+        int[] ids = widgetManager.getAppWidgetIds(new ComponentName(context, ClassWidgetProvider.class));
+
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        context.sendBroadcast(intent);
+    }
+
+
 
     public static String formatPersonalName(String personalName){
 

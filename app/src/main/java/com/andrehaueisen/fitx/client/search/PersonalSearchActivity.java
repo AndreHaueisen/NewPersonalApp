@@ -127,7 +127,7 @@ public class PersonalSearchActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 bundle.putString(Constants.SEARCH_BUNDLE_KEY, query);
-                Fragment fragment = SpecificPersonalSearchFragment.Companion.newInstance(bundle);
+                Fragment fragment = PersonalSearchFragment.Companion.newInstance(bundle);
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.add(R.id.specific_search_fragment_container, fragment, getString(R.string.specific_personal_search_fragment_tag));

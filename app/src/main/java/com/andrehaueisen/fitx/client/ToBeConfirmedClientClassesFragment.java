@@ -41,7 +41,7 @@ import static com.andrehaueisen.fitx.Utils.getSharedPreferences;
  */
 
 public class ToBeConfirmedClientClassesFragment extends Fragment implements ClientClassesAdapter.ClassCallback, ChildEventListener,
-        FirebaseProfileImageCatcher.FirebaseProfileCallback {
+        FirebaseProfileImageCatcher.FirebaseOnArrayProfileCallback {
 
     private static final String TAG = ToBeConfirmedClientClassesFragment.class.getSimpleName();
 
@@ -224,6 +224,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
     @Override
     public void onProfileImageReady(byte[] personProfileImage, int positionOnArray) {
+
         new LoadImageTask(positionOnArray).execute(personProfileImage);
     }
 
@@ -269,26 +270,6 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
             super.onPostExecute(aVoid);
             mAdapter.notifyItemChanged(mPositionOnArray);
         }
-    }
-
-    @Override
-    public void onProfileImageReady(byte[] personProfileImage) {
-
-    }
-
-    @Override
-    public void onFrontBodyImageReady(byte[] personFrontImage) {
-
-    }
-
-    @Override
-    public void onPersonalPicsReady(String classKey, ArrayList<byte[]> personPhotos) {
-
-    }
-
-    @Override
-    public void onProfileImageReady(byte[] personProfileImage, String personalKey) {
-
     }
 
     @Override

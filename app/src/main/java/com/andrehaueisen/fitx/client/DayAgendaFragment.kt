@@ -3,6 +3,7 @@ package com.andrehaueisen.fitx.client
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -58,7 +59,12 @@ internal class DayAgendaFragment : Fragment(){
                     createClassesSchedules(duration, startTimeClasses, endTimeClasses)
 
                     val availableClassesRecyclerView = view.findViewById(R.id.classes_recycler_view) as RecyclerView
-                    availableClassesRecyclerView.layoutManager = GridLayoutManager(context, 2)
+                    if(Utils.getSmallestScreenWidth(context) < 600) {
+                        availableClassesRecyclerView.layoutManager = LinearLayoutManager(context)
+                    }else{
+                        availableClassesRecyclerView.layoutManager = GridLayoutManager(context, 2)
+                    }
+
                     availableClassesRecyclerView.setHasFixedSize(true)
                     availableClassesRecyclerView.adapter = PersonalWorkingTimesAdapter(context, activity.supportFragmentManager, personalTrainer,
                             personalProfilePic, workingPlaces, specialties, date, duration, mStartTimeClassesWithDuration!!, mEndTimeClassesWithDuration!!)

@@ -1,85 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.andrehaueisen.fitx.CustomTextView
-        android:layout_margin="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="@string/configure_class_duration"/>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/class_duration_radio_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        style="@style/RadioButton">
-
-        <RadioButton
-            android:id="@+id/duration_45_radio_button"
+        <com.andrehaueisen.fitx.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
+            android:layout_margin="16dp"
+            android:text="@string/configure_class_duration"
+            android:textSize="20sp"/>
 
-            android:text="@string/duration_45"/>
-        <RadioButton
-            android:id="@+id/duration_60_radio_button"
+        <RadioGroup
+            android:id="@+id/class_duration_radio_group"
+            style="@style/RadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:text="@string/duration_60"/>
-        <RadioButton
-            android:id="@+id/duration_75_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:text="@string/duration_75"/>
-        <RadioButton
-            android:id="@+id/duration_90_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:text="@string/duration_90"/>
-        <RadioButton
-            android:id="@+id/duration_105_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:text="@string/duration_105"/>
-        <RadioButton
-            android:id="@+id/duration_120_radio_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:buttonTint="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            android:text="@string/duration_120"/>
+            android:layout_margin="16dp">
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/duration_45_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_45"
+                android:textColor="@color/colorPrimaryDark"
 
-    <com.andrehaueisen.fitx.CustomButton
-        android:id="@+id/confirm_class_configuration_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:background="@drawable/shape_rectangle_outline"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:text="OK"/>
+                android:textSize="16sp"/>
 
-</LinearLayout>
+            <RadioButton
+                android:id="@+id/duration_60_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_60"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/duration_75_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_75"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/duration_90_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_90"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/duration_105_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_105"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+            <RadioButton
+                android:id="@+id/duration_120_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/colorPrimaryDark"
+                android:text="@string/duration_120"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"/>
+
+        </RadioGroup>
+
+        <com.andrehaueisen.fitx.CustomButton
+            android:id="@+id/confirm_class_configuration_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_rectangle_outline"
+            android:text="OK"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
