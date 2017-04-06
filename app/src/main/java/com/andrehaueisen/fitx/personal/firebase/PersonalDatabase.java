@@ -303,12 +303,18 @@ public class PersonalDatabase {
     public static void removeAgendaRestrictions(final DatabaseReference databaseRef, final String dateCode, final String personalKey, final Integer
             startTimeCode, final Integer endTimeCode){
 
-        databaseRef.child(Constants.FIREBASE_LOCATION_PERSONAL_AGENDA_RESTRICTIONS).child(String.valueOf(dateCode)).child(personalKey).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRef.child(Constants.FIREBASE_LOCATION_PERSONAL_AGENDA_RESTRICTIONS).child(String.valueOf(dateCode)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<ArrayList<Integer>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<Integer>>() {};
-                ArrayList<Integer> startTimeCodes = dataSnapshot.child(Constants.AGENDA_CODES_START_LIST).getValue(genericTypeIndicator);
-                ArrayList<Integer> endTimeCodes = dataSnapshot.child(Constants.AGENDA_CODES_END_LIST).getValue(genericTypeIndicator);
+                //GenericTypeIndicator<ArrayList<Integer>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<Integer>>() {};
+
+                ArrayList<Integer> startTimeCodes = new ArrayList<>();
+                ArrayList<Integer> endTimeCodes = new ArrayList<>();
+                for(DataSnapshot snapshot : dataSnapshot.child(personalKey).getChildren()){
+                    startTimeCodes.add(snapshot.child(Constants.AGENDA_CODES_START_LIST).getValue(Integer.class));
+                    endTimeCodes.add(snapshot.child(Constants.AGENDA_CODES_END_LIST).getValue(Integer.class));
+                }
+
 
                 startTimeCodes.remove(startTimeCode);
                 endTimeCodes.remove(endTimeCode);

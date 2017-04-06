@@ -2,14 +2,15 @@ package com.andrehaueisen.fitx;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
+
 
 /**
  * Created by andre on 11/29/2016.
  */
 
-public class CustomTextView extends TextView {
+public class CustomTextView extends AppCompatTextView {
 
     public CustomTextView(Context context) {
         super(context);

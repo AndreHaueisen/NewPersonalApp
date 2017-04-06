@@ -313,7 +313,7 @@ public class PersonalActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
 
-            case 7:
+            case 4:
 
 
                 AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {

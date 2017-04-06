@@ -18,9 +18,6 @@
         <item>Make your schedule</item>
         <item>Set professional profile</item>
         <item>My reviews</item>
-        <item>How to get great reviews</item>
-        <item>Payment info</item>
-        <item>Help and feedback</item>
         <item>Log out</item>
     </string-array>
 
@@ -28,9 +25,6 @@
         <item>ic_calendar_dark_24dp</item>
         <item>ic_person_24dp</item>
         <item>ic_reviews_24dp</item>
-        <item>ic_full_star_dark_24dp</item>
-        <item>ic_credit_card_24dp</item>
-        <item>ic_help_24dp</item>
         <item>ic_log_out_24dp</item>
     </string-array>
 
@@ -128,17 +122,11 @@
 
     <string-array name="client_drawer_list">
         <item>Set profile</item>
-        <item>My personals</item>
-        <item>Payment info</item>
-        <item>Help and feedback</item>
         <item>Log out</item>
     </string-array>
 
     <string-array name="client_drawer_icons_list">
         <item>ic_person_24dp</item>
-        <item>ic_specialties_24dp</item>
-        <item>ic_credit_card_24dp</item>
-        <item>ic_help_24dp</item>
         <item>ic_log_out_24dp</item>
     </string-array>
 
@@ -148,7 +136,7 @@
     <string name="federation_state">State</string>
     <string name="cref_number">CREF number</string>
     <string name="cref_name">Name as in CREF register</string>
-    <string name="which_state_cref_from">Which state is your CREF from?</string>
+    <string name="which_state_cref_from">CREF state</string>
     <string name="question_has_studio">Do you have a private studio?</string>
     <string name="question_gym_access">What gyms do you have access to?</string>
     <string name="choose_specialties">Choose your objectives</string>

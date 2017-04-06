@@ -28,12 +28,12 @@
     </style>
 
     <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="android:colorPressedHighlight">@color/colorPrimaryDark</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/colorPrimaryDark</item>
-    </style>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorControlHighlight">@color/colorAccent</item>
+    <item name="android:colorPressedHighlight">@color/colorPrimaryDark</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorControlActivated">@color/colorPrimaryDark</item>
+</style>
 
 </resources>

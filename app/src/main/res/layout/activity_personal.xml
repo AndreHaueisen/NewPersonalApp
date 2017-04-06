@@ -1,55 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     android:id="@+id/fragment_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:layout_width="match_parent"
+        <com.andrehaueisen.fitx.CustomTextView
+            style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:text="@string/app_name"/>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <ImageView
+            android:id="@+id/class_filter_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/class_status_animated_vector_drawable_end_to_start"/>
 
-                <com.andrehaueisen.fitx.CustomTextView
-                    style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"/>
+    </android.support.v7.widget.Toolbar>
 
-                <ImageView
-                    android:id="@+id/class_filter_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/class_status_animated_vector_drawable_end_to_start"/>
-
-            </android.support.v7.widget.Toolbar>
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-
-    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/classes_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_height="match_parent"/>
 
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

@@ -81,10 +81,14 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(dy > 0){
-                    ((FloatingActionButton)getActivity().findViewById(R.id.search_personal_fab)).hide();
-                }else{
-                    ((FloatingActionButton)getActivity().findViewById(R.id.search_personal_fab)).show();
+                if (recyclerView.getChildCount() != 0)
+                    if (dy > 0) {
+                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).hide();
+                    } else {
+                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
+                    }
+                else {
+                    ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
                 }
             }
         });
@@ -125,19 +129,21 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
             ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
             mPersonalKey = clientFitClass.getPersonalKey();
 
-            if (Utils.isClassOnThePast(clientFitClass)) {
-                //TODO do some work on badges
-                createClassReceipt(clientFitClass);
+            if(clientFitClass != null) {
+                if (Utils.isClassOnThePast(clientFitClass)) {
+                    //TODO do some work on badges
+                    createClassReceipt(clientFitClass);
 
-            } else {
+                } else {
 
-                if (!clientFitClass.isConfirmed()) {
-                    mWaitingConfirmationClientFitClasses.add(clientFitClass);
-                    mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mWaitingConfirmationClientFitClasses.size() - 1);
-                    mAdapter.notifyItemInserted(mWaitingConfirmationClientFitClasses.size());
-                    mRecyclerView.smoothScrollToPosition(mWaitingConfirmationClientFitClasses.size() - 1);
+                    if (!clientFitClass.isConfirmed()) {
+                        mWaitingConfirmationClientFitClasses.add(clientFitClass);
+                        mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mWaitingConfirmationClientFitClasses.size() - 1);
+                        mAdapter.notifyItemInserted(mWaitingConfirmationClientFitClasses.size());
+                        mRecyclerView.smoothScrollToPosition(mWaitingConfirmationClientFitClasses.size() - 1);
+                    }
+                    changeStatus();
                 }
-                changeStatus();
             }
         }
     }

@@ -76,10 +76,14 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(dy > 0){
-                    ((FloatingActionButton)getActivity().findViewById(R.id.search_personal_fab)).hide();
-                }else{
-                    ((FloatingActionButton)getActivity().findViewById(R.id.search_personal_fab)).show();
+                if (recyclerView.getChildCount() != 0)
+                    if (dy > 0) {
+                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).hide();
+                    } else {
+                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
+                    }
+                else {
+                    ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
                 }
             }
         });
@@ -88,17 +92,15 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.client_no_class_confirmed_message));
 
-        if(savedInstanceState != null && !savedInstanceState.isEmpty()){
+        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
             mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));
             mConfirmedClientFitClasses = savedInstanceState.getParcelableArrayList(Constants.CONFIRMED_CLIENT_CLASSES_SAVED_STATE_KEY);
 
-            if(mConfirmedClientFitClasses != null && !mConfirmedClientFitClasses.isEmpty()){
+            if (mConfirmedClientFitClasses != null && !mConfirmedClientFitClasses.isEmpty()) {
                 mNoClassesPlaceHolder.setVisibility(View.GONE);
             }
 
         }
-
-
         return view;
     }
 
@@ -106,7 +108,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
     public void onStart() {
         super.onStart();
 
-        if(mConfirmedClientFitClasses == null) {
+        if (mConfirmedClientFitClasses == null) {
             mConfirmedClientFitClasses = new ArrayList<>();
         }
         mAdapter = new ClientClassesAdapter(this, mConfirmedClientFitClasses);
@@ -121,20 +123,22 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
             ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
             mPersonalKey = clientFitClass.getPersonalKey();
 
-            if (Utils.isClassOnThePast(clientFitClass)) {
-                //TODO do some work on badges
-                createClassReceipt(clientFitClass);
+            if (clientFitClass != null) {
+                if (Utils.isClassOnThePast(clientFitClass)) {
+                    //TODO do some work on badges
+                    createClassReceipt(clientFitClass);
 
-            } else {
+                } else {
 
-                if (clientFitClass.isConfirmed()) {
-                    mConfirmedClientFitClasses.add(clientFitClass);
-                    mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mConfirmedClientFitClasses.size() - 1);
-                    mAdapter.notifyItemInserted(mConfirmedClientFitClasses.size());
-                    mRecyclerView.smoothScrollToPosition(mConfirmedClientFitClasses.size() - 1);
+                    if (clientFitClass.isConfirmed()) {
+                        mConfirmedClientFitClasses.add(clientFitClass);
+                        mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mConfirmedClientFitClasses.size() - 1);
+                        mAdapter.notifyItemInserted(mConfirmedClientFitClasses.size());
+                        mRecyclerView.smoothScrollToPosition(mConfirmedClientFitClasses.size() - 1);
+                    }
+
+                    changeStatus();
                 }
-
-                changeStatus();
             }
         }
     }
@@ -253,7 +257,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
         private int mPositionOnArray;
 
-        LoadImageTask(int positionOnArray){
+        LoadImageTask(int positionOnArray) {
             mPositionOnArray = positionOnArray;
         }
 

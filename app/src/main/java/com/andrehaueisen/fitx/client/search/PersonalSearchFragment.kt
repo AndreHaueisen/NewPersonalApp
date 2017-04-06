@@ -32,7 +32,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseProfileCallback, ClassDurationDialogFragment.DurationCallBack {
+class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseOnArrayProfileCallback, ClassDurationDialogFragment.DurationCallBack {
 
     private val mDatabaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val mStartTimesHashMap = HashMap<String, ArrayList<Int>>()
@@ -385,7 +385,7 @@ class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseP
     private fun configurePersonalView(view: View, personal: PersonalTrainer) {
 
         val imageCatcher = FirebaseProfileImageCatcher(this)
-        imageCatcher.getPersonalProfilePicture(activity, Utils.encodeEmail(personal.email))
+        imageCatcher.getPersonalProfilePicture(Utils.encodeEmail(personal.email), 0)
 
         val nameTextView = view.findViewById(R.id.personal_name_text_view) as TextView
         val gradeTextView = view.findViewById(R.id.grade_text_view) as TextView
@@ -411,13 +411,13 @@ class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseP
         mDuration = duration
     }
 
-    override fun onProfileImageReady(personProfileImage: ByteArray?) {
+
+    override fun onProfileImageReady(personProfileImage: ByteArray?, positionOnArray: Int) {
         val profileImageView = view?.findViewById(R.id.profile_image_view) as ImageView
         Glide.with(this).load(personProfileImage).asBitmap().into(profileImageView)
 
         if (personProfileImage != null) {
             mPersonalProfilePic = personProfileImage
         }
-
     }
 }

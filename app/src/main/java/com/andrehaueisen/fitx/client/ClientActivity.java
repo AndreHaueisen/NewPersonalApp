@@ -342,20 +342,6 @@ public class ClientActivity extends AppCompatActivity {
                 break;
 
             case 2:
-
-                break;
-
-            case 3:
-
-                break;
-
-            case 4:
-                break;
-
-            case 5:
-
-
-
                 AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
