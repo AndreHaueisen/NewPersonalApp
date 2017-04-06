@@ -1,6 +1,5 @@
 package com.andrehaueisen.fitx.client;
 
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +12,10 @@ import android.view.MenuItem;
 
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
 import com.andrehaueisen.fitx.client.adapters.ExpandableClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.FirebaseBackgroundImageCatcher;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
-import com.andrehaueisen.fitx.models.ClassDetailed;
 import com.andrehaueisen.fitx.models.ClassReceipt;
-import com.andrehaueisen.fitx.models.ClassResume;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -42,7 +38,6 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
     @BindView(R.id.review_personal_recycler_view) RecyclerView mRecyclerView;
 
     //private ProgressDialog mProgressDialog;
-    //private HashMap<String, ArrayList<byte[]>> mHeadBodyPersonalPicsHM = new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,37 +94,10 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
     }
 
     private void setupAdapter() {
-        ArrayList<ClassResume> classResumes = setClassResumes();
-        mExpandableClassesAdapter = new ExpandableClassesAdapter(classResumes, this, mClassReceipts);
+        mExpandableClassesAdapter = new ExpandableClassesAdapter(this, mClassReceipts);
         mRecyclerView.setAdapter(mExpandableClassesAdapter);
         mRecyclerView.setHasFixedSize(true);
 
-    }
-
-    private ArrayList<ClassResume> setClassResumes() {
-
-        ArrayList<ClassResume> classResumes = new ArrayList<>();
-
-        for (ClassReceipt classReceipt : mClassReceipts) {
-
-            String personalName = classReceipt.getPersonalName();
-            String classDate = Utils.getWrittenDateFromDateCode(this, classReceipt.getDateCode());
-            String classPlaceName = classReceipt.getPlaceName();
-            Bitmap personalProfileImage = classReceipt.getPersonalProfileImage();
-
-            ClassDetailed classDetailed = new ClassDetailed(personalProfileImage, personalName, classDate, classPlaceName);
-
-            ArrayList<ClassDetailed> detailedClasses = new ArrayList<>();
-            detailedClasses.add(classDetailed);
-
-            ClassResume classResume = new ClassResume(personalProfileImage, personalName, classDate, classPlaceName, detailedClasses);
-
-            classResumes.add(classResume);
-        }
-
-        //mProgressDialog.dismiss();
-
-        return classResumes;
     }
 
     @Override
@@ -206,7 +174,7 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
         @Override
         protected void onPostExecute(Integer position) {
             super.onPostExecute(position);
-            mExpandableClassesAdapter.notifyParentChanged(position);
+            mExpandableClassesAdapter.notifyItemChanged(position);
         }
     }
 }
