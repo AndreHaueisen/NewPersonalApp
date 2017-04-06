@@ -35,7 +35,7 @@ android {
 }
 
 ext{
-    support_version = '25.3.0'
+    support_version = '25.3.1'
     play_version = '10.2.1'
     firebase_version = '10.2.1'
     retrofit_version = '2.2.0'
