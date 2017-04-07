@@ -180,9 +180,9 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         mDatabaseReference.removeEventListener(this);
-        super.onDestroy();
     }
 
     @Override

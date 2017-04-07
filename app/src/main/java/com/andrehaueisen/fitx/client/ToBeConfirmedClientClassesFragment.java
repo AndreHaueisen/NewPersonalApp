@@ -47,7 +47,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
     private RecyclerView mRecyclerView;
     private DesertPlaceholder mNoClassesPlaceHolder;
-    private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mDatabaseReference;
     private ArrayList<ClientFitClass> mWaitingConfirmationClientFitClasses;
     private ClientClassesAdapter mAdapter;
     private FirebaseProfileImageCatcher mImageCatcher;
@@ -58,14 +58,14 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         return new ToBeConfirmedClientClassesFragment();
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setRetainInstance(true);
-
         String clientKey = getSharedPreferences(getContext()).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
-        mDatabaseReference.child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey).addChildEventListener(this);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey);
+        mDatabaseReference.addChildEventListener(this);
     }
 
     @Override
@@ -120,7 +120,6 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         mRecyclerView.setAdapter(mAdapter);
 
     }
-
 
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -243,9 +242,9 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
         mDatabaseReference.removeEventListener(this);
-        super.onDestroy();
+        super.onStop();
     }
 
     private class LoadImageTask extends AsyncTask<byte[], Void, Void> {

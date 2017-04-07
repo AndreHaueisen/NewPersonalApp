@@ -119,6 +119,8 @@
     <string name="find_personal">Find personal</string>
     <string name="review_personal">Review personal</string>
     <string name="logged_out">Logged out</string>
+    <string name="to_be_confirmed_client_classes_fragment_tag" translatable="false">be_confirmed_client_classes_fragment_tag</string>
+    <string name="upcoming_client_classes_fragment_tag" translatable="false">upcoming_client_classes_fragment_tag</string>
 
     <string-array name="client_drawer_list">
         <item>Set profile</item>

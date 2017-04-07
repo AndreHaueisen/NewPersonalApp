@@ -194,11 +194,10 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         super.onSaveInstanceState(outState);
     }
 
-
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         mDatabaseReference.removeEventListener(this);
-        super.onDestroy();
     }
 
     @Override

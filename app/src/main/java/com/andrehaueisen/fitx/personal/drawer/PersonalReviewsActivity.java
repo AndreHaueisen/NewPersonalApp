@@ -9,19 +9,19 @@ import android.support.v7.widget.Toolbar;
 import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.personal.adapters.ReviewAdapter;
 import com.andrehaueisen.fitx.models.Review;
+import com.andrehaueisen.fitx.personal.adapters.ReviewAdapter;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-public class PersonalReviewsActivity extends AppCompatActivity implements ValueEventListener {
+public class PersonalReviewsActivity extends AppCompatActivity implements ChildEventListener {
 
     private ArrayList<Review> mReviews = new ArrayList<>();
     private RecyclerView mReviewRecyclerView;
@@ -36,9 +36,10 @@ public class PersonalReviewsActivity extends AppCompatActivity implements ValueE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+        if(savedInstanceState == null){
+            mHasScreenRotated = false;
+        }else {
             mReviews = savedInstanceState.getParcelableArrayList(Constants.REVIEWS_SAVED_STATE_KEY);
-            mHasScreenRotated = savedInstanceState.getBoolean(Constants.HAS_SCREEN_ROTATED_SAVED_STATE_KEY);
         }
 
         setContentView(R.layout.activity_personal_reviews);
@@ -65,26 +66,39 @@ public class PersonalReviewsActivity extends AppCompatActivity implements ValueE
         String personalKey = Utils.getSharedPreferences(this).getString(Constants.SHARED_PREF_PERSONAL_EMAIL_UNIQUE_KEY, null);
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mDatabaseReference.child(Constants.FIREBASE_LOCATION_PERSONAL_REVIEWS).child(personalKey).addValueEventListener(this);
+        mDatabaseReference.child(Constants.FIREBASE_LOCATION_PERSONAL_REVIEWS).child(personalKey).addChildEventListener(this);
     }
 
     @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        if(!mHasScreenRotated) {
+    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        if (!mHasScreenRotated) {
             if (dataSnapshot.exists()) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    Review review = snapshot.getValue(Review.class);
-                    mReviews.add(review);
-                    mReviewAdapter.notifyItemInserted(mReviews.size());
-                }
+                Review review = dataSnapshot.getValue(Review.class);
+                mReviews.add(review);
+                mReviewAdapter.notifyItemInserted(mReviews.size());
 
             } else {
                 Utils.generateInfoToast(PersonalReviewsActivity.this, getString(R.string.no_reviews_yet)).show();
             }
-        }else {
+        } else {
             mHasScreenRotated = false;
         }
+    }
+
+    @Override
+    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+    }
+
+    @Override
+    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+    }
+
+    @Override
+    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
     }
 
     @Override
@@ -92,7 +106,6 @@ public class PersonalReviewsActivity extends AppCompatActivity implements ValueE
         super.onSaveInstanceState(outState);
         mHasScreenRotated = true;
         outState.putParcelableArrayList(Constants.REVIEWS_SAVED_STATE_KEY, mReviews);
-        outState.putBoolean(Constants.HAS_SCREEN_ROTATED_SAVED_STATE_KEY, mHasScreenRotated);
     }
 
     @Override

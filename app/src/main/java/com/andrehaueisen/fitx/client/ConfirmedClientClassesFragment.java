@@ -44,7 +44,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
     private RecyclerView mRecyclerView;
     private DesertPlaceholder mNoClassesPlaceHolder;
-    private DatabaseReference mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mDatabaseReference;
     private ArrayList<ClientFitClass> mConfirmedClientFitClasses;
     private ClientClassesAdapter mAdapter;
     private FirebaseProfileImageCatcher mImageCatcher;
@@ -61,7 +61,8 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
         setRetainInstance(true);
 
         String clientKey = Utils.getSharedPreferences(getContext()).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
-        mDatabaseReference.child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey).addChildEventListener(this);
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey);
+        mDatabaseReference.addChildEventListener(this);
     }
 
     @Override
@@ -248,9 +249,9 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         mDatabaseReference.removeEventListener(this);
-        super.onDestroy();
     }
 
     private class LoadImageTask extends AsyncTask<byte[], Void, Void> {
