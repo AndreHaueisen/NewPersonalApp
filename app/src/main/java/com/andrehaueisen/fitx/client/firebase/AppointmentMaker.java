@@ -2,8 +2,8 @@ package com.andrehaueisen.fitx.client.firebase;
 
 import android.app.Activity;
 
-import com.andrehaueisen.fitx.Constants;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.ScheduleConfirmation;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.google.firebase.database.DataSnapshot;

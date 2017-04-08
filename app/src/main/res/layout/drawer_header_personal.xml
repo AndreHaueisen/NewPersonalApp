@@ -9,7 +9,7 @@
     android:background="@drawable/background_3"
     android:orientation="vertical">
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/personal_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.65999997"
         app:srcCompat="@drawable/ic_full_star_white_24dp"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/personal_grade_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="4.5"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/personal_email_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

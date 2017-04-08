@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.adapters.ExpandableClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.FirebaseBackgroundImageCatcher;

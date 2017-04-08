@@ -22,7 +22,7 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/client_gym_name"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/attributions_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintRight_toRightOf="@+id/client_place_image_view"
         tools:text="By lolallaor"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/client_gym_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:text="Primatas"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/client_gym_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

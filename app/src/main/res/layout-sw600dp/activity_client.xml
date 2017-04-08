@@ -17,7 +17,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/customTextView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         app:layout_constraintRight_toLeftOf="@+id/customTextView2"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/customTextView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

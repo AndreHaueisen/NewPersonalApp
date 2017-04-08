@@ -6,9 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.models.Review;
 import com.andrehaueisen.fitx.personal.adapters.ReviewAdapter;
 import com.google.firebase.database.ChildEventListener;

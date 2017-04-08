@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;

@@ -37,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@android:layout/simple_expandable_list_item_1"/>
 
-    <com.andrehaueisen.fitx.CustomButton
+    <com.andrehaueisen.fitx.utilities.CustomButton
         android:id="@+id/choose_date_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.andrehaueisen.fitx.CustomButton
+    <com.andrehaueisen.fitx.utilities.CustomButton
         android:id="@+id/choose_class_start_time_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_date_button"/>
 
-    <com.andrehaueisen.fitx.CustomButton
+    <com.andrehaueisen.fitx.utilities.CustomButton
         android:id="@+id/choose_duration_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -12,6 +12,10 @@ import com.andrehaueisen.fitx.client.ScheduleConfirmation
 import com.andrehaueisen.fitx.models.Gym
 import com.andrehaueisen.fitx.models.PersonalFitClass
 import com.andrehaueisen.fitx.models.PersonalTrainer
+import com.andrehaueisen.fitx.utilities.Constants
+import com.andrehaueisen.fitx.utilities.CustomButton
+import com.andrehaueisen.fitx.utilities.CustomTextView
+import com.andrehaueisen.fitx.utilities.Utils
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import org.joda.time.LocalDate

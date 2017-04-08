@@ -16,10 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.Constants;
-import com.andrehaueisen.fitx.CustomButton;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.CustomButton;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.bumptech.glide.Glide;

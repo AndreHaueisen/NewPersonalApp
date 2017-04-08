@@ -15,9 +15,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.ClientActivity;
 import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.google.firebase.database.ChildEventListener;

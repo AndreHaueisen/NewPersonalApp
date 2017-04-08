@@ -9,7 +9,7 @@
     android:background="@drawable/background_3"
     android:orientation="vertical">
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/client_name_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         tools:text="Andre Haueisen"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/client_email_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/client_main_objective_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

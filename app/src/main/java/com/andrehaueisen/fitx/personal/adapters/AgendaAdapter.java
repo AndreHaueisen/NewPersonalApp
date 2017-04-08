@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.appyvet.rangebar.RangeBar;
 
 import java.util.ArrayList;

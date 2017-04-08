@@ -1,7 +1,7 @@
 package com.andrehaueisen.fitx.client.firebase;
 
-import com.andrehaueisen.fitx.Constants;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.search.GeneralPersonalSearchFragment;
 import com.andrehaueisen.fitx.models.Gym;
 import com.andrehaueisen.fitx.models.PersonalTrainer;

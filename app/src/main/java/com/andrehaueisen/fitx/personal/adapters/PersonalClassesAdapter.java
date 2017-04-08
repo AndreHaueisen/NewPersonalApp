@@ -17,9 +17,9 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.CustomButton;
+import com.andrehaueisen.fitx.utilities.CustomButton;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.bumptech.glide.Glide;

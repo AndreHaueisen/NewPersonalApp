@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.personal.adapters.WorkingTimesAdapter;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.google.firebase.database.DataSnapshot;

@@ -17,9 +17,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.ClientActivity;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.models.Client;

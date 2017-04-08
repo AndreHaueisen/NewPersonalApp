@@ -8,7 +8,7 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/no_results_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-                <com.andrehaueisen.fitx.CustomTextView
+                <com.andrehaueisen.fitx.utilities.CustomTextView
                     android:id="@+id/personal_name_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_image_view"
                     tools:text="Andre Haueisen"/>
 
-                <com.andrehaueisen.fitx.CustomTextView
+                <com.andrehaueisen.fitx.utilities.CustomTextView
                     android:id="@+id/grade_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
 
             </android.support.constraint.ConstraintLayout>
 
-            <com.andrehaueisen.fitx.CustomButton
+            <com.andrehaueisen.fitx.utilities.CustomButton
                 android:id="@+id/class_duration_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:background="@drawable/shape_rectangle_outline"
                 android:text="@string/configure_class_duration"/>
 
-            <com.andrehaueisen.fitx.CustomTextView
+            <com.andrehaueisen.fitx.utilities.CustomTextView
                 android:id="@+id/month_name_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

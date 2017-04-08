@@ -19,7 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

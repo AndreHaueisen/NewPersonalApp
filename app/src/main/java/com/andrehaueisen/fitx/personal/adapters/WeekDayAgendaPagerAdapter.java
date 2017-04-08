@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.personal.drawer.ScheduleArrangementFragment;
 import com.andrehaueisen.fitx.personal.drawer.WeekScheduleResumeFragment;
 

@@ -1,6 +1,6 @@
 package com.andrehaueisen.fitx.register
 
-import com.andrehaueisen.fitx.Utils
+import com.andrehaueisen.fitx.utilities.Utils
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.FormElement

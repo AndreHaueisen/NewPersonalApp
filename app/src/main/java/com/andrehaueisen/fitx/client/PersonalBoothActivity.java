@@ -8,7 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.adapters.ExpandableBoothAdapter;
 import com.andrehaueisen.fitx.models.PersonalFitClass;

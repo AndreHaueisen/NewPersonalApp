@@ -46,10 +46,11 @@
         </activity>
 
         <activity
-            android:name=".personal.PersonalActivity"/>
+            android:name=".personal.PersonalActivity"
+            android:theme="@style/AppTheme.NoActionBar.MainActivity"/>
         <activity
             android:name=".client.ClientActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar.MainActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -19,6 +19,10 @@ import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher
 import com.andrehaueisen.fitx.models.Gym
 import com.andrehaueisen.fitx.models.PersonalTrainer
 import com.andrehaueisen.fitx.shared.dialogFragments.ClassDurationDialogFragment
+import com.andrehaueisen.fitx.utilities.Constants
+import com.andrehaueisen.fitx.utilities.CustomButton
+import com.andrehaueisen.fitx.utilities.CustomTextView
+import com.andrehaueisen.fitx.utilities.Utils
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
 import jp.co.recruit_mp.android.lightcalendarview.LightCalendarView

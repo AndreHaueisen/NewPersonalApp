@@ -6,7 +6,7 @@
     android:layout_marginBottom="16dp"
     android:orientation="vertical">
 
-    <com.andrehaueisen.fitx.CustomTextView
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/date_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

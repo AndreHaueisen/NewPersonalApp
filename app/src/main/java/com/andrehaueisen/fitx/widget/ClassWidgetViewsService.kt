@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.andrehaueisen.fitx.Constants
+import com.andrehaueisen.fitx.utilities.Constants
 import com.andrehaueisen.fitx.R
-import com.andrehaueisen.fitx.Utils
+import com.andrehaueisen.fitx.utilities.Utils
 import com.andrehaueisen.fitx.models.ClientFitClass
 import com.andrehaueisen.fitx.models.PersonalFitClass
 import com.google.firebase.database.*

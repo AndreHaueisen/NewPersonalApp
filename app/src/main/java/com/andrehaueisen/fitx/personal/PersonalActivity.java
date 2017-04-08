@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.personal.adapters.DrawerAdapter;
 import com.andrehaueisen.fitx.personal.drawer.PersonalReviewsActivity;
 import com.andrehaueisen.fitx.personal.drawer.ProfessionalProfileActivity;

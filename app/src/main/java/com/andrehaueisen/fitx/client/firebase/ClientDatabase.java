@@ -8,9 +8,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.models.ClassReceipt;
 import com.andrehaueisen.fitx.models.Client;
 import com.andrehaueisen.fitx.models.ClientFitClass;
@@ -103,6 +103,7 @@ public class ClientDatabase {
             @Override
             public void onSuccess(Void aVoid) {
                 Utils.generateSuccessToast(activity, activity.getString(R.string.class_scheduled)).show();
+                activity.finish();
                 Log.i(TAG, "Class scheduled! YAY!");
             }
         }).addOnFailureListener(activity, new OnFailureListener() {
@@ -131,6 +132,7 @@ public class ClientDatabase {
             @Override
             public void onSuccess(Void aVoid) {
                 Utils.generateSuccessToast(activity, activity.getString(R.string.class_scheduled)).show();
+                activity.finish();
                 Log.i(TAG, "Class scheduled! YAY!");
             }
         }).addOnFailureListener(activity, new OnFailureListener() {

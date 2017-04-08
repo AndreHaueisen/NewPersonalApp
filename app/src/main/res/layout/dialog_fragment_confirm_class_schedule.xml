@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/customTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/working_places_spinner"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/class_date_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/personal_name_text_view"
             tools:text="10/04/2017"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/class_time_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/class_date_text_view"
             tools:text="00:00 - 01:00 "/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/personal_name_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
             app:layout_constraintTop_toBottomOf="@+id/specialties_spinner"
             tools:text="Andre Haueisen"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/class_time_text_view"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

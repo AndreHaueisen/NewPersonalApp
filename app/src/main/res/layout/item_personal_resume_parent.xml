@@ -29,7 +29,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/personal_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_image_view"
             tools:text="Andre Haueisen"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/grade_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             app:layout_constraintVertical_bias="1.0"
             android:layout_marginRight="8dp"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/cref_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             tools:text="CREF"
             tools:visibility="visible"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/cref_number_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
             tools:text="003628"
             tools:visibility="visible"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/class_counter_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             tools:text="30 reviews"
             tools:visibility="visible"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/schedule_class_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

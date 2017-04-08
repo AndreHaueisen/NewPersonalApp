@@ -1,6 +1,7 @@
 package com.andrehaueisen.fitx.shared.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.models.AttributedPhoto;
 import com.andrehaueisen.fitx.models.Gym;
+import com.andrehaueisen.fitx.personal.drawer.WorkPlacesFragment;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -24,10 +26,12 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
 
     private Context mContext;
     private ArrayList<Gym> mWorkingPlaces;
+    private WorkPlacesFragment mFragment;
 
-    public PlacesAdapter(Context context, ArrayList<Gym> workingPlaces) {
+    public PlacesAdapter(Context context, ArrayList<Gym> workingPlaces, Fragment fragment) {
         mContext = context;
         mWorkingPlaces = workingPlaces;
+        mFragment = (WorkPlacesFragment) fragment;
     }
 
     @Override
@@ -37,7 +41,6 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
         View view;
 
         view = inflater.inflate(R.layout.item_work_place, parent, false);
-
 
         return new PlaceViewHolder(view);
     }
@@ -69,7 +72,6 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
 
         private PlaceViewHolder(View itemView) {
             super(itemView);
-
 
             mPlaceImageView = (ImageView) itemView.findViewById(R.id.work_place_image_view);
             mAttributionTextView = (TextView) itemView.findViewById(R.id.attributions_text_view);
@@ -125,6 +127,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
             int position = getAdapterPosition();
             mWorkingPlaces.remove(position);
             notifyItemRemoved(position);
+            mFragment.changeRecyclerViewVisibility();
         }
     }
 }

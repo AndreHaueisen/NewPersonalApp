@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.CustomButton;
+import com.andrehaueisen.fitx.utilities.CustomButton;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.PersonalBoothActivity;
 import com.andrehaueisen.fitx.client.ScheduleConfirmation;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;

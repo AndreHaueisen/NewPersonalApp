@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -81,7 +81,7 @@
 
         </RadioGroup>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/confirm_class_configuration_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,6 +1,0 @@
-<paths
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <external-path name="personal_profile_pics" path="Android/data/com.andrehaueisen.fitx/files/Pictures" />
-
-</paths>

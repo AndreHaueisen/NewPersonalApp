@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.andrehaueisen.fitx.R
-import com.andrehaueisen.fitx.Utils
+import com.andrehaueisen.fitx.utilities.Utils
 import com.andrehaueisen.fitx.client.dialogFragment.ScheduleClassDialogFragment
 import com.andrehaueisen.fitx.models.Gym
 import com.andrehaueisen.fitx.models.PersonalTrainer

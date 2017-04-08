@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.andrehaueisen.fitx.Constants
-import com.andrehaueisen.fitx.CustomTextView
+import com.andrehaueisen.fitx.utilities.Constants
+import com.andrehaueisen.fitx.utilities.CustomTextView
 import com.andrehaueisen.fitx.R
-import com.andrehaueisen.fitx.Utils
+import com.andrehaueisen.fitx.utilities.Utils
 import com.andrehaueisen.fitx.client.adapters.PersonalWorkingTimesAdapter
 import com.andrehaueisen.fitx.models.Gym
 import com.andrehaueisen.fitx.models.PersonalTrainer

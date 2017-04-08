@@ -16,6 +16,10 @@
 
     </style>
 
+    <style name="AppTheme.NoActionBar.MainActivity">
+        <item name="android:windowBackground">@drawable/running_background_wide</item>
+    </style>
+
     <style name="AppTheme.NoActionBar.Register">
         <item name="android:windowBackground">@drawable/login_background_wide</item>
         <item name="windowNoTitle">true</item>

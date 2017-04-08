@@ -45,7 +45,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/space"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/personal_name_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toBottomOf="@+id/personal_head_photo_circle_view"
             tools:text="Andre Haueisen"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/class_location_name_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/personal_name_text_view"
             tools:text="Primatas Crossfit"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/class_date_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/class_date_text_view"
             tools:visibility="visible"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/grade_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
             tools:text="Current Grade"
             tools:visibility="visible"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/personal_grade_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                 android:inputType="textCapSentences"/>
         </android.support.design.widget.TextInputLayout>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/submit_button"
             style="@style/ColoredButton"
             android:layout_width="wrap_content"

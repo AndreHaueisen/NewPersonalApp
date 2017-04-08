@@ -11,14 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrehaueisen.fitx.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
-import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.models.AttributedPhoto;
 import com.andrehaueisen.fitx.models.Gym;
+import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.shared.PlacePhoto;
 import com.andrehaueisen.fitx.shared.adapters.PlacesAdapter;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.places.Places;
@@ -62,7 +62,6 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
                 .addConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
                     @Override
                     public void onConnected(@Nullable Bundle bundle) {
-                        Utils.generateSuccessToast(getContext(), "Google api places services connected!").show();
                         mPlacePhoto = new PlacePhoto(mGoogleApiClient,  WorkPlacesFragment.this);
                     }
 
@@ -74,7 +73,6 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
                 .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-                        Utils.generateErrorToast(getContext(), "Api places services failed!").show();
                     }
                 })
                 .build();
@@ -124,6 +122,7 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
         if(dataSnapshot.exists()) {
             mGyms.addAll(dataSnapshot.getValue(genericTypeIndicator));
             mPlacesAdapter.notifyDataSetChanged();
+            changeRecyclerViewVisibility();
         }
         collectPlacePhotos();
     }
@@ -148,8 +147,9 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
             mGyms = new ArrayList<>();
         }
 
-        mPlacesAdapter = new PlacesAdapter(getContext(), mGyms);
+        mPlacesAdapter = new PlacesAdapter(getContext(), mGyms, this);
         mWorkPlacesRecyclerView.setAdapter(mPlacesAdapter);
+        changeRecyclerViewVisibility();
     }
 
     @Override
@@ -158,6 +158,7 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
         for(int i = 0; i < mGyms.size(); i++){
             mGyms.get(i).setAttributedPhoto(attributedPhotos.get(i));
             mPlacesAdapter.notifyItemChanged(i);
+            changeRecyclerViewVisibility();
         }
 
     }
@@ -166,12 +167,16 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
     public void onSinglePhotoReady(AttributedPhoto attributedPhoto, int position) {
         mGyms.get(position).setAttributedPhoto(attributedPhoto);
         mPlacesAdapter.notifyItemInserted(position);
+        changeRecyclerViewVisibility();
         mWorkPlacesRecyclerView.smoothScrollToPosition(position);
     }
 
-    @Override
-    public void onSinglePhotoReady(AttributedPhoto attributedPhoto) {
-
+     public void changeRecyclerViewVisibility(){
+        if(mPlacesAdapter.getItemCount() != 0){
+            mWorkPlacesRecyclerView.setVisibility(View.VISIBLE);
+        }else {
+            mWorkPlacesRecyclerView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -203,5 +208,10 @@ public class WorkPlacesFragment extends Fragment implements ProfessionalProfileA
     public void onDestroy() {
         mGoogleApiClient.disconnect();
         super.onDestroy();
+    }
+
+    @Override
+    public void onSinglePhotoReady(AttributedPhoto attributedPhoto) {
+
     }
 }

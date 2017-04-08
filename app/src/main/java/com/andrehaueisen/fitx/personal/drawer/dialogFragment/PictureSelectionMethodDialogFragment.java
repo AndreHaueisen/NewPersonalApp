@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
 
 import java.io.File;

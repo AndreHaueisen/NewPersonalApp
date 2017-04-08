@@ -57,6 +57,9 @@
     <!--Personal ProfessionalProfile activity strings -->
     <string name="professional_profile_toolbar_title">Configure public profile</string>
 
+    <!--Personal PlacesAutocompleteFragment strings -->
+    <string name="search_working_place">Search your gyms</string>
+
 
     <!--Personal Schedule strings-->
     <string name="confirm_changes_menu_button_title">Confirm</string>
@@ -119,8 +122,8 @@
     <string name="find_personal">Find personal</string>
     <string name="review_personal">Review personal</string>
     <string name="logged_out">Logged out</string>
-    <string name="to_be_confirmed_client_classes_fragment_tag" translatable="false">be_confirmed_client_classes_fragment_tag</string>
-    <string name="upcoming_client_classes_fragment_tag" translatable="false">upcoming_client_classes_fragment_tag</string>
+    <string name="to_be_confirmed_client_classes_fragment_tag" translatable="false">to_be_confirmed_fragment_tag</string>
+    <string name="confirmed_client_classes_fragment_tag" translatable="false">confirmed_fragment_tag</string>
 
     <string-array name="client_drawer_list">
         <item>Set profile</item>

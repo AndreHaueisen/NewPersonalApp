@@ -12,7 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.personal.adapters.AgendaAdapter;
 import com.andrehaueisen.fitx.personal.adapters.WeekDayAgendaPagerAdapter;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;

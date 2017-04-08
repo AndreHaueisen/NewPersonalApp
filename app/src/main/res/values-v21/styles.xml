@@ -8,6 +8,10 @@
         <!--<item name="android:windowTranslucentStatus">true</item>-->
     </style>
 
+    <style name="AppTheme.NoActionBar.MainActivity">
+        <item name="android:windowBackground">@drawable/running_background</item>
+    </style>
+
     <style name="AppTheme.NoActionBar.Register">
         <item name="android:windowBackground">@drawable/login_background</item>
         <item name="windowNoTitle">true</item>

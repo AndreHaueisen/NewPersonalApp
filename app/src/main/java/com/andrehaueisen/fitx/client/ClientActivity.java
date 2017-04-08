@@ -25,9 +25,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.adapters.DrawerAdapter;
 import com.andrehaueisen.fitx.client.drawer.ClientProfileActivity;
 import com.andrehaueisen.fitx.client.search.PersonalSearchActivity;
@@ -49,8 +49,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.andrehaueisen.fitx.R.string.upcoming_classes_fragment_tag;
-import static com.andrehaueisen.fitx.R.string.upcoming_client_classes_fragment_tag;
+import static com.andrehaueisen.fitx.R.string.confirmed_client_classes_fragment_tag;
 
 public class ClientActivity extends AppCompatActivity {
 
@@ -80,11 +79,13 @@ public class ClientActivity extends AppCompatActivity {
         if(Utils.getSmallestScreenWidth(this) < 600) {
 
             FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment toBeConfirmedClientClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_classes_fragment_tag));
+            Fragment toBeConfirmedClientClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_client_classes_fragment_tag));
 
             if(toBeConfirmedClientClassesFragment == null) {
                 toBeConfirmedClientClassesFragment = ToBeConfirmedClientClassesFragment.newInstance();
-                fragmentManager.beginTransaction().add(R.id.classes_fragment_container, toBeConfirmedClientClassesFragment, getString(R.string.to_be_confirmed_classes_fragment_tag)).commitNow();
+                fragmentManager.beginTransaction()
+                        .add(R.id.classes_fragment_container, toBeConfirmedClientClassesFragment, getString(R.string.to_be_confirmed_client_classes_fragment_tag))
+                        .commitNow();
             }
 
             mClassFilterImageView.setOnClickListener(classFilterClickListener);
@@ -109,7 +110,7 @@ public class ClientActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             Fragment toBeConfirmedClientClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_client_classes_fragment_tag));
-            Fragment upcomingClassesFragment = fragmentManager.findFragmentByTag(getString(upcoming_classes_fragment_tag));
+            Fragment confirmedClientClassesFragment = fragmentManager.findFragmentByTag(getString(confirmed_client_classes_fragment_tag));
 
 
             if(toBeConfirmedClientClassesFragment == null){
@@ -117,9 +118,9 @@ public class ClientActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.classes_fragment_container, toBeConfirmedClientClassesFragment, getString(R.string.to_be_confirmed_client_classes_fragment_tag));
             }
 
-            if(upcomingClassesFragment == null){
-                upcomingClassesFragment = ConfirmedClientClassesFragment.newInstance();
-                fragmentTransaction.add(R.id.classes_fragment_container, upcomingClassesFragment, getString(R.string.upcoming_client_classes_fragment_tag));
+            if(confirmedClientClassesFragment == null){
+                confirmedClientClassesFragment = ConfirmedClientClassesFragment.newInstance();
+                fragmentTransaction.add(R.id.classes_fragment_container, confirmedClientClassesFragment, getString(R.string.confirmed_client_classes_fragment_tag));
             }
 
             fragmentTransaction.commit();
@@ -135,7 +136,7 @@ public class ClientActivity extends AppCompatActivity {
                 }
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.hide(toBeConfirmedClientClassesFragment);
-                transaction.show(upcomingClassesFragment);
+                transaction.show(confirmedClientClassesFragment);
                 transaction.commit();
 
             } else {
@@ -147,7 +148,7 @@ public class ClientActivity extends AppCompatActivity {
                     ((Animatable) classFilterDrawable).start();
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.hide(upcomingClassesFragment);
+                transaction.hide(confirmedClientClassesFragment);
                 transaction.show(toBeConfirmedClientClassesFragment);
                 transaction.commit();
 
@@ -162,7 +163,7 @@ public class ClientActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Fragment toBeConfirmedClientClassesFragment = fragmentManager.findFragmentByTag(getString(R.string.to_be_confirmed_client_classes_fragment_tag));
-        Fragment upcomingClassesFragment = fragmentManager.findFragmentByTag(getString(upcoming_client_classes_fragment_tag));
+        Fragment upcomingClassesFragment = fragmentManager.findFragmentByTag(getString(confirmed_client_classes_fragment_tag));
 
         if(toBeConfirmedClientClassesFragment == null){
             toBeConfirmedClientClassesFragment = ToBeConfirmedClientClassesFragment.newInstance();
@@ -171,7 +172,7 @@ public class ClientActivity extends AppCompatActivity {
 
         if(upcomingClassesFragment == null){
             upcomingClassesFragment = ConfirmedClientClassesFragment.newInstance();
-            fragmentTransaction.add(R.id.classes_fragment_container_2, upcomingClassesFragment, getString(upcoming_client_classes_fragment_tag));
+            fragmentTransaction.add(R.id.classes_fragment_container_2, upcomingClassesFragment, getString(confirmed_client_classes_fragment_tag));
         }
 
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);

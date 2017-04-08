@@ -14,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;

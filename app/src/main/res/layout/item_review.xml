@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/grade_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"/>
 
-        <com.andrehaueisen.fitx.CustomTextView
+        <com.andrehaueisen.fitx.utilities.CustomTextView
             android:id="@+id/review_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -24,9 +24,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.models.PersonalTrainer;
 import com.andrehaueisen.fitx.personal.drawer.dialogFragment.PictureSelectionMethodDialogFragment;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
@@ -45,7 +45,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
-import static com.andrehaueisen.fitx.Utils.getSharedPreferences;
+import static com.andrehaueisen.fitx.utilities.Utils.getSharedPreferences;
 import static com.bumptech.glide.Glide.with;
 
 /**

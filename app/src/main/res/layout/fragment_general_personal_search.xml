@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/choose_date_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:background="@drawable/shape_rectangle_outline"
             android:text="@string/choose_date"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/choose_class_start_time_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:background="@drawable/shape_rectangle_outline"
             android:text="@string/choose_start_time"/>
 
-        <com.andrehaueisen.fitx.CustomButton
+        <com.andrehaueisen.fitx.utilities.CustomButton
             android:id="@+id/choose_duration_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

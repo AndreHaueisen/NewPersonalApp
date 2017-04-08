@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 
 import com.andrehaueisen.fitx.R;
@@ -59,13 +60,13 @@ public class ProfessionalProfileActivity extends AppCompatActivity {
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
         autocompleteFragment.setFilter(filter);
-        autocompleteFragment.setHint("Choose working places");
+        autocompleteFragment.setHint(getString(R.string.search));
+        View rootView = autocompleteFragment.getView();
+        rootView.setBackground(getDrawable(R.drawable.shape_top_line_open_rectangle));
+        rootView.setElevation(4);
 
         ImageButton imageButton = ((ImageButton)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_button));
         imageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_dark_24dp));
-
-        autocompleteFragment.setFilter(filter);
-        autocompleteFragment.setHint(getString(R.string.try_new_working_out_place_hint));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override

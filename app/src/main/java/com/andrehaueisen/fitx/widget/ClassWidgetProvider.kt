@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.app.TaskStackBuilder
 import android.widget.RemoteViews
-import com.andrehaueisen.fitx.Constants
+import com.andrehaueisen.fitx.utilities.Constants
 import com.andrehaueisen.fitx.R
 import com.andrehaueisen.fitx.client.ClientActivity
 import com.andrehaueisen.fitx.personal.PersonalActivity

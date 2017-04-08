@@ -13,9 +13,9 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.andrehaueisen.fitx.personal.PersonalActivity;
 import com.google.firebase.database.ChildEventListener;

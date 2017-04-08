@@ -13,9 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrehaueisen.fitx.Constants;
+import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.Utils;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
@@ -34,7 +34,7 @@ import java.util.concurrent.ExecutionException;
 
 import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
 
-import static com.andrehaueisen.fitx.Utils.getSharedPreferences;
+import static com.andrehaueisen.fitx.utilities.Utils.getSharedPreferences;
 
 /**
  * Created by andre on 11/21/2016.
@@ -62,6 +62,8 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setRetainInstance(true);
 
         String clientKey = getSharedPreferences(getContext()).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey);
