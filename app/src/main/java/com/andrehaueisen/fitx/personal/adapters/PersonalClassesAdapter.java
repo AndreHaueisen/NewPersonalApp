@@ -1,27 +1,32 @@
 package com.andrehaueisen.fitx.personal.adapters;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.utilities.CustomButton;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.utilities.Utils;
-import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
+import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
+import com.andrehaueisen.fitx.utilities.CustomButton;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 
@@ -39,13 +44,18 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
     private Context mContext;
     private ArrayList<PersonalFitClass> mPersonalFitClasses;
     private Activity mActivity;
+    private DisplayMetrics mDisplayMetrics;
+    private DecelerateInterpolator mInterpolator;
+    private Resources mResources;
 
     public PersonalClassesAdapter(Fragment fragment, ArrayList<PersonalFitClass> personalFitClasses) {
 
         mContext = fragment.getContext();
         mActivity = fragment.getActivity();
-
+        mDisplayMetrics = mContext.getResources().getDisplayMetrics();
         mPersonalFitClasses = personalFitClasses;
+        mInterpolator = new DecelerateInterpolator();
+        mResources = mContext.getResources();
     }
 
     @Override
@@ -69,6 +79,7 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
 
     public class ClassHolder extends RecyclerView.ViewHolder {
 
+        private CardView mCardView;
         private CountDownTimer mDismissClassCountDownTimer;
         private CountDownTimer mConfirmClassCountDownTimer;
         private AlertDialog mPenaltyAlertDialog;
@@ -92,6 +103,7 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
             setupCountDownListeners();
             setupAlertDialogs();
 
+            mCardView = (CardView) itemView.findViewById(R.id.class_container_card_view);
             mStatusClassButton = (CustomButton) itemView.findViewById(R.id.class_status_button);
             mTimeTextView = (TextView) itemView.findViewById(R.id.class_time_text_view);
             mDateTextView = (TextView) itemView.findViewById(R.id.class_date_text_view);
@@ -114,6 +126,8 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
 
         private void onBindClass(int position) {
 
+            setCardViewMargins();
+
             PersonalFitClass personalFitClass = mPersonalFitClasses.get(position);
 
             String classStartTime = Utils.getClockFromTimeCode(mContext, personalFitClass.getStartTimeCode());
@@ -122,14 +136,31 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
             mDirectionImageButton.setOnClickListener(directionButtonClickListener);
             mDismissClassImageButton.setOnTouchListener(dismissClassOnTouchListener);
 
+            ObjectAnimator animator;
+
             if (personalFitClass.isConfirmed()) {
                 mStatusClassButton.setText(mContext.getString(R.string.confirmed));
                 mStatusClassButton.setEnabled(false);
                 mStatusClassButton.setElevation(0f);
+
+                animator = ObjectAnimator.ofArgb(mCardView, "CardBackgroundColor",
+                        mResources.getColor(R.color.card_green), mResources.getColor(R.color.greenish), mResources.getColor(R.color.card_green))
+                        .setDuration(1500);
+                animator.setInterpolator(mInterpolator);
+                animator.setStartDelay(2000);
+                animator.start();
             } else {
                 mStatusClassButton.setBackground(mContext.getResources().getDrawable(R.drawable.shape_rectangle_outline));
                 mStatusClassButton.setText(mContext.getString(R.string.hold_to_confirm));
                 mStatusClassButton.setOnTouchListener(confirmClassOnTouchListener);
+
+                animator = ObjectAnimator.ofArgb(mCardView, "CardBackgroundColor",
+                        mResources.getColor(R.color.card_red), mResources.getColor(R.color.reddish), mResources.getColor(R.color.card_red))
+                        .setDuration(1500);
+                animator.setInterpolator(mInterpolator);
+                animator.setStartDelay(2000);
+                animator.start();
+
             }
 
             String classStartEnd = mContext.getString(R.string.class_start_end, classStartTime, classEndTime);
@@ -145,6 +176,38 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
 
             setProfileImage(personalFitClass.getClassProfileImage());
 
+        }
+
+        private void setCardViewMargins(){
+            if(Utils.getSmallestScreenWidth(mContext) < 600) {
+                if (getLayoutPosition() == 0) {
+                    Utils.setMargins(mCardView,
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(64, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                } else {
+                    Utils.setMargins(mCardView,
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                }
+            }else{
+                if (getLayoutPosition() == 0 || getLayoutPosition() == 1) {
+                    Utils.setMargins(mCardView,
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(86, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                } else {
+                    Utils.setMargins(mCardView,
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                }
+            }
         }
 
 

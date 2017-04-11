@@ -6,21 +6,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.ClassReceipt;
 import com.andrehaueisen.fitx.models.ClientFitClass;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -52,12 +54,12 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     private ClientClassesAdapter mAdapter;
     private FirebaseProfileImageCatcher mImageCatcher;
     private String mPersonalKey;
+    private boolean mAnimationController;
 
 
     public static ToBeConfirmedClientClassesFragment newInstance() {
         return new ToBeConfirmedClientClassesFragment();
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,23 +79,16 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         View view = inflater.inflate(R.layout.fragment_to_be_confirmed_classes, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new SlideInRightAnimator());
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (recyclerView.getChildCount() != 0)
-                    if (dy > 0) {
-                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).hide();
-                    } else {
-                        ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
-                    }
-                else {
-                    ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab)).show();
-                }
-            }
-        });
+        setOnScrollAnimations();
+        mRecyclerView.setHasFixedSize(true);
+
+        if(Utils.getSmallestScreenWidth(getContext()) < 600){
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }else {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
+
 
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.client_no_class_scheduled_message));
@@ -193,6 +188,37 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
                 }
             }
         }
+
+    }
+
+    private void setOnScrollAnimations(){
+
+        final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        final FloatingActionButton fab = ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab));
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (0 == recyclerView.computeVerticalScrollOffset() && !mAnimationController) {
+                    toolbar.animate().z(1).alpha(1.0f).start();
+                    mAnimationController = true;
+                } else if(mAnimationController){
+                    toolbar.animate().z(8).alpha(0.95f).start();
+                    mAnimationController = false;
+                }
+
+                if (recyclerView.getChildCount() != 0)
+                    if (dy > 0) {
+                        fab.hide();
+                    } else {
+                        fab.show();
+                    }
+                else {
+                    fab.show();
+                }
+            }
+        });
 
     }
 

@@ -21,6 +21,9 @@ import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.andrehaueisen.fitx.R;
@@ -402,6 +405,21 @@ public class Utils {
         } else {
             return false;
         }
+    }
+
+    public static void setMargins (View view, int left, int top, int right, int bottom) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            p.setMargins(left, top, right, bottom);
+            view.requestLayout();
+        }
+    }
+
+    public static int convertDpIntoPx(int dp, DisplayMetrics displayMetrics){
+        return (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp,
+                displayMetrics);
     }
 
     public static String formatGrade(float grade) {

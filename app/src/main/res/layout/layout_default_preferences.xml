@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="0dp"
-        android:background="@color/white"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/client_place_image_view"
         app:layout_constraintLeft_toLeftOf="@+id/client_place_image_view"
         app:layout_constraintRight_toRightOf="@+id/client_place_image_view"

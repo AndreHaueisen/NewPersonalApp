@@ -5,19 +5,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
-import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
+import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.google.firebase.database.ChildEventListener;
@@ -45,6 +47,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mWaitingConfirmationPersonalFitClasses;
     private FirebaseProfileImageCatcher mImageCatcher;
+    private boolean mAnimationController;
 
     public static ToBeConfirmedClassesFragment newInstance() {
         return new ToBeConfirmedClassesFragment();
@@ -70,6 +73,14 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new SlideInRightAnimator());
+        setOnScrollAnimations();
+        mRecyclerView.setHasFixedSize(true);
+
+        if(Utils.getSmallestScreenWidth(getContext()) < 600){
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        }else {
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        }
 
         mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_scheduled_message));
@@ -157,6 +168,26 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
                 }
             }
         }
+
+    }
+
+    private void setOnScrollAnimations(){
+
+        final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                if (0 == recyclerView.computeVerticalScrollOffset() && !mAnimationController) {
+                    toolbar.animate().z(1).alpha(1.0f).start();
+                    mAnimationController = true;
+                } else if(mAnimationController){
+                    toolbar.animate().z(8).alpha(0.95f).start();
+                    mAnimationController = false;
+                }
+            }
+        });
 
     }
 

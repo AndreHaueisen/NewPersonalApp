@@ -1,33 +1,40 @@
 package com.andrehaueisen.fitx.client.adapters;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.utilities.Constants;
-import com.andrehaueisen.fitx.utilities.CustomButton;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.models.ClientFitClass;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.CustomButton;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.style.DoubleBounce;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -38,6 +45,9 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
     private Context mContext;
     private ArrayList<ClientFitClass> mClientFitClasses;
+    private DisplayMetrics mDisplayMetrics;
+    private DecelerateInterpolator mInterpolator;
+    private Resources mResources;
 
     public interface ClassCallback {
         String getPersonalKey();
@@ -46,6 +56,10 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
     public ClientClassesAdapter(Fragment fragment, ArrayList<ClientFitClass> clientFitClasses) {
         mContext = fragment.getContext();
         mClientFitClasses = clientFitClasses;
+        mDisplayMetrics = mContext.getResources().getDisplayMetrics();
+
+        mInterpolator = new DecelerateInterpolator();
+        mResources = mContext.getResources();
     }
 
     @Override
@@ -73,40 +87,34 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
         private CountDownTimer mDismissClassCountDownTimer;
         private AlertDialog mCancellationAlertDialog;
 
-        private CustomButton mStatusClassButton;
-        private TextView mPersonalNameTextView;
-        private TextView mTimeTextView;
-        private TextView mDateTextView;
-        private TextView mAddressTextView;
-        private TextView mLocationNameTextView;
-        private ImageButton mDirectionImageButton;
-        private ImageButton mDismissClassImageButton;
-        private ProgressBar mDismissProgressBar;
-        private CircleImageView mPersonalImageView;
+        @BindView(R.id.card_view) CardView mCardView;
+        @BindView(R.id.class_status_button) CustomButton mStatusClassButton;
+        @BindView(R.id.personal_name_text_view) TextView mPersonalNameTextView;
+        @BindView(R.id.class_time_text_view) TextView mTimeTextView;
+        @BindView(R.id.class_date_text_view) TextView mDateTextView;
+        @BindView(R.id.class_location_address_text_view) TextView mAddressTextView;
+        @BindView(R.id.class_location_name_text_view) TextView mLocationNameTextView;
+        @BindView(R.id.direction_image_button) ImageButton mDirectionImageButton;
+        @BindView(R.id.dismiss_class_image_button) ImageButton mDismissClassImageButton;
+        @BindView(R.id.spin_kit_dismiss) ProgressBar mDismissProgressBar;
+        @BindView(R.id.person_image_view) CircleImageView mPersonalImageView;
 
         public ClassHolder(View itemView) {
             super(itemView);
 
+            ButterKnife.bind(this, itemView);
+
             setupCountDownListeners();
             setupAlertDialogs();
 
-            mStatusClassButton = (CustomButton) itemView.findViewById(R.id.class_status_button);
-            mTimeTextView = (TextView) itemView.findViewById(R.id.class_time_text_view);
-            mDateTextView = (TextView) itemView.findViewById(R.id.class_date_text_view);
-            mPersonalNameTextView = (TextView) itemView.findViewById(R.id.personal_name_text_view);
-            mAddressTextView = (TextView) itemView.findViewById(R.id.class_location_address_text_view);
-            mLocationNameTextView = (TextView) itemView.findViewById(R.id.class_location_name_text_view);
-            mDirectionImageButton = (ImageButton) itemView.findViewById(R.id.direction_image_button);
-
-            mDismissClassImageButton = (ImageButton) itemView.findViewById(R.id.dismiss_class_image_button);
-            mDismissProgressBar = (ProgressBar) itemView.findViewById(R.id.spin_kit_dismiss);
             DoubleBounce doubleBounceDismiss = new DoubleBounce();
             mDismissProgressBar.setIndeterminateDrawable(doubleBounceDismiss);
 
-            mPersonalImageView = (CircleImageView) itemView.findViewById(R.id.person_image_view);
         }
 
         private void onBindClass(int position) {
+
+            setCardViewMargins();
 
             ClientFitClass clientFitClass = mClientFitClasses.get(position);
 
@@ -118,11 +126,26 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
             mStatusClassButton.setEnabled(false);
             mStatusClassButton.setElevation(0f);
+
+            ObjectAnimator animator;
+
             if (clientFitClass.isConfirmed()) {
                 mStatusClassButton.setText(mContext.getString(R.string.confirmed));
+                animator = ObjectAnimator.ofArgb(mCardView, "CardBackgroundColor",
+                        mResources.getColor(R.color.card_green), mResources.getColor(R.color.greenish), mResources.getColor(R.color.card_green))
+                        .setDuration(1500);
+                animator.setInterpolator(mInterpolator);
+                animator.setStartDelay(2000);
+                animator.start();
 
             } else {
                 mStatusClassButton.setText(mContext.getString(R.string.not_confirmed));
+                animator = ObjectAnimator.ofArgb(mCardView, "CardBackgroundColor",
+                        mResources.getColor(R.color.card_red), mResources.getColor(R.color.reddish), mResources.getColor(R.color.card_red))
+                        .setDuration(1500);
+                animator.setInterpolator(mInterpolator);
+                animator.setStartDelay(2000);
+                animator.start();
             }
 
             String classStartEnd = mContext.getString(R.string.class_start_end, classStartTime, classEndTime);
@@ -136,6 +159,34 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
             setPersonName(clientFitClass);
             setProfileImage(clientFitClass.getClassProfileImage());
+        }
+
+        private void setCardViewMargins(){
+            if(Utils.getSmallestScreenWidth(mContext) < 600) {
+                if (getLayoutPosition() == 0) {
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(64, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                } else {
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                }
+            }else{
+                if (getLayoutPosition() == 0 || getLayoutPosition() == 1) {
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(86, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                } else {
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                }
+            }
         }
 
         private void setupCountDownListeners(){
