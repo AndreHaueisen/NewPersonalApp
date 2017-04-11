@@ -53,7 +53,8 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
         mContext = fragment.getContext();
         mActivity = fragment.getActivity();
         mDisplayMetrics = mContext.getResources().getDisplayMetrics();
-        mPersonalFitClasses = personalFitClasses;
+        mPersonalFitClasses = new ArrayList<>();
+        mPersonalFitClasses.addAll(personalFitClasses);
         mInterpolator = new DecelerateInterpolator();
         mResources = mContext.getResources();
     }
@@ -65,6 +66,18 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
         View view = inflater.inflate(R.layout.item_personal_class, parent, false);
 
         return new ClassHolder(view);
+    }
+
+    public void removePersonalFitClass(int position){
+        mPersonalFitClasses.remove(position);
+    }
+
+    public void addPersonalFitClass(PersonalFitClass personalFitClass){
+        mPersonalFitClasses.add(personalFitClass);
+    }
+
+    public void changePersonalFitClass(int position, PersonalFitClass personalFitClass){
+        mPersonalFitClasses.set(position, personalFitClass);
     }
 
     @Override

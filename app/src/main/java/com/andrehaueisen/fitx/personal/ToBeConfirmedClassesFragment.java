@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
@@ -32,7 +33,7 @@ import com.jetradar.desertplaceholder.DesertPlaceholder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,9 +73,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setItemAnimator(new SlideInRightAnimator());
-        setOnScrollAnimations();
-        mRecyclerView.setHasFixedSize(true);
+        setRecyclerViewAnimations();
 
         if(Utils.getSmallestScreenWidth(getContext()) < 600){
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -120,11 +119,8 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         if (!personalFitClass.isConfirmed()) {
             mWaitingConfirmationPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mWaitingConfirmationPersonalFitClasses.size() - 1);
-            mAdapter.notifyItemInserted(mWaitingConfirmationPersonalFitClasses.size());
+            //mAdapter.notifyItemInserted(mWaitingConfirmationPersonalFitClasses.size());
         }
-
-        if(mWaitingConfirmationPersonalFitClasses.size() == 1)
-            changeStatus();
     }
 
     @Override
@@ -137,6 +133,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
             for (int i = 0; i < mWaitingConfirmationPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mWaitingConfirmationPersonalFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationPersonalFitClasses.set(i, personalFitClass);
+                    mAdapter.changePersonalFitClass(i, personalFitClass);
                     mAdapter.notifyItemChanged(i);
                     break;
                 }
@@ -145,6 +142,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         for (int i = 0; i < mWaitingConfirmationPersonalFitClasses.size(); i++) {
             if (personalFitClass.getClassKey().equals(mWaitingConfirmationPersonalFitClasses.get(i).getClassKey())) {
                 mWaitingConfirmationPersonalFitClasses.remove(i);
+                mAdapter.removePersonalFitClass(i);
                 mAdapter.notifyItemRemoved(i);
                 changeStatus();
                 break;
@@ -163,6 +161,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
             for (int i = 0; i < mWaitingConfirmationPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mWaitingConfirmationPersonalFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationPersonalFitClasses.remove(i);
+                    mAdapter.removePersonalFitClass(i);
                     mAdapter.notifyItemRemoved(i);
                     changeStatus();
                 }
@@ -171,7 +170,10 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
 
     }
 
-    private void setOnScrollAnimations(){
+    private void setRecyclerViewAnimations(){
+
+        final SlideInLeftAnimator animator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
+        mRecyclerView.setItemAnimator(animator);
 
         final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
@@ -253,7 +255,9 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            mAdapter.addPersonalFitClass(mWaitingConfirmationPersonalFitClasses.get(mPositionOnArray));
             mAdapter.notifyItemChanged(mPositionOnArray);
+            changeStatus();
         }
     }
 

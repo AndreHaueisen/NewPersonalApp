@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
@@ -34,7 +35,7 @@ import com.jetradar.desertplaceholder.DesertPlaceholder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 import static com.andrehaueisen.fitx.utilities.Utils.getSharedPreferences;
 
@@ -79,9 +80,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         View view = inflater.inflate(R.layout.fragment_to_be_confirmed_classes, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
-        mRecyclerView.setItemAnimator(new SlideInRightAnimator());
-        setOnScrollAnimations();
-        mRecyclerView.setHasFixedSize(true);
+        setRecyclerViewAnimations();
 
         if(Utils.getSmallestScreenWidth(getContext()) < 600){
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -135,10 +134,9 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
                     if (!clientFitClass.isConfirmed()) {
                         mWaitingConfirmationClientFitClasses.add(clientFitClass);
                         mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mWaitingConfirmationClientFitClasses.size() - 1);
-                        mAdapter.notifyItemInserted(mWaitingConfirmationClientFitClasses.size());
-                        mRecyclerView.smoothScrollToPosition(mWaitingConfirmationClientFitClasses.size() - 1);
+                        //mRecyclerView.smoothScrollToPosition(mWaitingConfirmationClientFitClasses.size() - 1);
                     }
-                    changeStatus();
+
                 }
             }
         }
@@ -155,6 +153,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
                 for (int i = 0; i < mWaitingConfirmationClientFitClasses.size(); i++) {
                     if (clientFitClass.getClassKey().equals(mWaitingConfirmationClientFitClasses.get(i).getClassKey())) {
                         mWaitingConfirmationClientFitClasses.set(i, clientFitClass);
+                        mAdapter.changeClientFitClass(i, clientFitClass);
                         mAdapter.notifyItemChanged(i);
                         break;
                     }
@@ -163,6 +162,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
                 for (int i = 0; i < mWaitingConfirmationClientFitClasses.size(); i++) {
                     if (clientFitClass.getClassKey().equals(mWaitingConfirmationClientFitClasses.get(i).getClassKey())) {
                         mWaitingConfirmationClientFitClasses.remove(i);
+
                         mAdapter.notifyItemRemoved(i);
                         changeStatus();
                         break;
@@ -182,6 +182,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
             for (int i = 0; i < mWaitingConfirmationClientFitClasses.size(); i++) {
                 if (clientFitClass.getClassKey().equals(mWaitingConfirmationClientFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationClientFitClasses.remove(i);
+                    mAdapter.removeClientFitClass(i);
                     mAdapter.notifyItemRemoved(i);
                     changeStatus();
                     break;
@@ -191,7 +192,10 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
     }
 
-    private void setOnScrollAnimations(){
+    private void setRecyclerViewAnimations(){
+
+        final SlideInLeftAnimator animator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
+        mRecyclerView.setItemAnimator(animator);
 
         final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         final FloatingActionButton fab = ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab));
@@ -301,7 +305,9 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mAdapter.notifyItemChanged(mPositionOnArray);
+            mAdapter.addClientFitClass(mWaitingConfirmationClientFitClasses.get(mPositionOnArray));
+            mAdapter.notifyItemInserted(mPositionOnArray);
+            changeStatus();
         }
     }
 

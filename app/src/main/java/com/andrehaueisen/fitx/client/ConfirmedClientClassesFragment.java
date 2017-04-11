@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.adapters.ClientClassesAdapter;
@@ -75,8 +76,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         mRecyclerView.setItemAnimator(new SlideInLeftAnimator());
-        setOnScrollAnimations();
-        mRecyclerView.setHasFixedSize(true);
+        setRecyclerViewAnimations();
 
         if(Utils.getSmallestScreenWidth(getContext()) < 600){
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -129,8 +129,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
                     if (clientFitClass.isConfirmed()) {
                         mConfirmedClientFitClasses.add(clientFitClass);
                         mImageCatcher.getPersonalProfilePicture(clientFitClass.getPersonalKey(), mConfirmedClientFitClasses.size() - 1);
-                        mAdapter.notifyItemInserted(mConfirmedClientFitClasses.size());
-                        mRecyclerView.smoothScrollToPosition(mConfirmedClientFitClasses.size() - 1);
+                        //mRecyclerView.smoothScrollToPosition(mConfirmedClientFitClasses.size() - 1);
                     }
 
                     changeStatus();
@@ -158,9 +157,11 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
                 if (isClassOnAdapter) {
                     mConfirmedClientFitClasses.set(i, clientFitClass);
+                    mAdapter.changeClientFitClass(i, clientFitClass);
                     mAdapter.notifyItemChanged(i);
                 } else {
                     mConfirmedClientFitClasses.add(clientFitClass);
+                    mAdapter.addClientFitClass(clientFitClass);
                     mAdapter.notifyItemInserted(mConfirmedClientFitClasses.size());
                     changeStatus();
                 }
@@ -170,6 +171,7 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
                 for (int i = 0; i < mConfirmedClientFitClasses.size(); i++) {
                     if (clientFitClass.getClassKey().equals(mConfirmedClientFitClasses.get(i).getClassKey())) {
                         mConfirmedClientFitClasses.remove(i);
+                        mAdapter.removeClientFitClass(i);
                         mAdapter.notifyItemRemoved(i);
                         changeStatus();
                         break;
@@ -179,7 +181,29 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
         }
     }
 
-    private void setOnScrollAnimations(){
+    @Override
+    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+        ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
+
+        if (clientFitClass.isConfirmed()) {
+            for (int i = 0; i < mConfirmedClientFitClasses.size(); i++) {
+                if (clientFitClass.getClassKey().equals(mConfirmedClientFitClasses.get(i).getClassKey())) {
+                    mConfirmedClientFitClasses.remove(i);
+                    mAdapter.removeClientFitClass(i);
+                    mAdapter.notifyItemRemoved(i);
+                    changeStatus();
+                    break;
+                }
+            }
+        }
+
+    }
+
+    private void setRecyclerViewAnimations(){
+
+        final SlideInLeftAnimator animator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
+        mRecyclerView.setItemAnimator(animator);
 
         final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         final FloatingActionButton fab = ((FloatingActionButton) getActivity().findViewById(R.id.search_personal_fab));
@@ -207,24 +231,6 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
                 }
             }
         });
-
-    }
-
-    @Override
-    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-        ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
-
-        if (clientFitClass.isConfirmed()) {
-            for (int i = 0; i < mConfirmedClientFitClasses.size(); i++) {
-                if (clientFitClass.getClassKey().equals(mConfirmedClientFitClasses.get(i).getClassKey())) {
-                    mConfirmedClientFitClasses.remove(i);
-                    mAdapter.notifyItemRemoved(i);
-                    changeStatus();
-                    break;
-                }
-            }
-        }
 
     }
 
@@ -275,9 +281,9 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    public void onDestroy() {
         mDatabaseReference.removeEventListener(this);
+        super.onDestroy();
     }
 
     private class LoadImageTask extends AsyncTask<byte[], Void, Void> {
@@ -307,7 +313,9 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mAdapter.notifyItemChanged(mPositionOnArray);
+            mAdapter.addClientFitClass(mConfirmedClientFitClasses.get(mPositionOnArray));
+            mAdapter.notifyItemInserted(mPositionOnArray);
+            changeStatus();
         }
     }
 

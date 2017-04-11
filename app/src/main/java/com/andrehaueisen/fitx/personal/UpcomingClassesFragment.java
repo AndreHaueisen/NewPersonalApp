@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.andrehaueisen.fitx.R;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
@@ -31,7 +32,7 @@ import com.jetradar.desertplaceholder.DesertPlaceholder;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import jp.wasabeef.recyclerview.animators.SlideInRightAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 /**
  * Created by andre on 9/8/2016.
@@ -73,9 +74,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setItemAnimator(new SlideInRightAnimator());
-        setOnScrollAnimations();
-        mRecyclerView.setHasFixedSize(true);
+        setRecyclerViewAnimations();
 
         if(Utils.getSmallestScreenWidth(getContext()) < 600){
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -123,12 +122,8 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         if (personalFitClass.isConfirmed()) {
             mConfirmedPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mConfirmedPersonalFitClasses.size() - 1);
-            mAdapter.notifyItemInserted(mConfirmedPersonalFitClasses.size());
-            mRecyclerView.smoothScrollToPosition(mConfirmedPersonalFitClasses.size() - 1);
+            //mRecyclerView.smoothScrollToPosition(mConfirmedPersonalFitClasses.size() - 1);
         }
-
-        if(mConfirmedPersonalFitClasses != null && mConfirmedPersonalFitClasses.size() == 1)
-            changeStatus();
     }
 
     @Override
@@ -148,9 +143,11 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
             if (isClassOnAdapter) {
                 mConfirmedPersonalFitClasses.set(i, personalFitClass);
+                mAdapter.changePersonalFitClass(i, personalFitClass);
                 mAdapter.notifyItemChanged(i);
             } else {
                 mConfirmedPersonalFitClasses.add(personalFitClass);
+                mAdapter.addPersonalFitClass(personalFitClass);
                 mAdapter.notifyItemInserted(mConfirmedPersonalFitClasses.size());
                 changeStatus();
             }
@@ -160,6 +157,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
             for (int i = 0; i < mConfirmedPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mConfirmedPersonalFitClasses.get(i).getClassKey())) {
                     mConfirmedPersonalFitClasses.remove(i);
+                    mAdapter.removePersonalFitClass(i);
                     mAdapter.notifyItemRemoved(i);
                     changeStatus();
                     break;
@@ -178,6 +176,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
             for (int i = 0; i < mConfirmedPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mConfirmedPersonalFitClasses.get(i).getClassKey())) {
                     mConfirmedPersonalFitClasses.remove(i);
+                    mAdapter.removePersonalFitClass(i);
                     mAdapter.notifyItemRemoved(i);
                     changeStatus();
                 }
@@ -186,7 +185,11 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
     }
 
-    private void setOnScrollAnimations(){
+    private void setRecyclerViewAnimations(){
+
+        final SlideInLeftAnimator animator = new SlideInLeftAnimator(new AccelerateDecelerateInterpolator());
+        mRecyclerView.setItemAnimator(animator);
+
         final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -267,7 +270,9 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            mAdapter.addPersonalFitClass(mConfirmedPersonalFitClasses.get(mPositionOnArray));
             mAdapter.notifyItemChanged(mPositionOnArray);
+            changeStatus();
         }
     }
 

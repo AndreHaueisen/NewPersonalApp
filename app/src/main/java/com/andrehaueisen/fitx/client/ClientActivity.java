@@ -137,6 +137,7 @@ public class ClientActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.hide(toBeConfirmedClientClassesFragment);
                 transaction.show(confirmedClientClassesFragment);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction.commit();
 
             } else {
@@ -150,6 +151,7 @@ public class ClientActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.hide(confirmedClientClassesFragment);
                 transaction.show(toBeConfirmedClientClassesFragment);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction.commit();
 
             }

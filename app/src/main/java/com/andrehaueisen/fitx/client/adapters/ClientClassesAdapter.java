@@ -55,7 +55,8 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
     public ClientClassesAdapter(Fragment fragment, ArrayList<ClientFitClass> clientFitClasses) {
         mContext = fragment.getContext();
-        mClientFitClasses = clientFitClasses;
+        mClientFitClasses =  new ArrayList<>();
+        mClientFitClasses.addAll(clientFitClasses);
         mDisplayMetrics = mContext.getResources().getDisplayMetrics();
 
         mInterpolator = new DecelerateInterpolator();
@@ -75,6 +76,18 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
     @Override
     public void onBindViewHolder(ClientClassesAdapter.ClassHolder holder, int position) {
         holder.onBindClass(position);
+    }
+
+    public void removeClientFitClass(int position){
+        mClientFitClasses.remove(position);
+    }
+
+    public void addClientFitClass(ClientFitClass clientFitClass){
+        mClientFitClasses.add(clientFitClass);
+    }
+
+    public void changeClientFitClass(int position, ClientFitClass clientFitClass){
+        mClientFitClasses.set(position, clientFitClass);
     }
 
     @Override
@@ -135,7 +148,7 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
                         mResources.getColor(R.color.card_green), mResources.getColor(R.color.greenish), mResources.getColor(R.color.card_green))
                         .setDuration(1500);
                 animator.setInterpolator(mInterpolator);
-                animator.setStartDelay(2000);
+                animator.setStartDelay(1000);
                 animator.start();
 
             } else {
@@ -144,7 +157,7 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
                         mResources.getColor(R.color.card_red), mResources.getColor(R.color.reddish), mResources.getColor(R.color.card_red))
                         .setDuration(1500);
                 animator.setInterpolator(mInterpolator);
-                animator.setStartDelay(2000);
+                animator.setStartDelay(1000);
                 animator.start();
             }
 

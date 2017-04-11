@@ -118,6 +118,7 @@ public class PersonalActivity extends AppCompatActivity {
                 }
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.hide(toBeConfirmedClassesFragment);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction.show(upcomingClassesFragment);
                 transaction.commit();
 
@@ -131,6 +132,7 @@ public class PersonalActivity extends AppCompatActivity {
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.hide(upcomingClassesFragment);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 transaction.show(toBeConfirmedClassesFragment);
                 transaction.commit();
             }
