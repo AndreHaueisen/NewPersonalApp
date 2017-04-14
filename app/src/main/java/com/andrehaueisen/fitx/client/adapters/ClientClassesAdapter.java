@@ -48,6 +48,7 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
     private DisplayMetrics mDisplayMetrics;
     private DecelerateInterpolator mInterpolator;
     private Resources mResources;
+    private float mSmallestScreenWidth;
 
     public interface ClassCallback {
         String getPersonalKey();
@@ -55,12 +56,13 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
     public ClientClassesAdapter(Fragment fragment, ArrayList<ClientFitClass> clientFitClasses) {
         mContext = fragment.getContext();
-        mClientFitClasses =  new ArrayList<>();
+        mClientFitClasses = new ArrayList<>();
         mClientFitClasses.addAll(clientFitClasses);
         mDisplayMetrics = mContext.getResources().getDisplayMetrics();
 
         mInterpolator = new DecelerateInterpolator();
         mResources = mContext.getResources();
+        mSmallestScreenWidth = Utils.getSmallestScreenWidth(mContext);
     }
 
     @Override
@@ -78,15 +80,15 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
         holder.onBindClass(position);
     }
 
-    public void removeClientFitClass(int position){
+    public void removeClientFitClass(int position) {
         mClientFitClasses.remove(position);
     }
 
-    public void addClientFitClass(ClientFitClass clientFitClass){
+    public void addClientFitClass(ClientFitClass clientFitClass) {
         mClientFitClasses.add(clientFitClass);
     }
 
-    public void changeClientFitClass(int position, ClientFitClass clientFitClass){
+    public void changeClientFitClass(int position, ClientFitClass clientFitClass) {
         mClientFitClasses.set(position, clientFitClass);
     }
 
@@ -100,17 +102,28 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
         private CountDownTimer mDismissClassCountDownTimer;
         private AlertDialog mCancellationAlertDialog;
 
-        @BindView(R.id.card_view) CardView mCardView;
-        @BindView(R.id.class_status_button) CustomButton mStatusClassButton;
-        @BindView(R.id.personal_name_text_view) TextView mPersonalNameTextView;
-        @BindView(R.id.class_time_text_view) TextView mTimeTextView;
-        @BindView(R.id.class_date_text_view) TextView mDateTextView;
-        @BindView(R.id.class_location_address_text_view) TextView mAddressTextView;
-        @BindView(R.id.class_location_name_text_view) TextView mLocationNameTextView;
-        @BindView(R.id.direction_image_button) ImageButton mDirectionImageButton;
-        @BindView(R.id.dismiss_class_image_button) ImageButton mDismissClassImageButton;
-        @BindView(R.id.spin_kit_dismiss) ProgressBar mDismissProgressBar;
-        @BindView(R.id.person_image_view) CircleImageView mPersonalImageView;
+        @BindView(R.id.card_view)
+        CardView mCardView;
+        @BindView(R.id.class_status_button)
+        CustomButton mStatusClassButton;
+        @BindView(R.id.personal_name_text_view)
+        TextView mPersonalNameTextView;
+        @BindView(R.id.class_time_text_view)
+        TextView mTimeTextView;
+        @BindView(R.id.class_date_text_view)
+        TextView mDateTextView;
+        @BindView(R.id.class_location_address_text_view)
+        TextView mAddressTextView;
+        @BindView(R.id.class_location_name_text_view)
+        TextView mLocationNameTextView;
+        @BindView(R.id.direction_image_button)
+        ImageButton mDirectionImageButton;
+        @BindView(R.id.dismiss_class_image_button)
+        ImageButton mDismissClassImageButton;
+        @BindView(R.id.spin_kit_dismiss)
+        ProgressBar mDismissProgressBar;
+        @BindView(R.id.person_image_view)
+        CircleImageView mPersonalImageView;
 
         public ClassHolder(View itemView) {
             super(itemView);
@@ -174,35 +187,25 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
             setProfileImage(clientFitClass.getClassProfileImage());
         }
 
-        private void setCardViewMargins(){
-            if(Utils.getSmallestScreenWidth(mContext) < 600) {
-                if (getLayoutPosition() == 0) {
-                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(64, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                } else {
-                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                }
-            }else{
-                if (getLayoutPosition() == 0 || getLayoutPosition() == 1) {
-                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(86, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                } else {
-                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                }
+        private void setCardViewMargins() {
+            if (mSmallestScreenWidth < 600) {
+                Utils.setMargins(mCardView,
+                        Utils.convertDpIntoPx(16, mDisplayMetrics),
+                        Utils.convertDpIntoPx(64, mDisplayMetrics),
+                        Utils.convertDpIntoPx(16, mDisplayMetrics),
+                        Utils.convertDpIntoPx(8, mDisplayMetrics));
+
+            } else {
+                Utils.setMargins(mCardView,
+                        Utils.convertDpIntoPx(16, mDisplayMetrics),
+                        Utils.convertDpIntoPx(86, mDisplayMetrics),
+                        Utils.convertDpIntoPx(16, mDisplayMetrics),
+                        Utils.convertDpIntoPx(8, mDisplayMetrics));
+
             }
         }
 
-        private void setupCountDownListeners(){
+        private void setupCountDownListeners() {
 
             mDismissClassCountDownTimer = new CountDownTimer(5000, 1000) {
                 @Override
@@ -221,7 +224,8 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
             };
 
         }
-        private void setupAlertDialogs(){
+
+        private void setupAlertDialogs() {
             mCancellationAlertDialog = new AlertDialog.Builder(mContext)
                     .setCancelable(false)
                     .setIcon(R.drawable.ic_penalty_warning_48dp)
@@ -230,7 +234,7 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
                     .create();
         }
 
-        private void setPersonName(ClientFitClass clientFitClass){
+        private void setPersonName(ClientFitClass clientFitClass) {
             mPersonalNameTextView.setText(clientFitClass.getPersonalName());
         }
 
@@ -252,13 +256,13 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
                 int action = event.getAction();
 
-                if(action == MotionEvent.ACTION_DOWN){
+                if (action == MotionEvent.ACTION_DOWN) {
                     mDismissProgressBar.setVisibility(View.VISIBLE);
                     mCancellationAlertDialog.show();
                     mDismissClassCountDownTimer.start();
                     return true;
                 }
-                if(action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL){
+                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
                     mDismissProgressBar.setVisibility(View.GONE);
                     mCancellationAlertDialog.dismiss();
                     mDismissClassCountDownTimer.cancel();
@@ -272,7 +276,7 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
         private void setProfileImage(Bitmap personProfileImage) {
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if(personProfileImage != null) {
+            if (personProfileImage != null) {
 
                 personProfileImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
 

@@ -347,6 +347,10 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
         editText.setTextSize(16.0f);
         editText.setHintTextColor(getResources().getColor(R.color.colorPrimaryDark));
 
+        View rootView = autocompleteFragment.getView();
+        rootView.setBackground(getResources().getDrawable(R.drawable.shape_top_line_open_rectangle));
+        rootView.setElevation(4);
+
         ImageButton imageButton = ((ImageButton)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_button));
         imageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_dark_24dp));
 

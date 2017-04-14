@@ -47,6 +47,7 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
     private DisplayMetrics mDisplayMetrics;
     private DecelerateInterpolator mInterpolator;
     private Resources mResources;
+    private float mSmallestScreenWidth;
 
     public PersonalClassesAdapter(Fragment fragment, ArrayList<PersonalFitClass> personalFitClasses) {
 
@@ -57,6 +58,7 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
         mPersonalFitClasses.addAll(personalFitClasses);
         mInterpolator = new DecelerateInterpolator();
         mResources = mContext.getResources();
+        mSmallestScreenWidth = Utils.getSmallestScreenWidth(mContext);
     }
 
     @Override
@@ -192,22 +194,21 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
         }
 
         private void setCardViewMargins(){
-            if(Utils.getSmallestScreenWidth(mContext) < 600) {
-                if (getLayoutPosition() == 0) {
+            if(mSmallestScreenWidth < 600) {
+                if (getAdapterPosition() == 0) {
                     Utils.setMargins(mCardView,
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(64, mDisplayMetrics),
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(8, mDisplayMetrics));
                 } else {
-                    Utils.setMargins(mCardView,
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(8, mDisplayMetrics),
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(8, mDisplayMetrics));
                 }
             }else{
-                if (getLayoutPosition() == 0 || getLayoutPosition() == 1) {
+                if (getAdapterPosition() == 0 || getAdapterPosition() == 1) {
                     Utils.setMargins(mCardView,
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(86, mDisplayMetrics),

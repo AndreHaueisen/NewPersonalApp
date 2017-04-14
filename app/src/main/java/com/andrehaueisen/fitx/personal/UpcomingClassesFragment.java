@@ -20,6 +20,7 @@ import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.CustomTextView;
 import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
@@ -27,7 +28,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jetradar.desertplaceholder.DesertPlaceholder;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -43,7 +43,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
     private static final String TAG = UpcomingClassesFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
-    private DesertPlaceholder mNoClassesPlaceHolder;
+    private CustomTextView mNoClassesPlaceHolder;
     private DatabaseReference mDatabaseReference;
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mConfirmedPersonalFitClasses;
@@ -82,8 +82,8 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
             mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
 
-        mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_place_holder);
-        mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_confirmed_message));
+        mNoClassesPlaceHolder = (CustomTextView) view.findViewById(R.id.no_class_place_holder);
+        mNoClassesPlaceHolder.setText(getString(R.string.no_class_confirmed_message));
 
         mImageCatcher = new FirebaseProfileImageCatcher(this);
 
@@ -119,7 +119,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (personalFitClass.isConfirmed()) {
+        if (getActivity() != null && personalFitClass.isConfirmed()) {
             mConfirmedPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mConfirmedPersonalFitClasses.size() - 1);
             //mRecyclerView.smoothScrollToPosition(mConfirmedPersonalFitClasses.size() - 1);
@@ -131,7 +131,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (personalFitClass.isConfirmed()) {
+        if (getActivity() != null && personalFitClass.isConfirmed()) {
             boolean isClassOnAdapter = false;
             int i;
             for (i = 0; i < mConfirmedPersonalFitClasses.size(); i++) {
@@ -172,7 +172,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (personalFitClass.isConfirmed()) {
+        if (getActivity() != null && personalFitClass.isConfirmed()) {
             for (int i = 0; i < mConfirmedPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mConfirmedPersonalFitClasses.get(i).getClassKey())) {
                     mConfirmedPersonalFitClasses.remove(i);

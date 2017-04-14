@@ -23,6 +23,7 @@ import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.ClassReceipt;
 import com.andrehaueisen.fitx.models.ClientFitClass;
 import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.CustomTextView;
 import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
@@ -30,7 +31,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jetradar.desertplaceholder.DesertPlaceholder;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -49,7 +49,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     private static final String TAG = ToBeConfirmedClientClassesFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
-    private DesertPlaceholder mNoClassesPlaceHolder;
+    private CustomTextView mNoClassesPlaceHolder;
     private DatabaseReference mDatabaseReference;
     private ArrayList<ClientFitClass> mWaitingConfirmationClientFitClasses;
     private ClientClassesAdapter mAdapter;
@@ -71,6 +71,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         String clientKey = getSharedPreferences(getContext()).getString(Constants.SHARED_PREF_CLIENT_EMAIL_UNIQUE_KEY, null);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child(Constants.FIREBASE_LOCATION_CLIENT_CLASSES).child(clientKey);
         mDatabaseReference.addChildEventListener(this);
+        mDatabaseReference.keepSynced(true);
     }
 
     @Override
@@ -89,8 +90,8 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
         }
 
 
-        mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
-        mNoClassesPlaceHolder.setMessage(getString(R.string.client_no_class_scheduled_message));
+        mNoClassesPlaceHolder = (CustomTextView) view.findViewById(R.id.no_class_confirmed_place_holder);
+        mNoClassesPlaceHolder.setText(getString(R.string.client_no_class_scheduled_message));
         mImageCatcher = new FirebaseProfileImageCatcher(this);
 
         if(savedInstanceState != null){
@@ -119,7 +120,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
     @Override
     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-        if (dataSnapshot.exists()) {
+        if (getActivity() != null && dataSnapshot.exists()) {
 
             ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
             mPersonalKey = clientFitClass.getPersonalKey();
@@ -145,7 +146,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     @Override
     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-        if (dataSnapshot.exists()) {
+        if (getActivity() != null && dataSnapshot.exists()) {
 
             ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
 
@@ -178,7 +179,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
         ClientFitClass clientFitClass = dataSnapshot.getValue(ClientFitClass.class);
 
-        if(!clientFitClass.isConfirmed()) {
+        if(getActivity() != null && !clientFitClass.isConfirmed()) {
             for (int i = 0; i < mWaitingConfirmationClientFitClasses.size(); i++) {
                 if (clientFitClass.getClassKey().equals(mWaitingConfirmationClientFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationClientFitClasses.remove(i);
@@ -274,9 +275,9 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     }
 
     @Override
-    public void onStop() {
+    public void onDestroy() {
         mDatabaseReference.removeEventListener(this);
-        super.onStop();
+        super.onDestroy();
     }
 
     private class LoadImageTask extends AsyncTask<byte[], Void, Void> {

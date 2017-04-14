@@ -51,8 +51,8 @@
     <string name="confirmation_title">You are bout to confirm this class!</string>
     <string name="confirmation_message">Congratulations on your new class! Hold for %1$d seconds to tell the client you are gonna show up</string>
     <string name="class_confirmation_confirmation">This class was confirmed!</string>
-    <string name="no_class_confirmed_message">No class confirmed yet</string>
-    <string name="no_class_scheduled_message">No one scheduled a class with you yet</string>
+    <string name="no_class_confirmed_message">Classes you confirm will appear here</string>
+    <string name="no_class_scheduled_message">When someone schedules a class it will appear here for you to confirm</string>
 
     <!--Personal ProfessionalProfile activity strings -->
     <string name="professional_profile_toolbar_title">Configure public profile</string>
@@ -243,6 +243,7 @@
     <string name="search_personal">Search Personal</string>
     <string name="smart_search">Smart search</string>
     <string name="specific_search">Specific search</string>
+    <string name="personal_search">Personal Search</string>
 
     <!-- Client ReviewPersonalActivity strings -->
     <string name="review_past_personals">Review Personals</string>
@@ -272,8 +273,8 @@
     <!-- ClientUpcomingClasses strings-->
     <string name="cancellation_warning_message">Are you sure you want to cancel? Hold for %1$d seconds to confirm cancellation</string>
     <string name="class_cancellation_confirmation">Class canceled. Personal notified.</string>
-    <string name="client_no_class_confirmed_message">The personal has not confirmed your class yet. They were instructed to do so asap. Don\'t worry</string>
-    <string name="client_no_class_scheduled_message">Unconfirmed classes you schedule will appear here</string>
+    <string name="client_no_class_confirmed_message">When you schedule a class and it gets confirmed, it will appear here</string>
+    <string name="client_no_class_scheduled_message">Try searching for a personal trainer clicking at the yellow button</string>
 
     <!-- DayAgendaFragment strings-->
     <string name="no_class_available">No classes available at this date</string>

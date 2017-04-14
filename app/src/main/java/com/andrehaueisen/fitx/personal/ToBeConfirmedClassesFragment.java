@@ -20,6 +20,7 @@ import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.PersonalFitClass;
 import com.andrehaueisen.fitx.personal.adapters.PersonalClassesAdapter;
 import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.CustomTextView;
 import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
@@ -28,7 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.jetradar.desertplaceholder.DesertPlaceholder;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -43,7 +43,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
     private static final String TAG = ToBeConfirmedClassesFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
-    private DesertPlaceholder mNoClassesPlaceHolder;
+    private CustomTextView mNoClassesPlaceHolder;
     private DatabaseReference mDatabaseReference;
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mWaitingConfirmationPersonalFitClasses;
@@ -81,8 +81,8 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
             mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         }
 
-        mNoClassesPlaceHolder = (DesertPlaceholder) view.findViewById(R.id.no_class_confirmed_place_holder);
-        mNoClassesPlaceHolder.setMessage(getString(R.string.no_class_scheduled_message));
+        mNoClassesPlaceHolder = (CustomTextView) view.findViewById(R.id.no_class_confirmed_place_holder);
+        mNoClassesPlaceHolder.setText(getString(R.string.no_class_scheduled_message));
 
         mImageCatcher = new FirebaseProfileImageCatcher(this);
 
@@ -116,7 +116,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
 
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (!personalFitClass.isConfirmed()) {
+        if (getActivity() != null && !personalFitClass.isConfirmed()) {
             mWaitingConfirmationPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mWaitingConfirmationPersonalFitClasses.size() - 1);
             //mAdapter.notifyItemInserted(mWaitingConfirmationPersonalFitClasses.size());
@@ -129,7 +129,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         //TODO check
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (!personalFitClass.isConfirmed()) {
+        if (getActivity() != null && !personalFitClass.isConfirmed()) {
             for (int i = 0; i < mWaitingConfirmationPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mWaitingConfirmationPersonalFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationPersonalFitClasses.set(i, personalFitClass);
@@ -157,7 +157,7 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
 
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
-        if (!personalFitClass.isConfirmed()) {
+        if (getActivity() != null && !personalFitClass.isConfirmed()) {
             for (int i = 0; i < mWaitingConfirmationPersonalFitClasses.size(); i++) {
                 if (personalFitClass.getClassKey().equals(mWaitingConfirmationPersonalFitClasses.get(i).getClassKey())) {
                     mWaitingConfirmationPersonalFitClasses.remove(i);

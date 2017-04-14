@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_confirm_changes_menu_button"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_check_dark_24dp"
+        android:icon="@drawable/ic_check_24dp"
         android:title="@string/confirm_changes_menu_button_title"/>
 
 

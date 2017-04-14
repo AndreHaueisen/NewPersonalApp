@@ -12,6 +12,8 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/personal_reviews_toolbar"
+            android:background="@color/colorPrimary"
+            android:elevation="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -19,6 +21,7 @@
                 style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
                 android:text="@string/your_reviews"/>
 
         </android.support.v7.widget.Toolbar>

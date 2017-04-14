@@ -9,10 +9,15 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.jetradar.desertplaceholder.DesertPlaceholder
+    <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/no_class_place_holder"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/upcoming_classes_recycler_view"
