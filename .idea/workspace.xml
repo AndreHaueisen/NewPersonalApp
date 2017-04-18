@@ -11,7 +11,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="227914d2-c3b9-4529-8569-1ee7fffab607" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/andrehaueisen/fitx/personal/drawer/MapActivity.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PersonalApp.iws" />
@@ -4371,7 +4370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1492547616473</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="first final version for udacity review&#10;removed: unused file&#10;&#10;&#10;">
+      <created>1492547652310</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1492547652310</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -4438,7 +4444,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="change: trying to fix backend - 5&#10;&#10;&#10;&#10;" />
     <MESSAGE value="change: trying to fix backend - 6&#10;&#10;&#10;&#10;" />
     <MESSAGE value="change: trying to fix backend - 7&#10;&#10;&#10;&#10;" />
     <MESSAGE value="change: trying to fix backend - 8&#10;&#10;&#10;&#10;" />
@@ -4463,7 +4468,8 @@
     <MESSAGE value="first final version for udacity review&#10;change: design changes&#10;change: readme file&#10;&#10;" />
     <MESSAGE value="first final version for udacity review&#10;add: content descriptions&#10;&#10;&#10;" />
     <MESSAGE value="first final version for udacity review&#10;fix: login for first time bug&#10;removed: TODOS&#10;&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="first final version for udacity review&#10;fix: login for first time bug&#10;removed: TODOS&#10;&#10;&#10;" />
+    <MESSAGE value="first final version for udacity review&#10;removed: unused file&#10;&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="first final version for udacity review&#10;removed: unused file&#10;&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
