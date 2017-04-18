@@ -17,9 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
-import com.andrehaueisen.fitx.utilities.Utils;
 import com.andrehaueisen.fitx.client.ClientActivity;
 import com.andrehaueisen.fitx.client.firebase.ClientDatabase;
 import com.andrehaueisen.fitx.models.Client;
@@ -28,6 +26,8 @@ import com.andrehaueisen.fitx.models.UndefinedUser;
 import com.andrehaueisen.fitx.models.UserMappings;
 import com.andrehaueisen.fitx.personal.PersonalActivity;
 import com.andrehaueisen.fitx.personal.firebase.PersonalDatabase;
+import com.andrehaueisen.fitx.utilities.Constants;
+import com.andrehaueisen.fitx.utilities.Utils;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -46,10 +46,14 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     private static final String TAG = RegisterClientOrPersonalActivity.class.getSimpleName();
 
-    @BindView(R.id.name_textInputLayout) TextInputLayout mNameTextField;
-    @BindView(R.id.cref_name_textInputLayout) TextInputLayout mCREFNameTextField;
-    @BindView(R.id.cref_textInputLayout) TextInputLayout mCREFTextField;
-    @BindView(R.id.state_chooser_wheel) WheelView mStateChooserWheel;
+    @BindView(R.id.name_textInputLayout)
+    TextInputLayout mNameTextField;
+    @BindView(R.id.cref_name_textInputLayout)
+    TextInputLayout mCREFNameTextField;
+    @BindView(R.id.cref_textInputLayout)
+    TextInputLayout mCREFTextField;
+    @BindView(R.id.state_chooser_wheel)
+    WheelView mStateChooserWheel;
 
     private String mDisplayName;
     private String mEmail;
@@ -96,7 +100,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         isPersonalCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if(checked){
+                if (checked) {
                     mCREFNameTextField.setVisibility(View.VISIBLE);
                     mCREFTextField.setVisibility(View.VISIBLE);
                     mStateChooserWheel.setVisibility(View.VISIBLE);
@@ -114,9 +118,9 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     }
 
-    private void configureWheel(){
+    private void configureWheel() {
         final List<String> state_names = asList(getResources().getStringArray(R.array.states_array));
-        mStateChooserWheel.setWheelAdapter(new BaseWheelAdapter(){
+        mStateChooserWheel.setWheelAdapter(new BaseWheelAdapter() {
             @Override
             public View bindView(int position, View convertView, ViewGroup parent) {
                 View view = getLayoutInflater().inflate(R.layout.item_simple_name, parent, false);
@@ -140,7 +144,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         wheelViewStyle.backgroundColor = getResources().getColor(R.color.transparent);
         wheelViewStyle.textColor = getResources().getColor(R.color.black);
         wheelViewStyle.holoBorderColor = getResources().getColor(R.color.colorAccent);
-        mStateChooserWheel.setStyle( wheelViewStyle );
+        mStateChooserWheel.setStyle(wheelViewStyle);
 
     }
 
@@ -157,7 +161,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable editable) {
             String name = editable.toString();
-            if(mNameTextField.getEditText().getText().toString().equals("")){
+            if (mNameTextField.getEditText().getText().toString().equals("")) {
                 mNameTextField.setError(getString(R.string.invalid_name));
             } else {
                 mNameTextField.setErrorEnabled(false);
@@ -215,43 +219,15 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     public void saveData(View view) {
 
-        if(mIsPersonal){
-
-            if (isPersonalDataOk()) {
-                PersonalDatabase.savePersonalToDatabase(this, mPersonalTrainer);
-                saveUserMapping(true);
-
-                if(mPhotoPath != null){
-                    new ProfileImageTask().execute();
-                    Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, mPhotoPath).commit();
-                }
-
-                Intent intent = new Intent(this, PersonalActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        if (mIsPersonal) {
+            checkPersonalDataOk();
 
         } else {
-
-            if(isClientDataOk()){
-
-                if(mPhotoPath != null) {
-                    new ProfileImageTask().execute();
-                    Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, mPhotoPath).commit();
-                }
-
-                ClientDatabase.saveClientToDatabase(this, mClient);
-                saveUserMapping(false);
-
-                Intent intent = new Intent(this, ClientActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
+            checkClientDataOk();
         }
     }
 
-    private boolean isPersonalDataOk(){
+    private void checkPersonalDataOk() {
 
         boolean isAllDataSet = true;
         mPersonalTrainer.setName(mDisplayName);
@@ -280,27 +256,21 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         if (isAllDataSet && !cref.isEmpty() && (mHasCREFChanged || mHasCREFNameChanged)) {
             new RegisterClientOrPersonalActivity.ValidateCREF(mCrefName, mSelectedState, cref).execute();
         }
-
-        return isAllDataSet;
     }
 
-    private boolean isClientDataOk(){
-
-        boolean isAllDataSet = true;
+    private void checkClientDataOk() {
 
         mClient.setName(mDisplayName);
         mClient.setEmail(mEmail);
 
-        if(mClient.getName() == null || mNameTextField.isErrorEnabled()
-                || mNameTextField.getEditText().getText().toString().equals("")){
+        if (mClient.getName() == null || mNameTextField.isErrorEnabled()
+                || mNameTextField.getEditText().getText().toString().equals("")) {
             Utils.generateInfoToast(this, getString(R.string.invalid_name)).show();
-            isAllDataSet = false;
-        }
 
-        return isAllDataSet;
+        }
     }
 
-    private void saveUserMapping(boolean isPersonal){
+    private void saveUserMapping(boolean isPersonal) {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -309,11 +279,11 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     }
 
-    private class ProfileImageTask extends AsyncTask<Void, Void, Void>{
+    private class ProfileImageTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             Bitmap profileImage;
-            if(mIsPersonal){
+            if (mIsPersonal) {
                 try {
                     profileImage = Glide.with(RegisterClientOrPersonalActivity.this).load(mPhotoPath).asBitmap().into(100, 100).get();
                     PersonalDatabase.saveProfilePicsToFirebase(RegisterClientOrPersonalActivity.this, profileImage, Constants.PERSONAL_PROFILE_PICTURE_NAME);
@@ -322,7 +292,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                     Log.e(TAG, e.getMessage());
                 }
 
-            }else {
+            } else {
                 try {
                     profileImage = Glide.with(RegisterClientOrPersonalActivity.this).load(mPhotoPath).asBitmap().into(100, 100).get();
                     ClientDatabase.saveProfilePicsToFirebase(RegisterClientOrPersonalActivity.this, profileImage);
@@ -341,9 +311,10 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
     private class ValidateCREF extends AsyncTask<String, Void, Boolean> {
 
         private String mPersonalName;
-        int mState;
+        private int mState;
         private String mCref;
-        ProgressDialog mProgressDialog;
+        private ProgressDialog mProgressDialog = new ProgressDialog(RegisterClientOrPersonalActivity.this);
+
 
         ValidateCREF(String personalName, int state, String cref) {
             mPersonalName = personalName;
@@ -355,7 +326,6 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            mProgressDialog = new ProgressDialog(RegisterClientOrPersonalActivity.this);
             mProgressDialog.setTitle(getString(R.string.validating_cref));
             mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(false);
@@ -370,7 +340,6 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean isValid) {
-            super.onPostExecute(isValid);
 
             mProgressDialog.dismiss();
 
@@ -384,10 +353,45 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                 mHasCREFNameChanged = false;
                 mHasCREFChanged = false;
 
+                if (mIsPersonal)
+                    configurePersonal();
+                else
+                    configureClient();
+
             } else {
                 Utils.generateErrorToast(RegisterClientOrPersonalActivity.this, getString(R.string.name_cref_not_match)).show();
                 mCREFTextField.setError(getString(R.string.invalid_cref));
             }
+        }
+
+        private void configurePersonal() {
+
+            PersonalDatabase.savePersonalToDatabase(RegisterClientOrPersonalActivity.this, mPersonalTrainer);
+
+            saveUserMapping(true);
+            if (mPhotoPath != null) {
+                new ProfileImageTask().execute();
+                Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_PERSONAL_PROFILE_PHOTO_URI_PATH, mPhotoPath).commit();
+            }
+
+            Intent intent = new Intent(RegisterClientOrPersonalActivity.this, PersonalActivity.class);
+
+            startActivity(intent);
+            finish();
+        }
+
+        private void configureClient() {
+            if (mPhotoPath != null) {
+                new ProfileImageTask().execute();
+                Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, mPhotoPath).commit();
+            }
+
+            ClientDatabase.saveClientToDatabase(RegisterClientOrPersonalActivity.this, mClient);
+            saveUserMapping(false);
+
+            Intent intent = new Intent(RegisterClientOrPersonalActivity.this, ClientActivity.class);
+            startActivity(intent);
+            finish();
         }
 
     }

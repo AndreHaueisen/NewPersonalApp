@@ -245,7 +245,6 @@ public class PersonalActivity extends AppCompatActivity {
             }
         });
 
-        //TODO review ActionBarDrawerToggle last 2 arguments
         mBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, R.string.open_drawer, R.string.close_drawer);
         mDrawer.addDrawerListener(mBarDrawerToggle);
 

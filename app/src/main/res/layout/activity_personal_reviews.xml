@@ -12,19 +12,28 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/personal_reviews_toolbar"
-            android:background="@color/colorPrimary"
-            android:elevation="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="8dp">
 
             <com.andrehaueisen.fitx.utilities.CustomTextView
                 style="@android:style/TextAppearance.Material.Widget.Toolbar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
-                android:text="@string/your_reviews"/>
+                android:text="@string/your_reviews"
+                android:textColor="@android:color/white"/>
 
         </android.support.v7.widget.Toolbar>
+
+        <com.andrehaueisen.fitx.utilities.CustomTextView
+            android:id="@+id/no_reviews_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:text="@string/no_reviews_yet"
+            android:textSize="20sp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/personal_reviews_recycler_view"

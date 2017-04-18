@@ -211,9 +211,6 @@
     <string name="i_am_personal">I am a personal trainer</string>
     <string name="title_activity_register_client">RegisterClientActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!-- Client GeneralPersonalSearchFragment strings -->
     <string name="choose_date">Select class date</string>
     <string name="choose_start_time">Start time</string>

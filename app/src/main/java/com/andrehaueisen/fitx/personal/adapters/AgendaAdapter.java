@@ -117,18 +117,13 @@ public class AgendaAdapter extends RecyclerView.Adapter<AgendaAdapter.AgendaView
 
     private void configureBarColors(boolean hasConflict, RangeBar rangeBar, ImageView removeBarButton){
 
-        //TODO check if there is solution for pin disappearing
         Resources colorResources = mContext.getResources();
         if(hasConflict){
-         //   rangeBar.setPinColor(colorResources.getColor(R.color.red));
             rangeBar.setBarColor(colorResources.getColor(R.color.dark_red));
-           // rangeBar.setSelectorColor(colorResources.getColor(R.color.dark_red));
             rangeBar.setTickColor(colorResources.getColor(R.color.red));
 
         }else{
-         //   rangeBar.setPinColor(colorResources.getColor(R.color.colorAccent));
             rangeBar.setBarColor(colorResources.getColor(R.color.colorPrimaryDark));
-         //   rangeBar.setSelectorColor(colorResources.getColor(R.color.colorPrimary));
             rangeBar.setTickColor(colorResources.getColor(R.color.colorPrimary));
         }
     }

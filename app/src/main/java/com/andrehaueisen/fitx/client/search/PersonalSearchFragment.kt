@@ -369,7 +369,6 @@ class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseO
         Collections.sort(mUnitedEndTimeCodesForSpecificDay)
     }
 
-    //TODO make multiple results possible
     private fun filterResults(query: String, dataSnapshot: DataSnapshot): PersonalTrainer? {
 
         val personals = dataSnapshot.children.map { it.getValue(PersonalTrainer::class.java) }

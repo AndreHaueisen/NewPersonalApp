@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.andrehaueisen.fitx.utilities.Constants;
 import com.andrehaueisen.fitx.R;
@@ -16,6 +17,7 @@ import com.andrehaueisen.fitx.client.adapters.ExpandableClassesAdapter;
 import com.andrehaueisen.fitx.client.firebase.FirebaseBackgroundImageCatcher;
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher;
 import com.andrehaueisen.fitx.models.ClassReceipt;
+import com.andrehaueisen.fitx.utilities.CustomTextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -36,8 +38,7 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
     private ArrayList<ClassReceipt> mClassReceipts;
     private ExpandableClassesAdapter mExpandableClassesAdapter;
     @BindView(R.id.review_personal_recycler_view) RecyclerView mRecyclerView;
-
-    //private ProgressDialog mProgressDialog;
+    @BindView(R.id.no_reviews_place_holder) CustomTextView mNoReviewsTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +57,9 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
         mClassReceipts = getIntent().getParcelableArrayListExtra(Constants.CLASS_RECEIPTS_EXTRA_KEY);
         if(mClassReceipts != null && mClassReceipts.size() != 0){
             setupAdapter();
+            mNoReviewsTextView.setVisibility(View.GONE);
         }else{
-            //TODO put placeHolder
+            mNoReviewsTextView.setVisibility(View.VISIBLE);
         }
 
         if(savedInstanceState != null){
@@ -65,13 +67,6 @@ public class ReviewPersonalActivity extends AppCompatActivity implements Firebas
         }else{
             getPersonalPictures();
         }
-
-       /* mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setTitle(getString(R.string.loading_past_classes));
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.show(); */
 
     }
 

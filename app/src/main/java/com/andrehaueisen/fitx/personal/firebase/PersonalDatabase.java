@@ -87,19 +87,6 @@ public class PersonalDatabase {
         });
     }
 
-    //TODO check if it is necessary
-    /*public static void createClassLocation(final Activity activity){
-        String personalUniqueKey = getSharedPreferences(activity).getString(Constants.SHARED_PREF_PERSONAL_EMAIL_UNIQUE_KEY, null);
-
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-        database.child(Constants.FIREBASE_LOCATION_PERSONAL_CLASSES).child(personalUniqueKey).setValue(personalUniqueKey).addOnSuccessListener(activity, new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Utils.generateToast(activity, "Classes location created");
-            }
-        });
-    } */
-
     public static void savePersonalWorkingPlaces(final Context context, ArrayList<Gym> gyms){
 
         String personalUniqueKey = getSharedPreferences(context).getString(Constants.SHARED_PREF_PERSONAL_EMAIL_UNIQUE_KEY, null);

@@ -117,14 +117,12 @@ public class ToBeConfirmedClassesFragment extends Fragment implements ChildEvent
         if (getActivity() != null && !personalFitClass.isConfirmed()) {
             mWaitingConfirmationPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mWaitingConfirmationPersonalFitClasses.size() - 1);
-            //mAdapter.notifyItemInserted(mWaitingConfirmationPersonalFitClasses.size());
         }
     }
 
     @Override
     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-        //TODO check
         PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
         if (getActivity() != null && !personalFitClass.isConfirmed()) {

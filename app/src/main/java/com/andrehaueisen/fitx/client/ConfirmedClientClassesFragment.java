@@ -120,7 +120,6 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
 
             if (clientFitClass != null) {
                 if (Utils.isClassOnThePast(clientFitClass)) {
-                    //TODO do some work on badges
                     createClassReceipt(clientFitClass);
 
                 } else {

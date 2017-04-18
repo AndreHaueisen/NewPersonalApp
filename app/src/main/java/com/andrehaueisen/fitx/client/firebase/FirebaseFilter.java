@@ -135,7 +135,6 @@ public class FirebaseFilter {
         });
     }
 
-    //TODO REFACTOR DATABASE
     public void filterBySpecialty(final String mainObjective, final ArrayList<String> placeFilteredPersonalKeys){
 
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference();

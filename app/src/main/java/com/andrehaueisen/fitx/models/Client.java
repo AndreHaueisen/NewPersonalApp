@@ -6,8 +6,6 @@ import android.os.Parcelable;
 /**
  * Created by andre on 9/7/2016.
  */
-//TODO check about how to implement payment
-//TODO check about saving and retrieving user images
 public class Client implements Parcelable {
 
     private String mName;

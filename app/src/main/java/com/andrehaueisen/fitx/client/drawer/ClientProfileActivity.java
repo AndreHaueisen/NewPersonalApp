@@ -137,7 +137,6 @@ public class ClientProfileActivity extends AppCompatActivity implements GoogleAp
                         startActivity(mapIntent);
 
                     } else {
-                        //TODO review hard string
                         Utils.generateInfoToast(ClientProfileActivity.this, getString(R.string.no_map_app_detected)).show();
                     }
                 }

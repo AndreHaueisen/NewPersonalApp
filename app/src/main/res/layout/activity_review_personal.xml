@@ -19,10 +19,17 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <com.andrehaueisen.fitx.utilities.CustomTextView
+        android:id="@+id/no_reviews_place_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_reviews_yet"/>
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/review_personal_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/review_personal_recycler_view"/>
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>

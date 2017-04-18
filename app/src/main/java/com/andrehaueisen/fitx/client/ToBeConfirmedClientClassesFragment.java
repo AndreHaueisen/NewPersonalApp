@@ -124,7 +124,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
             if(clientFitClass != null) {
                 if (Utils.isClassOnThePast(clientFitClass)) {
-                    //TODO do some work on badges
+
                     createClassReceipt(clientFitClass);
 
                 } else {

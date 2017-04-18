@@ -6,7 +6,6 @@ import android.os.Parcelable;
 /**
  * Created by andre on 9/7/2016.
  */
-//TODO see about payment
 public class PersonalTrainer implements Parcelable {
 
     private String mName;
