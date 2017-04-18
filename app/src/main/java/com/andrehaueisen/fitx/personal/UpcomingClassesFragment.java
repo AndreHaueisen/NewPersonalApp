@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -44,6 +44,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
     private RecyclerView mRecyclerView;
     private CustomTextView mNoClassesPlaceHolder;
+    private CardView mCardView;
     private DatabaseReference mDatabaseReference;
     private PersonalClassesAdapter mAdapter;
     private ArrayList<PersonalFitClass> mConfirmedPersonalFitClasses;
@@ -75,13 +76,10 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setRecyclerViewAnimations();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        if(Utils.getSmallestScreenWidth(getContext()) < 600){
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }else {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        }
 
+        mCardView = (CardView) view.findViewById(R.id.no_class_card_place_holder);
         mNoClassesPlaceHolder = (CustomTextView) view.findViewById(R.id.no_class_place_holder);
         mNoClassesPlaceHolder.setText(getString(R.string.no_class_confirmed_message));
 
@@ -92,7 +90,7 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
             mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerState);
             mConfirmedPersonalFitClasses = savedInstanceState.getParcelableArrayList(Constants.CONFIRMED_PERSONALS_CLASSES_SAVED_STATE_KEY);
             if(mConfirmedPersonalFitClasses != null && !mConfirmedPersonalFitClasses.isEmpty()){
-                mNoClassesPlaceHolder.setVisibility(View.GONE);
+                mCardView.setVisibility(View.GONE);
             }
         }
 
@@ -212,10 +210,10 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
 
         if (mConfirmedPersonalFitClasses != null && mConfirmedPersonalFitClasses.size() != 0) {
             mRecyclerView.setVisibility(View.VISIBLE);
-            mNoClassesPlaceHolder.setVisibility(View.GONE);
+            mCardView.setVisibility(View.GONE);
         } else {
             mRecyclerView.setVisibility(View.GONE);
-            mNoClassesPlaceHolder.setVisibility(View.VISIBLE);
+            mCardView.setVisibility(View.VISIBLE);
         }
 
     }

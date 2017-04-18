@@ -43,21 +43,37 @@ Personal side has the following functionalities:
 * [x] Can **review clients comments and grades**
 * [x] Can **log out**
 
+### For Udacity Instructors
+
+Reviewer, you can test the personal trainer side using credentials from this website (Federal Council of Physical Education)](http://www.confef.org.br/extra/registrados/)
+To make it easier, I put bellow some credentials chosen randomly
+
+* Credential one
+    * Name as in CREF register: ALESSANDRE DA ROCHA
+    * CREF number: 2831
+    * CREF STATE: SERGIPE
+* Credential two
+    * Name as in CREF register: RENATO CEZAR ZAINE
+    * CREF number: 23352
+    * CREF STATE: PARANÁ
+* Credential one
+    * Name as in CREF register: LUCAS GOMES DE ARAUJO
+    * CREF number: 3248
+    * CREF STATE: GOIÁS
+
+Worked on this for 8 months. As it grew I noticed the problems one has when dealing with
+big apps. Code becomes spaghetti. Debug becomes a pain. To avoid those problems in future projects I
+chased some new skills. Learned MVP architecture, learned how to use dagger and reactive
+programming with RxJava. Since I did not had these skills ate the beginning I could'd use them this time.
+Also you will notice some classes in Kotlin. That is me learning the language. Sorry about the size of the app.
+
+
 ### Notes
 
 * App have some classes written in Kotlin since I'm learning it
 * Classes can be scheduled on a 15 minutes base. For example: 15:00 or 15:15 or 15:30 or 15:45.
 * Classes has the minimum duration of 45 minutes and a maximum duration of 120 minutes.
 * Price tag personal trainers set is for a 15 minute charge. For example: charge of $10 and class of 45 minutes will cost 3*10 = $30
-
-
-## Video Walkthrough
-
-Here's a walkthrough of the user side:
-
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Client Side Walkthrough' width='' alt='Client Side Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 
 ## Open-source libraries used

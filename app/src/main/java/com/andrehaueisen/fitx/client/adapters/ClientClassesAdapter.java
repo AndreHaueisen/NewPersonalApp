@@ -189,19 +189,24 @@ public class ClientClassesAdapter extends RecyclerView.Adapter<ClientClassesAdap
 
         private void setCardViewMargins() {
             if (mSmallestScreenWidth < 600) {
-                Utils.setMargins(mCardView,
-                        Utils.convertDpIntoPx(16, mDisplayMetrics),
-                        Utils.convertDpIntoPx(64, mDisplayMetrics),
-                        Utils.convertDpIntoPx(16, mDisplayMetrics),
-                        Utils.convertDpIntoPx(8, mDisplayMetrics));
-
+                if (getAdapterPosition() == 0) {
+                    Utils.setMargins(mCardView,
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(64, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                } else {
+                    Utils.setMargins(mCardView, Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics),
+                            Utils.convertDpIntoPx(16, mDisplayMetrics),
+                            Utils.convertDpIntoPx(8, mDisplayMetrics));
+                }
             } else {
                 Utils.setMargins(mCardView,
-                        Utils.convertDpIntoPx(16, mDisplayMetrics),
                         Utils.convertDpIntoPx(86, mDisplayMetrics),
-                        Utils.convertDpIntoPx(16, mDisplayMetrics),
-                        Utils.convertDpIntoPx(8, mDisplayMetrics));
-
+                        Utils.convertDpIntoPx(24, mDisplayMetrics),
+                        Utils.convertDpIntoPx(86, mDisplayMetrics),
+                        Utils.convertDpIntoPx(24, mDisplayMetrics));
             }
         }
 

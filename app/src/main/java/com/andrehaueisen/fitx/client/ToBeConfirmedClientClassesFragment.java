@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -49,6 +49,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     private static final String TAG = ToBeConfirmedClientClassesFragment.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
+    private CardView mCardView;
     private CustomTextView mNoClassesPlaceHolder;
     private DatabaseReference mDatabaseReference;
     private ArrayList<ClientFitClass> mWaitingConfirmationClientFitClasses;
@@ -82,14 +83,10 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.upcoming_classes_recycler_view);
         setRecyclerViewAnimations();
-
-        if(Utils.getSmallestScreenWidth(getContext()) < 600){
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        }else {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        }
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
+        mCardView = (CardView) view.findViewById(R.id.no_class_card_place_holder);
         mNoClassesPlaceHolder = (CustomTextView) view.findViewById(R.id.no_class_confirmed_place_holder);
         mNoClassesPlaceHolder.setText(getString(R.string.client_no_class_scheduled_message));
         mImageCatcher = new FirebaseProfileImageCatcher(this);
@@ -98,7 +95,7 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
             mRecyclerView.getLayoutManager().onRestoreInstanceState(savedInstanceState.getParcelable(Constants.RECYCLER_VIEW_SAVED_STATE_KEY));
             mWaitingConfirmationClientFitClasses = savedInstanceState.getParcelableArrayList(Constants.NOT_CONFIRMED_CLIENT_CLASSES_SAVED_STATE_KEY);
             if(mWaitingConfirmationClientFitClasses!= null && !mWaitingConfirmationClientFitClasses.isEmpty()){
-                mNoClassesPlaceHolder.setVisibility(View.GONE);
+                mCardView.setVisibility(View.GONE);
             }
         }
 
@@ -245,9 +242,9 @@ public class ToBeConfirmedClientClassesFragment extends Fragment implements Clie
     private void changeStatus() {
 
         if (mAdapter.getItemCount() != 0) {
-            mNoClassesPlaceHolder.setVisibility(View.GONE);
+            mCardView.setVisibility(View.GONE);
         } else {
-            mNoClassesPlaceHolder.setVisibility(View.VISIBLE);
+            mCardView.setVisibility(View.VISIBLE);
         }
     }
 

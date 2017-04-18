@@ -70,15 +70,15 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
         return new ClassHolder(view);
     }
 
-    public void removePersonalFitClass(int position){
+    public void removePersonalFitClass(int position) {
         mPersonalFitClasses.remove(position);
     }
 
-    public void addPersonalFitClass(PersonalFitClass personalFitClass){
+    public void addPersonalFitClass(PersonalFitClass personalFitClass) {
         mPersonalFitClasses.add(personalFitClass);
     }
 
-    public void changePersonalFitClass(int position, PersonalFitClass personalFitClass){
+    public void changePersonalFitClass(int position, PersonalFitClass personalFitClass) {
         mPersonalFitClasses.set(position, personalFitClass);
     }
 
@@ -193,8 +193,8 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
 
         }
 
-        private void setCardViewMargins(){
-            if(mSmallestScreenWidth < 600) {
+        private void setCardViewMargins() {
+            if (mSmallestScreenWidth < 600) {
                 if (getAdapterPosition() == 0) {
                     Utils.setMargins(mCardView,
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
@@ -207,151 +207,144 @@ public class PersonalClassesAdapter extends RecyclerView.Adapter<PersonalClasses
                             Utils.convertDpIntoPx(16, mDisplayMetrics),
                             Utils.convertDpIntoPx(8, mDisplayMetrics));
                 }
-            }else{
-                if (getAdapterPosition() == 0 || getAdapterPosition() == 1) {
-                    Utils.setMargins(mCardView,
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(86, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                } else {
-                    Utils.setMargins(mCardView,
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics),
-                            Utils.convertDpIntoPx(16, mDisplayMetrics),
-                            Utils.convertDpIntoPx(8, mDisplayMetrics));
-                }
-            }
-        }
-
-
-        private void setupCountDownListeners() {
-
-            mDismissClassCountDownTimer = new CountDownTimer(5000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    int secondsUntilFinished = (int) millisUntilFinished / 1000;
-                    mPenaltyAlertDialog.setMessage(mContext.getString(R.string.penalty_warning_message, secondsUntilFinished));
-                }
-
-                @Override
-                public void onFinish() {
-                    mDismissProgressBar.setVisibility(View.GONE);
-                    mPenaltyAlertDialog.dismiss();
-                    PersonalDatabase.deleteClassFromPersonalSide(mContext, mPersonalFitClasses.get(getAdapterPosition()));
-                }
-            };
-
-            mConfirmClassCountDownTimer = new CountDownTimer(3000, 1000) {
-                @Override
-                public void onTick(long millisUntilFinished) {
-                    int secondsUntilFinished = (int) millisUntilFinished / 1000;
-                    mConfirmationAlertDialog.setMessage(mContext.getString(R.string.confirmation_message, secondsUntilFinished));
-                }
-
-                @Override
-                public void onFinish() {
-                    PersonalFitClass fitClass = mPersonalFitClasses.get(getAdapterPosition());
-
-                    mConfirmProgressBar.setVisibility(View.GONE);
-                    mConfirmationAlertDialog.dismiss();
-                    PersonalDatabase.confirmClass(mActivity, fitClass.getClassKey(), fitClass.getClientKey());
-                }
-            };
-
-        }
-
-        private void setupAlertDialogs() {
-            mPenaltyAlertDialog = new AlertDialog.Builder(mContext)
-                    .setCancelable(false)
-                    .setIcon(R.drawable.ic_penalty_warning_48dp)
-                    .setMessage(mContext.getString(R.string.penalty_warning_message, 10))
-                    .setTitle(R.string.penalty_warning_title)
-                    .create();
-
-            mConfirmationAlertDialog = new AlertDialog.Builder(mContext)
-                    .setCancelable(false)
-                    .setIcon(R.drawable.ic_thumb_up_48dp)
-                    .setMessage(mContext.getString(R.string.confirmation_message, 10))
-                    .setTitle(R.string.confirmation_title)
-                    .create();
-        }
-
-        private void setPersonName(PersonalFitClass personalFitClass) {
-            mClientNameTextView.setText(personalFitClass.getClientName());
-        }
-
-        private View.OnClickListener directionButtonClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                PersonalFitClass fitClass = mPersonalFitClasses.get(getAdapterPosition());
-                Uri mapsIntentUri = Uri.parse("geo:0,0?q=" + fitClass.getPlaceLatitude() + "," + fitClass.getPlaceLongitude() + "(" + fitClass.getPlaceName() + ")");
-
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
-                mContext.startActivity(mapIntent);
-            }
-        };
-
-        private View.OnTouchListener dismissClassOnTouchListener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-
-                int action = event.getAction();
-
-                if (action == MotionEvent.ACTION_DOWN) {
-                    mDismissProgressBar.setVisibility(View.VISIBLE);
-                    mPenaltyAlertDialog.show();
-                    mDismissClassCountDownTimer.start();
-                    return true;
-                }
-                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-                    mDismissProgressBar.setVisibility(View.GONE);
-                    mPenaltyAlertDialog.dismiss();
-                    mDismissClassCountDownTimer.cancel();
-                    return true;
-                }
-
-                return false;
-            }
-        };
-
-        private View.OnTouchListener confirmClassOnTouchListener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-
-                int action = event.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    mConfirmProgressBar.setVisibility(View.VISIBLE);
-                    mConfirmationAlertDialog.show();
-                    mConfirmClassCountDownTimer.start();
-                    return true;
-                }
-                if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
-                    mConfirmProgressBar.setVisibility(View.GONE);
-                    mConfirmationAlertDialog.dismiss();
-                    mConfirmClassCountDownTimer.cancel();
-                    return true;
-                }
-
-                return false;
-            }
-        };
-
-        private void setProfileImage(Bitmap personProfileImage) {
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            if(personProfileImage != null) {
-
-                personProfileImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-
-                Glide.with(mContext).load(stream.toByteArray()).asBitmap().placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder))
-                        .into(mClientImageView);
             } else {
-                Glide.with(mContext).load("").placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder)).into(mClientImageView);
+                Utils.setMargins(mCardView,
+                        Utils.convertDpIntoPx(86, mDisplayMetrics),
+                        Utils.convertDpIntoPx(24, mDisplayMetrics),
+                        Utils.convertDpIntoPx(86, mDisplayMetrics),
+                        Utils.convertDpIntoPx(24, mDisplayMetrics));
             }
 
+    }
+
+
+    private void setupCountDownListeners() {
+
+        mDismissClassCountDownTimer = new CountDownTimer(5000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int secondsUntilFinished = (int) millisUntilFinished / 1000;
+                mPenaltyAlertDialog.setMessage(mContext.getString(R.string.penalty_warning_message, secondsUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                mDismissProgressBar.setVisibility(View.GONE);
+                mPenaltyAlertDialog.dismiss();
+                PersonalDatabase.deleteClassFromPersonalSide(mContext, mPersonalFitClasses.get(getAdapterPosition()));
+            }
+        };
+
+        mConfirmClassCountDownTimer = new CountDownTimer(3000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int secondsUntilFinished = (int) millisUntilFinished / 1000;
+                mConfirmationAlertDialog.setMessage(mContext.getString(R.string.confirmation_message, secondsUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                PersonalFitClass fitClass = mPersonalFitClasses.get(getAdapterPosition());
+
+                mConfirmProgressBar.setVisibility(View.GONE);
+                mConfirmationAlertDialog.dismiss();
+                PersonalDatabase.confirmClass(mActivity, fitClass.getClassKey(), fitClass.getClientKey());
+            }
+        };
+
+    }
+
+    private void setupAlertDialogs() {
+        mPenaltyAlertDialog = new AlertDialog.Builder(mContext)
+                .setCancelable(false)
+                .setIcon(R.drawable.ic_penalty_warning_48dp)
+                .setMessage(mContext.getString(R.string.penalty_warning_message, 10))
+                .setTitle(R.string.penalty_warning_title)
+                .create();
+
+        mConfirmationAlertDialog = new AlertDialog.Builder(mContext)
+                .setCancelable(false)
+                .setIcon(R.drawable.ic_thumb_up_48dp)
+                .setMessage(mContext.getString(R.string.confirmation_message, 10))
+                .setTitle(R.string.confirmation_title)
+                .create();
+    }
+
+    private void setPersonName(PersonalFitClass personalFitClass) {
+        mClientNameTextView.setText(personalFitClass.getClientName());
+    }
+
+    private View.OnClickListener directionButtonClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            PersonalFitClass fitClass = mPersonalFitClasses.get(getAdapterPosition());
+            Uri mapsIntentUri = Uri.parse("geo:0,0?q=" + fitClass.getPlaceLatitude() + "," + fitClass.getPlaceLongitude() + "(" + fitClass.getPlaceName() + ")");
+
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsIntentUri);
+            mContext.startActivity(mapIntent);
+        }
+    };
+
+    private View.OnTouchListener dismissClassOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+
+            int action = event.getAction();
+
+            if (action == MotionEvent.ACTION_DOWN) {
+                mDismissProgressBar.setVisibility(View.VISIBLE);
+                mPenaltyAlertDialog.show();
+                mDismissClassCountDownTimer.start();
+                return true;
+            }
+            if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                mDismissProgressBar.setVisibility(View.GONE);
+                mPenaltyAlertDialog.dismiss();
+                mDismissClassCountDownTimer.cancel();
+                return true;
+            }
+
+            return false;
+        }
+    };
+
+    private View.OnTouchListener confirmClassOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent event) {
+
+            int action = event.getAction();
+            if (action == MotionEvent.ACTION_DOWN) {
+                mConfirmProgressBar.setVisibility(View.VISIBLE);
+                mConfirmationAlertDialog.show();
+                mConfirmClassCountDownTimer.start();
+                return true;
+            }
+            if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
+                mConfirmProgressBar.setVisibility(View.GONE);
+                mConfirmationAlertDialog.dismiss();
+                mConfirmClassCountDownTimer.cancel();
+                return true;
+            }
+
+            return false;
+        }
+    };
+
+    private void setProfileImage(Bitmap personProfileImage) {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        if (personProfileImage != null) {
+
+            personProfileImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+            Glide.with(mContext).load(stream.toByteArray()).asBitmap().placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder))
+                    .into(mClientImageView);
+        } else {
+            Glide.with(mContext).load("").placeholder(mContext.getResources().getDrawable(R.drawable.head_placeholder)).into(mClientImageView);
         }
 
     }
+
+}
 }
