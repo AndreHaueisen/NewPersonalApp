@@ -25,6 +25,7 @@
 
         <ImageView
             android:id="@+id/class_filter_image_view"
+            android:contentDescription="@string/class_filter_cd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

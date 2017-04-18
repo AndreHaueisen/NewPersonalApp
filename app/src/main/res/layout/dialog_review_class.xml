@@ -12,10 +12,11 @@
         android:layout_width="60dp"
         android:layout_height="120dp"
         android:layout_gravity="top|start"
-        android:background="@drawable/body_placeholder"
         android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="16dp"
+        android:background="@drawable/body_placeholder"
+        android:contentDescription="@string/profile_image_cd"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.andrehaueisen.fitx.utilities.CustomTextView
@@ -24,88 +25,88 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@id/person_image_view"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:text="Andre Haueisen"
-        android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/person_image_view"
-        android:layout_marginTop="8dp"/>
+        tools:text="Andre Haueisen"/>
 
     <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/class_date_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/client_name_text_view"
-        android:layout_toEndOf="@id/person_image_view"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/client_name_text_view"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@id/person_image_view"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:text="10/04/2017"
-        android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/person_image_view"
-        android:layout_marginTop="16dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"/>
+        tools:text="10/04/2017"/>
 
     <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/class_time_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/person_image_view"
-        android:layout_below="@id/class_date_text_view"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/class_date_text_view"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/person_image_view"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:text="10:00 - 11:00"
-        android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/person_image_view"
-        app:layout_constraintTop_toBottomOf="@+id/class_date_text_view"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/class_date_text_view"
+        tools:text="10:00 - 11:00"/>
 
     <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/class_location_name_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/person_image_view"
-        android:layout_below="@id/class_time_text_view"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/class_time_text_view"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/person_image_view"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:text="Primatas Crossfit"
-        android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/person_image_view"
-        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/class_time_text_view"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"/>
+        tools:text="Primatas Crossfit"/>
 
     <com.andrehaueisen.fitx.utilities.CustomTextView
         android:id="@+id/class_location_address_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/person_image_view"
-        android:layout_below="@id/class_location_name_text_view"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/class_location_name_text_view"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@id/person_image_view"
         android:ellipsize="end"
         android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="16sp"
-        tools:text="Av. T-5 Num 640 Setor Bueno"
-        android:layout_marginStart="8dp"
         app:layout_constraintLeft_toRightOf="@+id/person_image_view"
-        app:layout_constraintTop_toBottomOf="@+id/class_location_name_text_view"
-        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/class_location_name_text_view"
+        tools:text="Av. T-5 Num 640 Setor Bueno"/>
 
     <Button
         android:id="@+id/confirm_class_image_button"
@@ -113,14 +114,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="@string/confirm"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/class_location_address_text_view"
-        android:layout_marginTop="32dp"/>
-
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/class_location_address_text_view"/>
 
 
 </android.support.constraint.ConstraintLayout>

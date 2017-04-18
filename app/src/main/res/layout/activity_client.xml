@@ -51,6 +51,7 @@
             android:id="@+id/class_filter_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/class_filter_cd"
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
             android:src="@drawable/class_status_animated_vector_drawable_end_to_start"/>

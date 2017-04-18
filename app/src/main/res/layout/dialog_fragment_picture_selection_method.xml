@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/choose_image_from_gallery_cd"
             android:src="@drawable/ic_gallery_72dp"/>
 
         <ImageView
@@ -35,6 +36,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/take_new_picture_cd"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:src="@drawable/ic_camera_72dp"/>

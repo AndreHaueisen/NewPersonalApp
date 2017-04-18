@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/wide_background_image_view"
         android:layout_width="0dp"
+        android:contentDescription="@string/background_image_cd"
         android:layout_height="wrap_content"
         android:minHeight="200dp"
         android:scaleType="centerCrop"

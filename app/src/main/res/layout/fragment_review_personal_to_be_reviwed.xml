@@ -10,6 +10,7 @@
     <ImageView
         android:id="@+id/background_image_view"
         android:layout_width="match_parent"
+        android:contentDescription="@string/background_image_cd"
         android:layout_height="210dp"
         android:adjustViewBounds="true"
         android:cropToPadding="true"
@@ -23,6 +24,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/head_photo_image_view"
+            android:contentDescription="@string/profile_image_cd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="224dp"

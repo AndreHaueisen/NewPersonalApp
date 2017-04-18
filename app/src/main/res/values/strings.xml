@@ -329,5 +329,13 @@
     <string name="new_class_notification_client">New class in %1$s at %2$s</string>
     <string name="class_canceled_notification_client">Class at %1$s was canceled</string>
 
+    <!--Content strings-->
+    <string name="profile_image_cd">Profile image</string>
+    <string name="choose_image_from_gallery_cd">Choose image from gallery</string>
+    <string name="take_new_picture_cd">Take new picture</string>
+    <string name="background_image_cd">Background image</string>
+    <string name="gym_picture_cd">Gym picture</string>
+    <string name="class_filter_cd">Alternate between confirmed and non confirmed classes</string>
+    <string name="delete_workplace_cd">Delete workplace</string>
 
 </resources>
