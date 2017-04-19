@@ -61,7 +61,7 @@ public class PlacePhoto implements GoogleApiClient.OnConnectionFailedListener, G
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Utils.generateSuccessToast(mContext, "Google api places services connected!").show();
+
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PlacePhoto implements GoogleApiClient.OnConnectionFailedListener, G
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Utils.generateErrorToast(mContext, "Api places services failed!").show();
+
     }
 
     class PlacePhotoTask extends AsyncTask<ArrayList<String>, Void, ArrayList<AttributedPhoto>> {

@@ -98,43 +98,43 @@ public class PersonalWeekAgenda implements Parcelable {
 
     protected PersonalWeekAgenda(Parcel in) {
         if (in.readByte() == 0x01) {
-            mMONDAY = new ArrayList<Integer>();
+            mMONDAY = new ArrayList<>();
             in.readList(mMONDAY, Integer.class.getClassLoader());
         } else {
             mMONDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mTUESDAY = new ArrayList<Integer>();
+            mTUESDAY = new ArrayList<>();
             in.readList(mTUESDAY, Integer.class.getClassLoader());
         } else {
             mTUESDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mWEDNESDAY = new ArrayList<Integer>();
+            mWEDNESDAY = new ArrayList<>();
             in.readList(mWEDNESDAY, Integer.class.getClassLoader());
         } else {
             mWEDNESDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mTHURSDAY = new ArrayList<Integer>();
+            mTHURSDAY = new ArrayList<>();
             in.readList(mTHURSDAY, Integer.class.getClassLoader());
         } else {
             mTHURSDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mFRIDAY = new ArrayList<Integer>();
+            mFRIDAY = new ArrayList<>();
             in.readList(mFRIDAY, Integer.class.getClassLoader());
         } else {
             mFRIDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mSATURDAY = new ArrayList<Integer>();
+            mSATURDAY = new ArrayList<>();
             in.readList(mSATURDAY, Integer.class.getClassLoader());
         } else {
             mSATURDAY = null;
         }
         if (in.readByte() == 0x01) {
-            mSUNDAY = new ArrayList<Integer>();
+            mSUNDAY = new ArrayList<>();
             in.readList(mSUNDAY, Integer.class.getClassLoader());
         } else {
             mSUNDAY = null;

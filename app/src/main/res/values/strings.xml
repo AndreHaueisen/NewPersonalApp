@@ -60,6 +60,10 @@
     <!--Personal PlacesAutocompleteFragment strings -->
     <string name="search_working_place">Search your gyms</string>
 
+    <!--Personal Database strings-->
+    <string name="profile_pic_saved">Profile picture saved</string>
+    <string name="profile_pic_failed">Image upload failure</string>
+
 
     <!--Personal Schedule strings-->
     <string name="confirm_changes_menu_button_title">Confirm</string>
@@ -163,6 +167,7 @@
 
     <string name="name_cref_match">Name and CREF are valid!</string>
     <string name="name_cref_not_match">Name and CREF do not match</string>
+    <string name="connection_timeout">No server response. Try again latter</string>
 
     <string name="invalid_name">Invalid name!</string>
     <string name="invalid_birthday">Invalid birthday!</string>
@@ -219,7 +224,7 @@
     <string name="class_duration_is">%1$s</string>
     <string name="click_choose_gym">Click to add a gym</string>
     <string name="searching_for_personal">Searching for your personal</string>
-    <string name="upsy_doopsi" translatable="false">Upsi Dopsy</string>
+    <string name="no_results_title" translatable="false">Something bad happened</string>
     <string name="no_personal_found_at_date">We could not find anyone free for that date. Try again.</string>
     <string name="reinforce_choose_working_out_place">Working out place missing</string>
     <string name="reinforce_choose_objective">Objective missing</string>
@@ -334,5 +339,14 @@
     <string name="gym_picture_cd">Gym picture</string>
     <string name="class_filter_cd">Alternate between confirmed and non confirmed classes</string>
     <string name="delete_workplace_cd">Delete workplace</string>
+    <string name="grade_cd">Grade 0 to 5</string>
+    <string name="remove_range_bar_cd">Remove schedule bar</string>
+    <string name="dismiss_class_cd">Dismiss class</string>
+    <string name="gym_map_cd">Get directions</string>
+    <string name="mock_date">10/04/2017</string>
+    <string name="mock_time">00:00 - 01:00</string>
+    <string name="mock_name">Andre Haueisen</string>
+    <string name="mock_place_name">Primatas Crossfit</string>
+    <string name="mock_place_address">Av. T-5 Num 640 Setor Bueno</string>
 
 </resources>

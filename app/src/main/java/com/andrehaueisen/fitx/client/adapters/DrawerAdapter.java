@@ -144,6 +144,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.DrawerItem
 
                 mDrawerItemTitleTextView.setText(mDrawerItems[position-1]);
                 mDrawerIconImageView.setImageResource(mIconsAddress[position-1]);
+                mDrawerIconImageView.setContentDescription(mDrawerItems[position-1]);
 
             } else {
                 setProfileImage();

@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.andrehaueisen.fitx.*
 import com.andrehaueisen.fitx.R
 import com.andrehaueisen.fitx.client.DayAgendaFragment
 import com.andrehaueisen.fitx.client.firebase.FirebaseProfileImageCatcher
@@ -239,7 +238,6 @@ class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseO
         mDatabaseReference.child(Constants.FIREBASE_LOCATION_GYMS).child(Utils.encodeEmail(personal.email))
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        Utils.generateWarningToast(context, "Fetch working places failed").show()
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot?) {
@@ -255,7 +253,6 @@ class PersonalSearchFragment : Fragment(), FirebaseProfileImageCatcher.FirebaseO
         mDatabaseReference.child(Constants.FIREBASE_LOCATION_SPECIALTIES).child(Utils.encodeEmail(personal.email)).child("specialties")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
-                        Utils.generateWarningToast(context, "Fetch specialties failed").show()
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot?) {

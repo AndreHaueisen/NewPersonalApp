@@ -308,7 +308,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
     }
 
-    private class ValidateCREF extends AsyncTask<String, Void, Boolean> {
+    private class ValidateCREF extends AsyncTask<String, Void, CrefValidator.ConnectionStatus> {
 
         private String mPersonalName;
         private int mState;
@@ -333,35 +333,44 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Boolean doInBackground(String... strings) {
+        protected CrefValidator.ConnectionStatus doInBackground(String... strings) {
+
 
             return new CrefValidator().isPersonalValid(mPersonalName, mState, mCref);
+
         }
 
         @Override
-        protected void onPostExecute(Boolean isValid) {
+        protected void onPostExecute(CrefValidator.ConnectionStatus status) {
 
             mProgressDialog.dismiss();
 
-            if (isValid) {
-                Utils.generateSuccessToast(RegisterClientOrPersonalActivity.this, getString(R.string.name_cref_match)).show();
+           switch (status){
+               case VALID_CREF:
+                   Utils.generateSuccessToast(RegisterClientOrPersonalActivity.this, getString(R.string.name_cref_match)).show();
 
-                mCREFTextField.setErrorEnabled(false);
-                mCREFTextField.setEnabled(false);
-                mPersonalTrainer.setCref(mCREFTextField.getEditText().getText().toString());
+                   mCREFTextField.setErrorEnabled(false);
+                   mCREFTextField.setEnabled(false);
+                   mPersonalTrainer.setCref(mCREFTextField.getEditText().getText().toString());
 
-                mHasCREFNameChanged = false;
-                mHasCREFChanged = false;
+                   mHasCREFNameChanged = false;
+                   mHasCREFChanged = false;
 
-                if (mIsPersonal)
-                    configurePersonal();
-                else
-                    configureClient();
+                   if (mIsPersonal)
+                       configurePersonal();
+                   else
+                       configureClient();
+                   break;
 
-            } else {
-                Utils.generateErrorToast(RegisterClientOrPersonalActivity.this, getString(R.string.name_cref_not_match)).show();
-                mCREFTextField.setError(getString(R.string.invalid_cref));
-            }
+               case INVALID_CREF:
+                   Utils.generateErrorToast(RegisterClientOrPersonalActivity.this, getString(R.string.name_cref_not_match)).show();
+                   mCREFTextField.setError(getString(R.string.invalid_cref));
+                   break;
+
+               case NO_CONNECTION:
+                   Utils.generateErrorToast(RegisterClientOrPersonalActivity.this, getString(R.string.connection_timeout)).show();
+           }
+
         }
 
         private void configurePersonal() {

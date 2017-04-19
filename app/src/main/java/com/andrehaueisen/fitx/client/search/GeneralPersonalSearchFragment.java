@@ -443,11 +443,6 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
         mFirebaseFilter.getPersonals(chosenPersonalKeys);
     }
 
-    /**
-     * Receives the final personal list
-     *
-     * @param chosenPersonalTrainers
-     */
     @Override
     public void onPersonalInformationReady(ArrayList<PersonalTrainer> chosenPersonalTrainers, ArrayList<String> chosenPersonalKeys) {
         mProgressDialog.dismiss();
@@ -457,7 +452,7 @@ public class GeneralPersonalSearchFragment extends Fragment implements DatePicke
     private void actOnSearchResult(ArrayList<PersonalTrainer> chosenPersonalTrainers, ArrayList<String> chosenPersonalKeys) {
 
         if ((chosenPersonalTrainers == null || chosenPersonalTrainers.size() == 0) && (chosenPersonalKeys == null || chosenPersonalKeys.size() == 0)) {
-            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(getString(R.string.upsy_doopsi)).setMessage(R.string.no_personal_found_at_date).
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(getString(R.string.no_results_title)).setMessage(R.string.no_personal_found_at_date).
                     setCancelable(true).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

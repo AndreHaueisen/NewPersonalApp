@@ -1,9 +1,11 @@
 package com.andrehaueisen.fitx.register
 
+import android.util.Log
 import com.andrehaueisen.fitx.utilities.Utils
 import org.jsoup.Connection
 import org.jsoup.Jsoup
 import org.jsoup.nodes.FormElement
+import java.io.IOException
 
 /**
  * Created by andre on 1/21/2017.
@@ -12,32 +14,51 @@ class CrefValidator {
 
     private val BASE_URL = "http://www.confef.org.br/extra/registrados/"
 
-    fun isPersonalValid(personalName: String, stateCode: Int, cref: String): Boolean {
+    enum class ConnectionStatus{
+        VALID_CREF,
+        INVALID_CREF,
+        NO_CONNECTION
+    }
+
+    fun isPersonalValid(personalName: String, stateCode: Int, cref: String): ConnectionStatus {
 
         val formattedPersonalName = Utils.formatPersonalName(personalName) // without spelling accent and uppercased
         val formattedCref = Utils.formatCrefNumber(cref) //add missing zeros
 
+        try {
+            val response = Jsoup.connect(BASE_URL).method(Connection.Method.GET).execute()
 
-        val response = Jsoup.connect(BASE_URL).method(Connection.Method.GET).execute()
+            val document = response.parse()
+            val form = document.getElementById("pesquisa") as FormElement
 
-        val document = response.parse()
-        val form = document.getElementById("pesquisa") as FormElement
+            form.getElementById("login3").attr("value", formattedPersonalName)
+            form.getElementsByTag("select")[0].getElementsByTag("option")[stateCode + 1].attr("selected", "selected") //set the option state as selected
 
-        form.getElementById("login3").attr("value", formattedPersonalName)
-        form.getElementsByTag("select")[0].getElementsByTag("option")[stateCode + 1].attr("selected", "selected") //set the option state as selected
+            val responseDoc = form.submit().post()
 
-        val responseDoc = form.submit().post()
+            val elementsFromColumn = responseDoc.getElementById("content2column").getElementsByTag("p")
 
-        val elementsFromColumn = responseDoc.getElementById("content2column").getElementsByTag("p")
+            val responseCref: CharSequence
 
-        val responseCref : CharSequence
+            if (elementsFromColumn != null && !elementsFromColumn.isEmpty()) {
+                responseCref = elementsFromColumn[0].getElementsByTag("i").text().subSequence(5, 11)
+            } else {
+                return ConnectionStatus.INVALID_CREF
+            }
 
-        if (elementsFromColumn != null && !elementsFromColumn.isEmpty()) {
-            responseCref = elementsFromColumn[0].getElementsByTag("i").text().subSequence(5, 11)
-        } else {
-            return false
+            if(responseCref == formattedCref){
+                return ConnectionStatus.VALID_CREF
+            }else{
+                return ConnectionStatus.INVALID_CREF
+            }
+
+        }catch (ioe: IOException){
+            Log.e("CrefValidator", ioe.message)
+            return ConnectionStatus.NO_CONNECTION
+        }catch (sioobe: StringIndexOutOfBoundsException){
+            Log.e("CrefValidator", sioobe.message)
+            return ConnectionStatus.INVALID_CREF
         }
-        return responseCref.equals(formattedCref)
 
     }
 

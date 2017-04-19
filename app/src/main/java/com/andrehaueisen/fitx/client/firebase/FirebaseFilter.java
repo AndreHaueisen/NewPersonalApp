@@ -37,7 +37,7 @@ public class FirebaseFilter {
     }
 
     public FirebaseFilter(GeneralPersonalSearchFragment searchFragment) {
-        mQueryKeys = (QueryKeys) searchFragment;
+        mQueryKeys = searchFragment;
     }
 
     public void startChainQuery(String dateCode){

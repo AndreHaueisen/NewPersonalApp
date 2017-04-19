@@ -89,7 +89,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/shape_rectangle_outline"
-            android:text="OK"/>
+            android:text="@android:string/ok"/>
 
     </LinearLayout>
 

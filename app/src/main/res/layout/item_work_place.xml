@@ -14,6 +14,7 @@
         android:layout_height="200dp"
         android:minHeight="200dp"
         android:minWidth="200dp"
+        android:contentDescription="@string/gym_picture_cd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

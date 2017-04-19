@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_clear_black_24dp"
+        android:contentDescription="@string/remove_range_bar_cd"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/end_time_text_view"
         app:layout_constraintTop_toTopOf="@+id/end_time_text_view"

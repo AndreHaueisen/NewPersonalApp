@@ -334,13 +334,14 @@ public class ClientDatabase {
                     Utils.getSharedPreferences(activity).edit().putString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, downloadUrl.toString()).apply();
                     //saveProfilePicsUrl(downloadUrl, personalUniqueKey);
                     Log.i(TAG, downloadUrl.getPath());
-                    Utils.generateSuccessToast(activity, "Profile picture " + downloadUrl.getLastPathSegment() + " saved").show();
+                    Utils.generateSuccessToast(activity, activity.getString(R.string.profile_pic_saved)).show();
+
                 }
             }).addOnFailureListener(activity, new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e(TAG, e.getMessage());
-                    Utils.generateErrorToast(activity, "Image upload failure").show();
+                    Utils.generateErrorToast(activity, activity.getString(R.string.profile_pic_failed)).show();
                 }
             });
 

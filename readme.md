@@ -61,6 +61,8 @@ To make it easier, I put bellow some credentials chosen randomly
     * CREF number: 3248
     * CREF STATE: GOIÁS
 
+To test the client side simply don't select "I'm a personal" checkbox
+
 Worked on this for 8 months. As it grew I noticed the problems one has when dealing with
 big apps. Code becomes spaghetti. Debug becomes a pain. To avoid those problems in future projects I
 chased some new skills. Learned MVP architecture, learned how to use dagger and reactive
@@ -83,7 +85,6 @@ Also you will notice some classes in Kotlin. That is me learning the language. S
 - [Touch Boarder Weekdays Buttons Bar](https://github.com/TouchBoarder/weekdays-buttons-bar) - For Personal Trainer week schedule
 - [CircleImageView](https://github.com/hdodenhof/CircleImageView#circleimageview) - A fast circular ImageView perfect for profile images.
 - [MaterialRangeBar](https://github.com/oli107/material-range-bar)
-- [Apache Commons Lang](https://github.com/apache/commons-lang) - Apache Commons Lang, a package of Java utility classes for the classes that are in java.lang's hierarchy, or are considered to be so standard as to justify existence in java.lang.
 - [Android-SpinKit](https://github.com/ybq/Android-SpinKit) - Confirming and canceling classes animations
 - [MaterialBadgeTextView](https://github.com/matrixxun/MaterialBadgeTextView#materialbadgetextview) - Badge for classes in need of review
 - [joda-time-android](https://github.com/dlew/joda-time-android) - This library is a version of Joda-Time built with Android in mind.

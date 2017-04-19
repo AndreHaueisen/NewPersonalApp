@@ -42,7 +42,7 @@ public class AppointmentMaker {
         mPersonalKey = personalKey;
         mPersonalName = personalName;
         mPersonalFitClass = personalFitClass;
-        mLastCheckCallback = (LastCheckCallback) confirmationFragment;
+        mLastCheckCallback = confirmationFragment;
         mActivity = activity;
     }
 

@@ -58,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:contentDescription="@string/grade_cd"
             android:src="@drawable/ic_full_star_dark_24dp"
             app:layout_constraintBottom_toBottomOf="@+id/grade_text_view"
             app:layout_constraintRight_toLeftOf="@+id/grade_text_view"

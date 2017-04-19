@@ -18,7 +18,6 @@
 
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE"/>
 
-    <!-- ATTENTION - WHEN POSSIBLE CHANGE THIS LINE FOR android:name=".PersonalApplication" -->
     <application
         android:name=".PersonalApplication"
         android:allowBackup="true"

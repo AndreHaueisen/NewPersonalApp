@@ -128,11 +128,15 @@ public class WeekScheduleResumeFragment extends Fragment implements ValueEventLi
         @Override
         public void onBindViewHolder(WeekDayScheduleViewHolder holder, int position) {
 
-            TextDrawable textDrawable = TextDrawable.builder().beginConfig().toUpperCase().fontSize(40)
+            TextDrawable textDrawable = TextDrawable.builder()
+                    .beginConfig()
+                    .toUpperCase()
+                    .fontSize(40)
                     .textColor(Color.WHITE)
                     .endConfig().buildRound(getDayText(position), getResources().getColor(R.color.colorPrimaryDark));
 
             holder.mDayImageView.setImageDrawable(textDrawable);
+            holder.mDayImageView.setContentDescription(getDayText(position));
             holder.onBindItem(mAgendaTimeCodesStartSA.get(position), mAgendaTimeCodesEndSA.get(position));
 
         }
