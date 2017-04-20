@@ -46,12 +46,6 @@ public class ClassUpdateListenerService extends Service {
 
                 if (!personalFitClass.isConfirmed()) {
 
-                    String dateCode = personalFitClass.getDateCode();
-                    String date = Utils.getWrittenDateFromDateCode(context, dateCode);
-                    String placeName = personalFitClass.getPlaceName();
-                    String classStartTime = Utils.getClockFromTimeCode(context, personalFitClass.getStartTimeCode());
-                    String classEndTime = Utils.getClockFromTimeCode(context, personalFitClass.getStartTimeCode() + personalFitClass.getDurationCode());
-
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
                             .setLargeIcon(appIcon)
                             .setColor(context.getResources().getColor(R.color.colorPrimaryDark))
@@ -87,14 +81,6 @@ public class ClassUpdateListenerService extends Service {
                 PersonalFitClass personalFitClass = dataSnapshot.getValue(PersonalFitClass.class);
 
                 if (!personalFitClass.isConfirmed()) {
-
-                    String dateCode = personalFitClass.getDateCode();
-                    String date = Utils.getWrittenDateFromDateCode(context, dateCode);
-                    String placeName = personalFitClass.getPlaceName();
-                    String classStartTime = Utils.getClockFromTimeCode(context, personalFitClass.getStartTimeCode());
-                    String classEndTime = Utils.getClockFromTimeCode(context, personalFitClass.getStartTimeCode() + personalFitClass.getDurationCode());
-
-                    String contentText = "Please, review and confirm the class as soon as possible";
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
                             .setLargeIcon(appIcon)

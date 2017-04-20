@@ -46,7 +46,6 @@ public class PersonalDatabase {
 
     private static final String TAG = PersonalDatabase.class.getSimpleName();
 
-
     public static void savePersonalToDatabase(Activity activity, PersonalTrainer personalTrainer){
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -204,22 +203,6 @@ public class PersonalDatabase {
 
 
     }
-
-    //Not needed for now -- evaluate later
-   /* private static void saveProfilePicsUrl(final Uri downloadUri, String personalUniqueKey){
-
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-
-        HashMap<String, Object> uriHashMap = new HashMap<>();
-        uriHashMap.put(Constants.FIREBASE_LOCATION_PERSONAL_URI, downloadUri.getPath());
-
-        database.child(Constants.FIREBASE_LOCATION_PERSONAL_TRAINER).child(personalUniqueKey).updateChildren(uriHashMap, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference mDatabaseReference) {
-                Log.i(TAG, downloadUri.getPath() + " saved");
-            }
-        });
-    } */
 
     public static void confirmClass(final Activity activity, final String classKey, final String clientKey){
 

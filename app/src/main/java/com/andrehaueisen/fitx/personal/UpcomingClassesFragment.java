@@ -120,7 +120,6 @@ public class UpcomingClassesFragment extends Fragment implements ChildEventListe
         if (getActivity() != null && personalFitClass.isConfirmed()) {
             mConfirmedPersonalFitClasses.add(personalFitClass);
             mImageCatcher.getClientProfilePicture(getActivity(), personalFitClass.getClientKey(), mConfirmedPersonalFitClasses.size() - 1);
-            //mRecyclerView.smoothScrollToPosition(mConfirmedPersonalFitClasses.size() - 1);
         }
     }
 

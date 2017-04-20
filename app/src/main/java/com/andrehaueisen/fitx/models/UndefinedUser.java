@@ -14,12 +14,8 @@ public class UndefinedUser implements Parcelable {
     private String mEmail;
     private String mUid;
     @Nullable private String mPhotoPath;
-    //private boolean mIsClient;
-    //private boolean mIsPersonal;
 
     public UndefinedUser() {
-     //   mIsClient = false;
-     //   mIsPersonal = false;
     }
 
     public UndefinedUser(String name, String email, String uid, String photoPath) {
@@ -27,8 +23,6 @@ public class UndefinedUser implements Parcelable {
         mEmail = email;
         mUid = uid;
         mPhotoPath = photoPath;
-      //  mIsClient = false;
-      //  mIsPersonal = false;
     }
 
     public String getName() {
@@ -63,29 +57,12 @@ public class UndefinedUser implements Parcelable {
         mPhotoPath = photoPath;
     }
 
-  /*  public boolean isClient() {
-        return mIsClient;
-    }
-
-    public void setClient(boolean client) {
-        mIsClient = client;
-    }
-
-    public boolean isPersonal() {
-        return mIsPersonal;
-    }
-
-    public void setPersonal(boolean personal) {
-        mIsPersonal = personal;
-    } */
 
     protected UndefinedUser(Parcel in) {
         mName = in.readString();
         mEmail = in.readString();
         mUid = in.readString();
         mPhotoPath = in.readString();
-    //    mIsClient = in.readByte() != 0x00;
-        //   mIsPersonal = in.readByte() != 0x00;
     }
 
     @Override

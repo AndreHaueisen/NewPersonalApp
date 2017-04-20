@@ -223,7 +223,9 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
             checkPersonalDataOk();
 
         } else {
-            checkClientDataOk();
+            if(checkClientDataOk()){
+                configureClient();
+            }
         }
     }
 
@@ -258,7 +260,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         }
     }
 
-    private void checkClientDataOk() {
+    private boolean checkClientDataOk() {
 
         mClient.setName(mDisplayName);
         mClient.setEmail(mEmail);
@@ -266,8 +268,24 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
         if (mClient.getName() == null || mNameTextField.isErrorEnabled()
                 || mNameTextField.getEditText().getText().toString().equals("")) {
             Utils.generateInfoToast(this, getString(R.string.invalid_name)).show();
-
+            return false;
+        }else {
+            return true;
         }
+    }
+
+    private void configureClient() {
+        if (mPhotoPath != null) {
+            new ProfileImageTask().execute();
+            Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, mPhotoPath).commit();
+        }
+
+        ClientDatabase.saveClientToDatabase(RegisterClientOrPersonalActivity.this, mClient);
+        saveUserMapping(false);
+
+        Intent intent = new Intent(RegisterClientOrPersonalActivity.this, ClientActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void saveUserMapping(boolean isPersonal) {
@@ -356,10 +374,7 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
                    mHasCREFNameChanged = false;
                    mHasCREFChanged = false;
 
-                   if (mIsPersonal)
-                       configurePersonal();
-                   else
-                       configureClient();
+                   configurePersonal();
                    break;
 
                case INVALID_CREF:
@@ -385,20 +400,6 @@ public class RegisterClientOrPersonalActivity extends AppCompatActivity {
 
             Intent intent = new Intent(RegisterClientOrPersonalActivity.this, PersonalActivity.class);
 
-            startActivity(intent);
-            finish();
-        }
-
-        private void configureClient() {
-            if (mPhotoPath != null) {
-                new ProfileImageTask().execute();
-                Utils.getSharedPreferences(RegisterClientOrPersonalActivity.this).edit().putString(Constants.SHARED_PREF_CLIENT_PHOTO_URI_PATH, mPhotoPath).commit();
-            }
-
-            ClientDatabase.saveClientToDatabase(RegisterClientOrPersonalActivity.this, mClient);
-            saveUserMapping(false);
-
-            Intent intent = new Intent(RegisterClientOrPersonalActivity.this, ClientActivity.class);
             startActivity(intent);
             finish();
         }

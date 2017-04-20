@@ -284,12 +284,6 @@ public class ConfirmedClientClassesFragment extends Fragment implements ClientCl
         super.onStop();
     }
 
-    /*@Override
-    public void onDestroy() {
-        mDatabaseReference.removeEventListener(this);
-        super.onDestroy();
-    }*/
-
     private class LoadImageTask extends AsyncTask<byte[], Void, Void> {
 
         private int mPositionOnArray;

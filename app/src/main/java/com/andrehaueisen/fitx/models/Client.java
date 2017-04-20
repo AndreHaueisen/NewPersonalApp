@@ -13,21 +13,18 @@ public class Client implements Parcelable {
     private String mMainObjective;
     private Gym mClientGym;
 
-    private BodyMeasures mBodyMeasures;
-
 
     public Client() {
         super();
     }
 
-    public Client(String name, String email, String mainObjective, Gym clientGym, BodyMeasures bodyMeasures) {
+    public Client(String name, String email, String mainObjective, Gym clientGym) {
 
         mName = name;
         mEmail = email;
         mMainObjective = mainObjective;
         mClientGym = clientGym;
-        mBodyMeasures = bodyMeasures;
-    }
+     }
 
     public String getName() {
         return mName;
@@ -61,21 +58,13 @@ public class Client implements Parcelable {
         mClientGym = clientGym;
     }
 
-    public BodyMeasures getBodyMeasures() {
-        return mBodyMeasures;
-    }
-
-    public void setBodyMeasures(BodyMeasures bodyMeasures) {
-        mBodyMeasures = bodyMeasures;
-    }
-
 
     protected Client(Parcel in) {
         mName = in.readString();
         mEmail = in.readString();
         mMainObjective = in.readString();
         mClientGym = (Gym) in.readValue(Gym.class.getClassLoader());
-        mBodyMeasures = (BodyMeasures) in.readValue(BodyMeasures.class.getClassLoader());
+
     }
 
     @Override
@@ -89,8 +78,7 @@ public class Client implements Parcelable {
         dest.writeString(mEmail);
         dest.writeString(mMainObjective);
         dest.writeValue(mClientGym);
-        dest.writeValue(mBodyMeasures);
-    }
+     }
 
     @SuppressWarnings("unused")
     public static final Parcelable.Creator<Client> CREATOR = new Parcelable.Creator<Client>() {
